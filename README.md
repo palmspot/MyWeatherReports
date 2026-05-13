@@ -25,15 +25,17 @@ No dependencies to install, no build process, no backend required.
 - JMA detailed forecast — weather description, wind, waves, 6-hour precipitation probability, 7-day outlook with reliability grades (A/B/C)
 - **Air quality panel** — PM2.5, desert dust (yellow sand / 黄砂), and EU AQI with color-coded level badges (no key required)
 - **Pollen forecast via Google Pollen API:**
-  - During pollen season (approx. Feb–May): individual species display — Japanese Cedar (スギ), Japanese Cypress (ヒノキ), Alder (ハンノキ), Birch (シラカバ), etc.
+  - During pollen season (approx. Feb–May): individual species — Japanese Cedar (スギ), Japanese Cypress (ヒノキ), Alder (ハンノキ), Birch (シラカバ), etc.
   - Off-season: pollen type summary — Tree Pollen (樹木花粉), Grass Pollen (草花粉), Weed Pollen (雑草花粉)
   - Off-season cards shown at reduced opacity with "シーズン外 / Off-season" label
 - Daily (24-hour) and weekly temperature charts
 - Multiple locations — add, switch, and delete; 9 Japanese city presets included
 - Map-based location picker with reverse geocoding (click the map → place name filled in automatically)
+- **Bulk API key paste** — paste up to 3 keys at once in order (OWM / Tomorrow.io / WeatherAPI); auto-distributed to each field
 - Dark / Light mode toggle, persisted across sessions
 - Japanese / English UI toggle
 - iOS home screen support (Apple Touch Icon + Web App meta tags)
+- Mobile-friendly layout
 
 ---
 
@@ -62,7 +64,7 @@ Enter keys in the **API Key Settings** panel at the bottom of the page — they 
 > **Notes:**
 > - OpenWeatherMap keys can take up to 24 hours to activate after registration.
 > - Google Pollen API requires a Google Cloud billing account (free tier covers personal use).
-> - The Google Pollen API key has a **dedicated input panel at the bottom of the page**, separate from other API keys.
+> - The Google Pollen API key has a **dedicated input panel at the very bottom of the page**, separate from other API keys.
 
 ---
 

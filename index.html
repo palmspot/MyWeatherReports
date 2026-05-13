@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="天気予報">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/dist/tabler-icons.min.css">
 <!-- Early theme init / テーマ早期初期化（フラッシュ防止） -->
 <script>
 (function(){
@@ -151,7 +151,7 @@ a{color:var(--info-text)}
     <div class="acts">
       <button class="icon-btn" onclick="toggleLang()" id="lang-btn" title="日本語/English">EN</button>
       <button class="icon-btn" onclick="toggleTheme()" title="テーマ切替" id="theme-btn">🌙</button>
-      <button onclick="loadAll()"><i class="ti ti-refresh" style="font-size:14px;vertical-align:-2px"></i> <span data-i18n="refresh">更新</span></button>
+      <button onclick="loadAll(true)"><i class="ti ti-refresh" style="font-size:14px;vertical-align:-2px"></i> <span data-i18n="refresh">更新</span></button>
     </div>
   </div>
 
@@ -167,16 +167,189 @@ a{color:var(--info-text)}
       <div style="padding-bottom:0"><button onclick="addLocation()"><i class="ti ti-plus" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="add">追加</span></button></div>
     </div>
     <div class="add-form-presets">
-      <span style="font-size:11px;color:var(--text2);padding:3px 0" data-i18n="presets">よく使う地点：</span>
-      <button class="preset-btn" onclick="setPreset('大阪',34.6937,135.5023,'270000')" data-i18n-preset="osaka">大阪</button>
-      <button class="preset-btn" onclick="setPreset('東京',35.6895,139.6917,'130000')" data-i18n-preset="tokyo">東京</button>
-      <button class="preset-btn" onclick="setPreset('名古屋',35.1815,136.9066,'230000')" data-i18n-preset="nagoya">名古屋</button>
-      <button class="preset-btn" onclick="setPreset('札幌',43.0642,141.3469,'016000')" data-i18n-preset="sapporo">札幌</button>
-      <button class="preset-btn" onclick="setPreset('福岡',33.5904,130.4017,'400000')" data-i18n-preset="fukuoka">福岡</button>
-      <button class="preset-btn" onclick="setPreset('那覇',26.2124,127.6809,'471000')" data-i18n-preset="naha">那覇</button>
-      <button class="preset-btn" onclick="setPreset('仙台',38.2688,140.8721,'040000')" data-i18n-preset="sendai">仙台</button>
-      <button class="preset-btn" onclick="setPreset('広島',34.3853,132.4553,'340000')" data-i18n-preset="hiroshima">広島</button>
-      <button class="preset-btn" onclick="setPreset('金沢',36.5944,136.6256,'170000')" data-i18n-preset="kanazawa">金沢</button>
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+        <!-- Japan / 日本 -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Hokkaido / 北海道</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Sapporo',43.0642,141.3469,'016000')">Sapporo 札幌</button>
+            <button class="preset-btn" onclick="setPreset('Asahikawa',43.7706,142.3650,'012000')">Asahikawa 旭川</button>
+            <button class="preset-btn" onclick="setPreset('Hakodate',41.7687,140.7290,'017000')">Hakodate 函館</button>
+            <button class="preset-btn" onclick="setPreset('Kushiro',42.9849,144.3819,'014100')">Kushiro 釧路</button>
+            <button class="preset-btn" onclick="setPreset('Wakkanai',45.4122,141.6728,'011000')">Wakkanai 稚内</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Tohoku / 東北</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Aomori',40.8244,140.7400,'020000')">Aomori 青森</button>
+            <button class="preset-btn" onclick="setPreset('Morioka',39.7036,141.1527,'030000')">Morioka 盛岡</button>
+            <button class="preset-btn" onclick="setPreset('Sendai',38.2688,140.8721,'040000')">Sendai 仙台</button>
+            <button class="preset-btn" onclick="setPreset('Akita',39.7200,140.1024,'050000')">Akita 秋田</button>
+            <button class="preset-btn" onclick="setPreset('Yamagata',38.2404,140.3633,'060000')">Yamagata 山形</button>
+            <button class="preset-btn" onclick="setPreset('Fukushima',37.7608,140.4748,'070000')">Fukushima 福島</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kanto / 関東</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Mito',36.3418,140.4468,'080000')">Mito 水戸</button>
+            <button class="preset-btn" onclick="setPreset('Utsunomiya',36.5657,139.8836,'090000')">Utsunomiya 宇都宮</button>
+            <button class="preset-btn" onclick="setPreset('Maebashi',36.3912,139.0608,'100000')">Maebashi 前橋</button>
+            <button class="preset-btn" onclick="setPreset('Saitama',35.8617,139.6455,'110000')">Saitama さいたま</button>
+            <button class="preset-btn" onclick="setPreset('Chiba',35.6050,140.1233,'120000')">Chiba 千葉</button>
+            <button class="preset-btn" onclick="setPreset('Tokyo',35.6895,139.6917,'130000')">Tokyo 東京</button>
+            <button class="preset-btn" onclick="setPreset('Yokohama',35.4478,139.6425,'140000')">Yokohama 横浜</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chubu / 中部</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Niigata',37.9026,139.0232,'150000')">Niigata 新潟</button>
+            <button class="preset-btn" onclick="setPreset('Toyama',36.6953,137.2113,'160000')">Toyama 富山</button>
+            <button class="preset-btn" onclick="setPreset('Kanazawa',36.5944,136.6256,'170000')">Kanazawa 金沢</button>
+            <button class="preset-btn" onclick="setPreset('Fukui',36.0652,136.2219,'180000')">Fukui 福井</button>
+            <button class="preset-btn" onclick="setPreset('Kofu',35.6639,138.5684,'190000')">Kofu 甲府</button>
+            <button class="preset-btn" onclick="setPreset('Nagano',36.6513,138.1812,'200000')">Nagano 長野</button>
+            <button class="preset-btn" onclick="setPreset('Gifu',35.3912,136.7222,'210000')">Gifu 岐阜</button>
+            <button class="preset-btn" onclick="setPreset('Shizuoka',34.9756,138.3828,'220000')">Shizuoka 静岡</button>
+            <button class="preset-btn" onclick="setPreset('Nagoya',35.1815,136.9066,'230000')">Nagoya 名古屋</button>
+            <button class="preset-btn" onclick="setPreset('Tsu',34.7303,136.5086,'240000')">Tsu 津</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kinki / 近畿</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Otsu',35.0045,135.8686,'250000')">Otsu 大津</button>
+            <button class="preset-btn" onclick="setPreset('Kyoto',35.0116,135.7681,'260000')">Kyoto 京都</button>
+            <button class="preset-btn" onclick="setPreset('Osaka',34.6937,135.5023,'270000')">Osaka 大阪</button>
+            <button class="preset-btn" onclick="setPreset('Kobe',34.6913,135.1830,'280000')">Kobe 神戸</button>
+            <button class="preset-btn" onclick="setPreset('Nara',34.6851,135.8325,'290000')">Nara 奈良</button>
+            <button class="preset-btn" onclick="setPreset('Wakayama',34.2260,135.1675,'300000')">Wakayama 和歌山</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chugoku / 中国</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Tottori',35.5011,134.2351,'310000')">Tottori 鳥取</button>
+            <button class="preset-btn" onclick="setPreset('Matsue',35.4723,133.0505,'320000')">Matsue 松江</button>
+            <button class="preset-btn" onclick="setPreset('Okayama',34.6618,133.9344,'330000')">Okayama 岡山</button>
+            <button class="preset-btn" onclick="setPreset('Hiroshima',34.3853,132.4553,'340000')">Hiroshima 広島</button>
+            <button class="preset-btn" onclick="setPreset('Yamaguchi',34.1860,131.4714,'350000')">Yamaguchi 山口</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Shikoku / 四国</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Tokushima',34.0658,134.5593,'360000')">Tokushima 徳島</button>
+            <button class="preset-btn" onclick="setPreset('Takamatsu',34.3401,134.0434,'370000')">Takamatsu 高松</button>
+            <button class="preset-btn" onclick="setPreset('Matsuyama',33.8417,132.7657,'380000')">Matsuyama 松山</button>
+            <button class="preset-btn" onclick="setPreset('Kochi',33.5597,133.5311,'390000')">Kochi 高知</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kyushu &amp; Okinawa / 九州・沖縄</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Fukuoka',33.5904,130.4017,'400000')">Fukuoka 福岡</button>
+            <button class="preset-btn" onclick="setPreset('Saga',33.2494,130.2990,'410000')">Saga 佐賀</button>
+            <button class="preset-btn" onclick="setPreset('Nagasaki',32.7503,129.8779,'420000')">Nagasaki 長崎</button>
+            <button class="preset-btn" onclick="setPreset('Kumamoto',32.7898,130.7417,'430000')">Kumamoto 熊本</button>
+            <button class="preset-btn" onclick="setPreset('Oita',33.2382,131.6126,'440000')">Oita 大分</button>
+            <button class="preset-btn" onclick="setPreset('Miyazaki',31.9111,131.4239,'450000')">Miyazaki 宮崎</button>
+            <button class="preset-btn" onclick="setPreset('Kagoshima',31.5602,130.5581,'460100')">Kagoshima 鹿児島</button>
+            <button class="preset-btn" onclick="setPreset('Amami',28.3790,129.4940,'460040')">Amami 奄美</button>
+            <button class="preset-btn" onclick="setPreset('Naha',26.2124,127.6809,'471000')">Naha 那覇</button>
+            <button class="preset-btn" onclick="setPreset('Okinawa-North',26.6958,128.1558,'472000')">Okinawa-N 沖縄北部</button>
+            <button class="preset-btn" onclick="setPreset('Miyako',24.8057,125.2814,'473000')">Miyako 宮古島</button>
+            <button class="preset-btn" onclick="setPreset('Ishigaki',24.3448,124.1564,'474000')">Ishigaki 石垣島</button>
+          </div>
+        </div>
+        <!-- East Asia / 東アジア -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 East Asia</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Seoul',37.5665,126.9780,'')">Seoul</button>
+            <button class="preset-btn" onclick="setPreset('Beijing',39.9042,116.4074,'')">Beijing</button>
+            <button class="preset-btn" onclick="setPreset('Shanghai',31.2304,121.4737,'')">Shanghai</button>
+            <button class="preset-btn" onclick="setPreset('Hong Kong',22.3193,114.1694,'')">Hong Kong</button>
+            <button class="preset-btn" onclick="setPreset('Taipei',25.0330,121.5654,'')">Taipei</button>
+            <button class="preset-btn" onclick="setPreset('Bangkok',13.7563,100.5018,'')">Bangkok</button>
+            <button class="preset-btn" onclick="setPreset('Singapore',1.3521,103.8198,'')">Singapore</button>
+            <button class="preset-btn" onclick="setPreset('Kuala Lumpur',3.1390,101.6869,'')">Kuala Lumpur</button>
+            <button class="preset-btn" onclick="setPreset('Jakarta',-6.2088,106.8456,'')">Jakarta</button>
+            <button class="preset-btn" onclick="setPreset('Manila',14.5995,120.9842,'')">Manila</button>
+            <button class="preset-btn" onclick="setPreset('Ho Chi Minh',10.8231,106.6297,'')">Ho Chi Minh</button>
+          </div>
+        </div>
+        <!-- South Asia & Middle East -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 South Asia / Middle East</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Mumbai',19.0760,72.8777,'')">Mumbai</button>
+            <button class="preset-btn" onclick="setPreset('Delhi',28.6139,77.2090,'')">Delhi</button>
+            <button class="preset-btn" onclick="setPreset('Dubai',25.2048,55.2708,'')">Dubai</button>
+            <button class="preset-btn" onclick="setPreset('Riyadh',24.7136,46.6753,'')">Riyadh</button>
+            <button class="preset-btn" onclick="setPreset('Karachi',24.8607,67.0011,'')">Karachi</button>
+            <button class="preset-btn" onclick="setPreset('Dhaka',23.8103,90.4125,'')">Dhaka</button>
+          </div>
+        </div>
+        <!-- Europe / ヨーロッパ -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Europe</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('London',51.5074,-0.1278,'')">London</button>
+            <button class="preset-btn" onclick="setPreset('Paris',48.8566,2.3522,'')">Paris</button>
+            <button class="preset-btn" onclick="setPreset('Berlin',52.5200,13.4050,'')">Berlin</button>
+            <button class="preset-btn" onclick="setPreset('Madrid',40.4168,-3.7038,'')">Madrid</button>
+            <button class="preset-btn" onclick="setPreset('Rome',41.9028,12.4964,'')">Rome</button>
+            <button class="preset-btn" onclick="setPreset('Amsterdam',52.3676,4.9041,'')">Amsterdam</button>
+            <button class="preset-btn" onclick="setPreset('Moscow',55.7558,37.6176,'')">Moscow</button>
+            <button class="preset-btn" onclick="setPreset('Istanbul',41.0082,28.9784,'')">Istanbul</button>
+            <button class="preset-btn" onclick="setPreset('Zurich',47.3769,8.5417,'')">Zurich</button>
+            <button class="preset-btn" onclick="setPreset('Stockholm',59.3293,18.0686,'')">Stockholm</button>
+          </div>
+        </div>
+        <!-- Africa / アフリカ -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Africa</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Cairo',30.0444,31.2357,'')">Cairo</button>
+            <button class="preset-btn" onclick="setPreset('Lagos',6.5244,3.3792,'')">Lagos</button>
+            <button class="preset-btn" onclick="setPreset('Nairobi',-1.2921,36.8219,'')">Nairobi</button>
+            <button class="preset-btn" onclick="setPreset('Cape Town',-33.9249,18.4241,'')">Cape Town</button>
+            <button class="preset-btn" onclick="setPreset('Johannesburg',-26.2041,28.0473,'')">Johannesburg</button>
+            <button class="preset-btn" onclick="setPreset('Casablanca',33.5731,-7.5898,'')">Casablanca</button>
+          </div>
+        </div>
+        <!-- Americas / 南北アメリカ -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌎 Americas</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('New York',40.7128,-74.0060,'')">New York</button>
+            <button class="preset-btn" onclick="setPreset('Los Angeles',34.0522,-118.2437,'')">Los Angeles</button>
+            <button class="preset-btn" onclick="setPreset('Chicago',41.8781,-87.6298,'')">Chicago</button>
+            <button class="preset-btn" onclick="setPreset('Toronto',43.6532,-79.3832,'')">Toronto</button>
+            <button class="preset-btn" onclick="setPreset('Vancouver',49.2827,-123.1207,'')">Vancouver</button>
+            <button class="preset-btn" onclick="setPreset('Mexico City',19.4326,-99.1332,'')">Mexico City</button>
+            <button class="preset-btn" onclick="setPreset('São Paulo',-23.5505,-46.6333,'')">São Paulo</button>
+            <button class="preset-btn" onclick="setPreset('Buenos Aires',-34.6037,-58.3816,'')">Buenos Aires</button>
+            <button class="preset-btn" onclick="setPreset('Lima',-12.0464,-77.0428,'')">Lima</button>
+            <button class="preset-btn" onclick="setPreset('Bogotá',4.7110,-74.0721,'')">Bogotá</button>
+            <button class="preset-btn" onclick="setPreset('Santiago',-33.4489,-70.6693,'')">Santiago</button>
+          </div>
+        </div>
+        <!-- Oceania / オセアニア -->
+        <div>
+          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 Oceania</div>
+          <div class="add-form-presets" style="margin-top:0">
+            <button class="preset-btn" onclick="setPreset('Sydney',-33.8688,151.2093,'')">Sydney</button>
+            <button class="preset-btn" onclick="setPreset('Melbourne',-37.8136,144.9631,'')">Melbourne</button>
+            <button class="preset-btn" onclick="setPreset('Auckland',-36.8509,174.7645,'')">Auckland</button>
+            <button class="preset-btn" onclick="setPreset('Brisbane',-27.4698,153.0251,'')">Brisbane</button>
+            <button class="preset-btn" onclick="setPreset('Perth',-31.9505,115.8605,'')">Perth</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- Pick location on map / 地図で場所を選ぶ -->
     <div style="margin-top:10px">
@@ -364,6 +537,11 @@ function esc(str){
     .replace(/"/g,'&quot;')
     .replace(/'/g,'&#039;');
 }
+
+var DEFAULT_LOCATIONS=[
+  {name:'Osaka',lat:34.6937,lon:135.5023,jma:'270000'},
+  {name:'Tokyo',lat:35.6895,lon:139.6917,jma:'130000'}
+];
 [{name:'大阪',lat:34.6937,lon:135.5023,jma:'270000'},{name:'東京',lat:35.6895,lon:139.6917,jma:'130000'}];
 function loadLocations(){try{var s=localStorage.getItem('locations');return s?JSON.parse(s):DEFAULT_LOCATIONS;}catch(e){return DEFAULT_LOCATIONS;}}
 function saveLocations(l){localStorage.setItem('locations',JSON.stringify(l));}
@@ -526,12 +704,24 @@ function tmrwIcon(c){if(c===1000)return'ti-sun';if(c===1100||c===1101)return'ti-
 function wapiIcon(c){if(c===1000)return'ti-sun';if(c===1003||c===1006||c===1009)return'ti-cloud';if(c===1030||c===1135)return'ti-mist';if(c>=1063&&c<=1201)return'ti-cloud-rain';if(c===1087||c>=1273)return'ti-cloud-storm';return'ti-cloud';}
 
 // ==================== Data Fetching / データ取得 ====================
-async function fetchOM(lat,lon){var r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&hourly=temperature_2m,precipitation_probability,windspeed_10m,relativehumidity_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
-async function fetchGFS(lat,lon){var r=await fetch('https://api.open-meteo.com/v1/gfs?latitude='+lat+'&longitude='+lon+'&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
-async function fetchJMA(code){if(!code)return null;try{var r=await fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
-async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetch('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
-async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetch('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
-async function fetchWapi(lat,lon,key){if(!key)return null;try{var r=await fetch('https://api.weatherapi.com/v1/forecast.json?key='+key+'&q='+lat+','+lon+'&days=7&lang=ja');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+// Fetch with timeout / タイムアウト付きfetch（デフォルト8秒）
+function fetchWithTimeout(url,ms){
+  ms=ms||8000;
+  // AbortController非対応環境のフォールバック / fallback for environments without AbortController
+  if(typeof AbortController==='undefined'){
+    return fetch(url);
+  }
+  var ctrl=new AbortController();
+  var timer=setTimeout(function(){ctrl.abort();},ms);
+  return fetch(url,{signal:ctrl.signal}).then(function(r){clearTimeout(timer);return r;},function(e){clearTimeout(timer);throw e;});
+}
+
+async function fetchOM(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&hourly=temperature_2m,precipitation_probability,windspeed_10m,relativehumidity_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
+async function fetchGFS(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/gfs?latitude='+lat+'&longitude='+lon+'&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
+async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/forecast/data/forecast/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchWapi(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.weatherapi.com/v1/forecast.json?key='+key+'&q='+lat+','+lon+'&days=7&lang=ja');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 
 function mfc(isToday,icon,max,min,rain,note){
   return '<div class="mfc'+(isToday?' td':'')+'"><div class="ci"><i class="ti '+icon+'"></i></div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="cr">'+rain+'%</div>'+(note?'<div class="cn">'+note+'</div>':'')+'</div>';
@@ -799,14 +989,14 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
 // ==================== Air Quality & Pollen API / 大気質・花粉API ====================
 async function fetchAirQuality(lat,lon){
   try{
-    var r=await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');
+    var r=await fetchWithTimeout('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');
     if(!r.ok)return null;return r.json();
   }catch(e){return null;}
 }
 async function fetchPollen(lat,lon,key){
   if(!key)return null;
   try{
-    var r=await fetch('https://pollen.googleapis.com/v1/forecast:lookup?key='+key+'&location.longitude='+lon+'&location.latitude='+lat+'&days=5&languageCode='+(getLang()==='en'?'en':'ja'));
+    var r=await fetchWithTimeout('https://pollen.googleapis.com/v1/forecast:lookup?key='+key+'&location.longitude='+lon+'&location.latitude='+lat+'&days=5&languageCode='+(getLang()==='en'?'en':'ja'));
     if(!r.ok)return null;return r.json();
   }catch(e){return null;}
 }
@@ -950,30 +1140,76 @@ function loadCache(loc){
   }catch(e){return null;}
 }
 
-async function loadAll(){
-  document.getElementById('main-content').innerHTML='<div class="loading"><i class="ti ti-cloud-download" style="font-size:28px;display:block;margin-bottom:8px"></i>'+t('loading')+'</div>';
+async function loadAll(forceRefresh){
+  document.getElementById('main-content').innerHTML='<div class="loading" id="loading-msg"><i class="ti ti-cloud-download" style="font-size:28px;display:block;margin-bottom:8px"></i>'+t('loading')+'</div><div id="debug-log"></div>';
   document.getElementById('chip-owm').classList.remove('on');document.getElementById('chip-tmrw').classList.remove('on');document.getElementById('chip-wapi').classList.remove('on');
   var locs=loadLocations();var idx=getCurrentIdx();if(idx>=locs.length)idx=0;var loc=locs[idx];
+
+  // 画面上デバッグ表示（?debug=1 付きでアクセス時のみ）
+  var debugMode=location.search.indexOf('debug=1')!==-1;
+  function dbg(msg){
+    var el=document.getElementById('debug-log');
+    if(!el)return;
+    var line=document.createElement('div');
+    line.style.cssText='font-size:12px;color:#333;padding:2px 8px;font-family:monospace;background:#f5f5f5;border-bottom:1px solid #ddd';
+    line.textContent=new Date().toLocaleTimeString()+' '+msg;
+    el.appendChild(line);
+    if(!debugMode) el.style.display='none';
+  }
+
+  dbg('start loc='+loc.name+' force='+!!forceRefresh);
+
+  if(!forceRefresh){
+    var cached=loadCache(loc);
+    if(cached&&cached.results&&Array.isArray(cached.results[2])){
+      var age=Math.round((Date.now()-cached.ts)/60000);
+      dbg('cache found, age='+age+'min');
+      if(age<30){
+        dbg('using cache');
+        var r=cached.results;
+        buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]);
+        return;
+      }
+    } else {
+      dbg('no valid cache');
+    }
+  }
+
   try{
     var ok=localStorage.getItem('owm_key')||'';
     var tk=localStorage.getItem('tmrw_key')||'';
     var wk=localStorage.getItem('wapi_key')||'';
     var pk=localStorage.getItem('pollen_key')||'';
-    var results=await Promise.all([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchWapi(loc.lat,loc.lon,wk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk)]);
-    // 必須データ（OM・GFS）が取れていればキャッシュ保存
-    if(results[0]&&results[0].daily&&results[1]&&results[1].daily){
-      saveCache(loc,results);
+    // Promise.allSettled polyfill for older iOS / 古いiOS向けポリフィル
+    if(!Promise.allSettled){
+      Promise.allSettled=function(promises){
+        return Promise.all(promises.map(function(p){
+          return Promise.resolve(p).then(function(v){return{status:'fulfilled',value:v};},function(e){return{status:'rejected',reason:e};});
+        }));
+      };
     }
+    dbg('fetching all APIs...');
+    var settled=await Promise.allSettled([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchWapi(loc.lat,loc.lon,wk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk)]);
+    var names=['OM','GFS','JMA','OWM','Tmrw','Wapi','AQ','Pollen'];
+    settled.forEach(function(s,i){dbg(names[i]+': '+(s.status==='fulfilled'?'OK':'FAIL '+(s.reason&&s.reason.message||s.reason)));});
+    var results=settled.map(function(s){return s.status==='fulfilled'?s.value:null;});
+    if(results[0]&&results[0].daily&&results[1]&&results[1].daily&&results[2]&&Array.isArray(results[2])){
+      saveCache(loc,results);
+      dbg('cache saved');
+    }
+    if(!results[0]||!results[0].daily||!results[1]||!results[1].daily){
+      throw new Error('Required weather data (OM/GFS) unavailable');
+    }
+    dbg('buildContent start');
     buildContent(loc,results[0],results[1],results[2],results[3],results[4],results[5],results[6],results[7]);
   }catch(e){
-    // 通信失敗時はキャッシュから復元
+    dbg('catch: '+e.message);
     var cached=loadCache(loc);
     if(cached&&cached.results){
       var age=Math.round((Date.now()-cached.ts)/60000);
       var ageStr=age<60?age+(getLang()==='ja'?'分前':' min ago'):Math.round(age/60)+(getLang()==='ja'?'時間前':' hr ago');
       var r=cached.results;
       buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]);
-      // キャッシュ使用中の通知バナーを表示
       var banner='<div style="background:#FAEEDA;border:0.5px solid #BA7517;border-radius:var(--rm);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#633806;">'
         +'<i class="ti ti-wifi-off" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>'
         +(getLang()==='ja'
@@ -982,10 +1218,9 @@ async function loadAll(){
         +'</div>';
       document.getElementById('main-content').innerHTML=banner+document.getElementById('main-content').innerHTML;
     } else {
-      // キャッシュもない場合のみエラー表示
       document.getElementById('main-content').innerHTML='<div class="errmsg"><i class="ti ti-alert-circle"></i> '
         +(getLang()==='ja'?'データを取得できませんでした。通信状況を確認してください。':'Failed to load data. Please check your connection.')
-        +'</div>';
+        +'<br><small>'+esc(e.message)+'</small></div>';
     }
   }
 }

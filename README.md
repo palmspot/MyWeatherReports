@@ -4,8 +4,6 @@ A multi-source weather forecast dashboard — a single static HTML file, no buil
 
 Aggregates and compares forecasts from Open-Meteo, GFS, and the Japan Meteorological Agency side-by-side, with optional support for OpenWeatherMap, Tomorrow.io, and WeatherAPI.
 
-**Live demo:** [https://DEPLOY_HOST](https://DEPLOY_HOST)
-
 ---
 
 ## Deploy

@@ -85,6 +85,21 @@ This ensures the key only works from your site and only for the Pollen API, maki
 
 ## Changelog
 
+### v1.7.0 — Security hardening
+- Added `esc()` HTML escape function applied to all API response strings before `innerHTML` insertion (XSS prevention)
+- Escaped fields: JMA weather text, wind, wave, pollen category, pollen plant names, reverse-geocoded place names, location tab labels, WeatherAPI condition text, OWM weather description
+- Added Subresource Integrity (SRI) `integrity` attributes to CDN resources:
+  - Leaflet CSS/JS: official sha256 hashes from leafletjs.com
+  - Chart.js: downgraded from v4.4.0 (no SRI support) to v3.9.1 (last SRI-supported version) with sha256 hash
+  - Tabler Icons: pinned from `@latest` to `@3.11.0` for version stability
+- Verified escaping with automated tests: XSS attack strings, normal Japanese text, double-escape prevention, None/empty input handling
+
+### v1.6.0 — Offline cache & graceful degradation
+- Added localStorage cache per location — successful data is saved after every fetch
+- On network failure, cached data is displayed instead of showing an error
+- Orange warning banner shown when using cached data, including elapsed time since last update (e.g. "5 min ago")
+- Error screen only shown when network fails AND no cache is available (first-time load with no connection)
+
 ### v1.5.0 — Mobile layout improvements & bulk API key paste
 - Fixed full-page horizontal overflow on mobile (removed fixed `min-width` from input fields, added `overflow-x: hidden` to `html`, `body`, `.wrap`, and all panels)
 - Added bulk API key paste field — paste 3 keys at once in order (OWM / Tomorrow.io / WeatherAPI), auto-distributed to each input

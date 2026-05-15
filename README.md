@@ -1,6 +1,6 @@
 # 🌤️ [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-1.12.0-blue)
+![Version](https://img.shields.io/badge/version-1.15.0-blue)
 
 A multi-source weather forecast dashboard — a single static HTML file, no build step, no server-side processing.
 

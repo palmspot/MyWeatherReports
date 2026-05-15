@@ -87,6 +87,34 @@ This ensures the key only works from your site and only for the Pollen API, maki
 
 ## Changelog
 
+### v1.15.0 — JMA forecast visual overhaul
+- Replaced JMA 7-day forecast table with card grid layout — each day shown as a card with weather emoji (24px), high/low temp in orange/blue, precipitation probability bar, and reliability badge (A=green, B=yellow, C=gray)
+- Added JMA weather emoji mapping (`JMA_EMOJI`) for all JMA weather codes
+- 6-hour precipitation probability cells now include a blue gradient progress bar
+- Today's temperature high/low shown in red/orange and blue with stronger color contrast
+- Weather text card styled with left accent border for visual emphasis
+- Fixed duplicate `.jma-weather-text` CSS definition causing layout misalignment in the weather text card
+- Moved hourly forecast section to immediately below the hero card
+
+### v1.14.0 — Visual overhaul of forecast grid
+- Replaced Tabler icon font with weather emoji (☀️🌧️⛈️❄️ etc.) in all forecast cells — larger (26px), no font dependency, works on all platforms
+- High temperature shown in orange, low temperature in blue across all sources
+- Added precipitation probability bar — a blue gradient progress bar below the percentage value in each cell
+- Today's column now highlighted with background color in addition to border
+- Hourly forecast cards: added weather emoji icon and highlight for the current time slot
+- Weekly chart: OM high/low temperature range filled with semi-transparent band for easier reading; temperature axis now shows degree symbol
+- All sources (OM, GFS, JMA, OWM, Tomorrow.io, WeatherAPI, Google Weather) use unified visual style
+- Fixed Google Weather API silently returning 404 for Japan — Japanese locations (JMA code present) now skip Google Weather automatically; note added to key input panel
+
+### v1.13.0 — Google Weather API, visual overhaul & bug fixes
+- Added **Google Weather API** support (current conditions + 10-day daily forecast); shown in hero card and source comparison grid
+- Added **Google Weather API key input** in the Google APIs panel (alongside Pollen API key)
+- **Fixed "Apply & Refresh" button** — was silently using 30-min cache instead of fetching live data; now calls `loadAll(true)` to force refresh
+- **Hero card**: replaced small metric tiles with a large current-conditions card showing weather emoji, large temperature, high/low, wind, humidity, and precipitation probability at a glance
+- **Daily chart improvement**: current hour point highlighted in orange with larger radius for easy identification of current temperature
+- Added weather emoji mapping (`WE`) for all WMO weather codes
+- Google Weather current conditions used as primary temperature source when API key is set
+
 ### v1.12.0 — Mobile fix & iOS compatibility
 - Fixed critical bug: `DEFAULT_LOCATIONS` variable was missing, causing blank/stuck loading screen on first visit (no localStorage data) — affected all mobile users and any browser without prior session data
 - Default locations set to Osaka and Tokyo as fallback when localStorage is empty

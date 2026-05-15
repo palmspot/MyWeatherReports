@@ -69,12 +69,37 @@ button:hover{background:var(--bg2)}
 /* 気象庁詳細 */
 .jma-detail{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:1.5rem;max-width:100%;overflow-x:hidden}
 .jma-detail-title{font-size:13px;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.jma-weather-text{font-size:13px;color:var(--text);margin-bottom:10px;line-height:1.6;padding:8px 12px;background:var(--bg2);border-radius:var(--rm)}
 .jma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:10px}
 .jma-item{background:var(--bg2);border-radius:var(--rm);padding:8px 12px}
 .jma-item .lb{font-size:11px;color:var(--text2);margin-bottom:3px}
 .jma-item .vl{font-size:14px;font-weight:500;color:var(--text)}
+
+/* JMA 7day cards / 7日間カード */
+.jma-7cards{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px;overflow-x:auto}
+.jma-7card{background:var(--bg2);border-radius:var(--rm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:44px}
+.jma-7card.today{background:var(--info-bg);border:1.5px solid var(--info-text)}
+.jma-7card .jdc-day{font-size:11px;font-weight:600;color:var(--text2)}
+.jma-7card .jdc-date{font-size:10px;color:var(--text2);opacity:0.7}
+.jma-7card .jdc-em{font-size:24px;line-height:1.2}
+.jma-7card .jdc-hi{font-size:13px;font-weight:600;color:#D44000}
+.jma-7card .jdc-lo{font-size:12px;color:#2A6DB5;font-weight:500}
+.jma-7card .jdc-bar{width:80%;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:1px 0}
+.jma-7card .jdc-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#64B5F6,#1565C0)}
+.jma-7card .jdc-pop{font-size:11px;color:var(--info-text);font-weight:500}
+.jma-7card .jdc-rel{font-size:10px;padding:1px 5px;border-radius:99px;font-weight:600;margin-top:1px}
+.jdc-rel-A{background:#E6F4EA;color:#1B7F3A}
+.jdc-rel-B{background:#FEF9E7;color:#9A7D0A}
+.jdc-rel-C{background:var(--bg3);color:var(--text2)}
+/* JMA pop bar / 6時間降水確率バー */
 .jma-pop-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:4px;margin-bottom:10px}
+.jma-pop-cell{background:var(--bg2);border-radius:var(--rm);padding:6px 4px;text-align:center}
+.jma-pop-cell .pt{font-size:10px;color:var(--text2)}
+.jma-pop-cell .pv{font-size:14px;font-weight:600;color:var(--info-text)}
+.jma-pop-cell .pb{width:80%;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:2px auto 0}
+.jma-pop-cell .pbf{height:100%;border-radius:2px;background:linear-gradient(90deg,#64B5F6,#1565C0)}
+/* JMA weather text card */
+.jma-weather-text{font-size:13px;color:var(--text);margin-bottom:10px;line-height:1.6;padding:10px 14px;background:var(--bg2);border-radius:var(--rm)}
+
 .jma-pop-cell{background:var(--bg2);border-radius:var(--rm);padding:6px 4px;text-align:center}
 .jma-pop-cell .pt{font-size:10px;color:var(--text2)}
 .jma-pop-cell .pv{font-size:13px;font-weight:500;color:var(--info-text)}
@@ -89,16 +114,27 @@ button:hover{background:var(--bg2)}
 .mf{margin-bottom:1.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 .mfrow{display:grid;grid-template-columns:90px repeat(7,minmax(44px,1fr));gap:4px;margin-bottom:4px;align-items:center;min-width:400px}
 .mflb{font-size:11px;padding:4px;border-radius:4px;text-align:center;font-weight:500}
-.mfhd{font-size:11px;color:var(--text2);text-align:center;padding:2px 0}
-.mfhd.td{color:var(--info-text);font-weight:500}
-.mfc{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rm);padding:6px 2px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:68px}
-.mfc.td{border:1.5px solid var(--info-text)}
-.mfc .ci{font-size:18px;color:var(--text)}.mfc .ct{font-size:12px;font-weight:500;color:var(--text)}
-.mfc .cl{font-size:11px;color:var(--text2)}.mfc .cr{font-size:11px;color:var(--info-text)}
+.mfhd{font-size:11px;color:var(--text2);text-align:center;padding:4px 0;line-height:1.4}
+.mfhd.td{color:var(--info-text);font-weight:600}
+.mfhd .dow{font-size:12px;font-weight:500}
+.mfhd .mdate{font-size:10px;opacity:0.7}
+.mfc{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:84px;transition:background 0.15s}
+.mfc.td{border:1.5px solid var(--info-text);background:var(--info-bg)}
+.mfc:hover{background:var(--bg2)}
+.mfc .ci{font-size:26px;line-height:1.1}
+.mfc .ct{font-size:13px;font-weight:600;color:#D44000}
+.mfc .cl{font-size:12px;color:#2A6DB5;font-weight:500}
+.mfc .rain-bar{width:80%;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:1px}
+.mfc .rain-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#64B5F6,#1565C0)}
+.mfc .cr{font-size:11px;color:var(--info-text);font-weight:500}
 .mfc .cn{font-size:10px;color:var(--text2)}.mfc.empty{background:transparent;border-color:transparent}
 .hourly{display:grid;grid-template-columns:repeat(8,minmax(44px,1fr));gap:6px;margin-bottom:1.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.hc{background:var(--bg2);border-radius:var(--rm);padding:8px 4px;text-align:center}
-.hc .ht{font-size:11px;color:var(--text2)}.hc .hv{font-size:14px;font-weight:500;margin:3px 0}.hc .hr{font-size:11px;color:var(--info-text)}
+.hc{background:var(--bg2);border-radius:var(--rm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.hc.now{background:var(--info-bg);border:1px solid var(--info-text)}
+.hc .ht{font-size:11px;color:var(--text2)}
+.hc .he{font-size:18px;line-height:1.2}
+.hc .hv{font-size:13px;font-weight:600;color:var(--text)}
+.hc .hr{font-size:11px;color:#1565C0;font-weight:500}
 .ctbl{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;min-width:500px}
 .ctbl th{text-align:left;padding:8px 10px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border);font-size:12px}
 .ctbl td{padding:8px 10px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle}
@@ -129,6 +165,22 @@ button:hover{background:var(--bg2)}
 .pollen-card .pn{font-size:11px;color:var(--text2);margin-bottom:4px}
 .pollen-card .pi{font-size:18px;font-weight:500}
 .pollen-card .pc{font-size:10px;font-weight:500;padding:2px 6px;border-radius:99px;display:inline-block;margin-top:3px}
+
+
+/* Hero card / ヒーローカード */
+.hero{background:linear-gradient(135deg,var(--info-bg) 0%,var(--bg) 100%);border:0.5px solid var(--border);border-radius:var(--rl);padding:20px 24px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hero-left{display:flex;align-items:center;gap:16px}
+.hero-icon{font-size:64px;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.15))}
+.hero-temp{font-size:56px;font-weight:300;line-height:1;color:var(--text)}
+.hero-unit{font-size:24px;font-weight:300;color:var(--text2);vertical-align:super}
+.hero-desc{font-size:15px;color:var(--text2);margin-top:4px}
+.hero-loc{font-size:13px;color:var(--text2);margin-top:2px}
+.hero-right{display:flex;flex-direction:column;gap:8px;min-width:140px}
+.hero-stat{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
+.hero-stat i{font-size:16px;color:var(--info-text);width:20px;text-align:center}
+.hero-hilow{font-size:18px;font-weight:500;color:var(--text)}
+.hero-hilow span{font-size:13px;color:var(--text2);font-weight:400;margin-left:4px}
+@media(max-width:600px){.hero{padding:14px 16px}.hero-icon{font-size:48px}.hero-temp{font-size:44px}.hero-unit{font-size:18px}}
 
 .keypanel{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:1.5rem;max-width:100%}
 .keyrow{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;max-width:100%}
@@ -372,6 +424,7 @@ a{color:var(--info-text)}
     <span class="chip on">Open-Meteo</span>
     <span class="chip on">GFS</span>
     <span class="chip on" data-i18n-chip="jma">気象庁</span>
+    <span class="chip" id="chip-gw">Google Weather</span>
     <span class="chip" id="chip-owm">OpenWeatherMap</span>
     <span class="chip" id="chip-tmrw">Tomorrow.io</span>
     <span class="chip" id="chip-wapi">WeatherAPI</span>
@@ -401,7 +454,9 @@ a{color:var(--info-text)}
   </div>
 
   <div class="keypanel" style="margin-top:0">
-    <div class="stitle" style="margin-bottom:10px"><i class="ti ti-leaf" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Google Pollen API キー設定</div>
+    <div class="stitle" style="margin-bottom:10px"><i class="ti ti-brand-google" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Google APIs キー設定</div>
+    <div class="keyrow"><span class="tag" style="min-width:120px;text-align:center;background:#E3F2FD;color:#0D47A1">Google Weather</span><input type="text" id="gweather-key" data-i18n-placeholder="api_key_ph"></div>
+    <div class="keynote" style="margin-top:4px">⚠️ Google Weather API is currently unavailable in Japan. Works for world cities outside Japan.</div>
     <div class="keyrow"><span class="tag" style="min-width:120px;text-align:center;background:#E8F5E9;color:#1B5E20">Google Pollen</span><input type="text" id="pollen-key" data-i18n-placeholder="api_key_ph"></div>
     <button onclick="applyKeys()" style="margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="apply">適用して更新</span></button>
     <div class="keynote">APIキーはPollen APIのみ・HTTPリファラー制限を推奨。<a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Console</a> で設定できます。</div>
@@ -456,6 +511,7 @@ var I18N={
     pollen_title:'花粉予報（Google）',
     pollen_na:'データなし',
     ql_good:'良い',ql_fair:'普通',ql_mod:'やや悪い',ql_poor:'悪い',ql_vpoor:'非常に悪い',
+    gw_note:'Google Weather APIキーを入力するとより精度の高いデータが表示されます。',
   },
   en:{
     title:'Weather Dashboard',app_title:'Weather Dashboard',refresh:'Refresh',
@@ -495,6 +551,7 @@ var I18N={
     pollen_title:'Pollen Forecast (Google)',
     pollen_na:'No data',
     ql_good:'Good',ql_fair:'Fair',ql_mod:'Moderate',ql_poor:'Poor',ql_vpoor:'Very Poor',
+    gw_note:'Enter a Google Weather API key for enhanced accuracy and additional data.',
   }
 };
 function t(k){var l=getLang();return (I18N[l]&&I18N[l][k])||I18N.ja[k]||k;}
@@ -604,8 +661,9 @@ function applyKeys(){
   var t2=document.getElementById('tmrw-key').value.trim();
   var w=document.getElementById('wapi-key').value.trim();
   var p=document.getElementById('pollen-key').value.trim();
-  if(o)localStorage.setItem('owm_key',o);if(t2)localStorage.setItem('tmrw_key',t2);if(w)localStorage.setItem('wapi_key',w);if(p)localStorage.setItem('pollen_key',p);
-  loadAll();
+  var gw=document.getElementById('gweather-key').value.trim();
+  if(o)localStorage.setItem('owm_key',o);if(t2)localStorage.setItem('tmrw_key',t2);if(w)localStorage.setItem('wapi_key',w);if(p)localStorage.setItem('pollen_key',p);if(gw)localStorage.setItem('gweather_key',gw);
+  loadAll(true);// force refresh / キャッシュを無視して強制更新
 }
 
 // ==================== Map Search / 地図検索 ====================
@@ -694,8 +752,34 @@ function applyMapLocation(){
 }
 
 // ==================== Icon Mapping / アイコン変換 ====================
+
+// Weather code to emoji / 天気コードを絵文字に変換
+var WE={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
+function weatherEmoji(code){return WE[code]||'🌡️';}
+
 var WI={0:'ti-sun',1:'ti-sun',2:'ti-cloud',3:'ti-cloud',45:'ti-mist',48:'ti-mist',51:'ti-cloud-drizzle',53:'ti-cloud-drizzle',55:'ti-cloud-drizzle',61:'ti-cloud-rain',63:'ti-cloud-rain',65:'ti-cloud-rain',71:'ti-snowflake',73:'ti-snowflake',75:'ti-snowflake',80:'ti-cloud-rain',81:'ti-cloud-rain',82:'ti-cloud-rain',95:'ti-cloud-storm',96:'ti-cloud-storm',99:'ti-cloud-storm'};
 var WL={0:'快晴/Clear',1:'晴れ/Sunny',2:'薄曇り/Partly Cloudy',3:'曇り/Cloudy',45:'霧/Fog',51:'霧雨/Drizzle',61:'小雨/Light Rain',63:'雨/Rain',65:'大雨/Heavy Rain',71:'小雪/Light Snow',73:'雪/Snow',80:'にわか雨/Showers',95:'雷雨/Thunderstorm'};
+
+// JMA weather code to emoji / 気象庁天気コードを絵文字に変換
+var JMA_EMOJI={'100':'☀️','101':'🌤️','102':'🌦️','103':'🌦️','104':'🌨️','105':'🌨️',
+  '110':'🌤️','111':'⛅','112':'🌦️','113':'🌦️','114':'🌦️','115':'🌨️',
+  '200':'☁️','201':'🌥️','202':'🌧️','203':'🌧️','204':'🌨️','205':'🌨️',
+  '206':'🌧️','207':'🌨️','208':'⛈️','209':'🌧️','210':'🌧️','211':'🌧️',
+  '212':'🌧️','213':'🌧️','214':'🌧️','215':'🌨️','216':'🌧️','217':'🌨️',
+  '218':'🌧️','219':'🌧️','220':'🌧️','221':'🌧️','222':'🌧️','223':'🌥️',
+  '224':'🌧️','225':'🌨️','226':'🌧️','228':'🌨️','229':'🌧️','230':'🌧️',
+  '231':'🌧️',
+  '300':'🌧️','301':'🌧️','302':'🌧️','303':'🌧️','304':'🌧️','306':'⛈️',
+  '308':'⛈️','309':'🌧️','311':'🌧️','313':'🌧️','314':'🌨️','315':'🌧️',
+  '316':'🌧️','317':'🌧️','320':'🌧️','321':'🌧️','322':'🌧️','323':'🌧️',
+  '324':'🌧️','325':'🌧️','326':'🌨️','327':'🌨️','328':'🌧️','329':'🌧️',
+  '340':'🌨️','350':'🌧️','361':'🌨️','371':'🌨️',
+  '400':'❄️','401':'🌨️','402':'🌨️','403':'🌨️','405':'🌨️','406':'⛈️',
+  '407':'⛈️','409':'🌨️','411':'🌨️','413':'❄️','414':'🌨️','420':'🌨️',
+  '421':'🌨️','422':'❄️','423':'❄️','425':'❄️','426':'🌨️','427':'🌨️',
+  '450':'❄️'};
+function jmaEmoji(code){return JMA_EMOJI[String(code)]||'🌡️';}
+
 var JI={'100':'ti-sun','101':'ti-sun','102':'ti-cloud-rain','103':'ti-cloud-rain','104':'ti-snowflake','105':'ti-snowflake','110':'ti-cloud','111':'ti-cloud','112':'ti-cloud-rain','200':'ti-cloud','201':'ti-cloud','202':'ti-cloud-rain','203':'ti-cloud-rain','204':'ti-snowflake','211':'ti-cloud','212':'ti-cloud-rain','300':'ti-cloud-rain','301':'ti-cloud-rain','306':'ti-cloud-storm','308':'ti-cloud-storm','400':'ti-snowflake','401':'ti-snowflake'};
 function omIcon(c){return WI[c]||'ti-cloud';}
 function jmaIcon(c){return JI[String(c)]||'ti-cloud';}
@@ -724,7 +808,12 @@ async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchW
 async function fetchWapi(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.weatherapi.com/v1/forecast.json?key='+key+'&q='+lat+','+lon+'&days=7&lang=ja');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 
 function mfc(isToday,icon,max,min,rain,note){
-  return '<div class="mfc'+(isToday?' td':'')+'"><div class="ci"><i class="ti '+icon+'"></i></div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="cr">'+rain+'%</div>'+(note?'<div class="cn">'+note+'</div>':'')+'</div>';
+  // アイコンはTablerクラス名から絵文字に変換 / map icon class to emoji
+  var emojiMap={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️','ti-wind':'💨'};
+  var em=emojiMap[icon]||'🌡️';
+  var rainNum=parseInt(rain)||0;
+  var barW=Math.min(100,rainNum);
+  return '<div class="mfc'+(isToday?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW+'%"></div></div><div class="cr">'+rainNum+'%</div>'+(note?'<div class="cn">'+esc(note)+'</div>':'')+'</div>';
 }
 
 // ==================== JMA Detailed Forecast / 気象庁詳細 ====================
@@ -740,19 +829,30 @@ function buildJmaDetail(jma){
     var tempArea=ts0[2]&&ts0[2].areas&&ts0[2].areas[0];
     var temps=tempArea&&tempArea.temps||[];
     var tempMin=temps[2]||'—';var tempMax=temps[3]||'—';
+
+    // 6時間降水確率（バー付き）
     var popArea=ts0[1]&&ts0[1].areas&&ts0[1].areas[0];
     var pops=popArea&&popArea.pops||[];
     var popTimes=ts0[1]&&ts0[1].timeDefines||[];
     var popHtml='';
     if(pops.length){
-      popHtml='<div class="stitle" style="margin-top:10px;margin-bottom:6px">'+t('pop_6h')+'</div><div class="jma-pop-row">';
+      popHtml='<div class="stitle" style="margin-top:12px;margin-bottom:6px">'+t('pop_6h')+'</div><div class="jma-pop-row">';
       for(var pi=0;pi<Math.min(pops.length,6);pi++){
         var pt=popTimes[pi]?new Date(popTimes[pi]):null;
-        var ptStr=pt?(pt.getMonth()+1)+'/'+(pt.getDate())+' '+pt.getHours()+'時':'—';
-        popHtml+='<div class="jma-pop-cell"><div class="pt">'+ptStr+'</div><div class="pv">'+(pops[pi]!==''?pops[pi]+'%':'—')+'</div></div>';
+        var ptStr=pt?pt.getHours()+(getLang()==='ja'?'時':'h'):'—';
+        var ptDate=pt?(pt.getMonth()+1)+'/'+(pt.getDate()):'';
+        var popVal=pops[pi]!==''&&pops[pi]!==undefined?parseInt(pops[pi]):null;
+        var barW=popVal!==null?Math.min(100,popVal):0;
+        popHtml+='<div class="jma-pop-cell">'
+          +'<div class="pt">'+ptDate+'<br>'+ptStr+'</div>'
+          +'<div class="pv">'+(popVal!==null?popVal+'%':'—')+'</div>'
+          +'<div class="pb"><div class="pbf" style="width:'+barW+'%"></div></div>'
+          +'</div>';
       }
       popHtml+='</div>';
     }
+
+    // 7日間予報（カード形式）
     var week7Html='';
     if(ts1&&ts1[0]&&ts1[0].areas){
       var wa=ts1[0].areas[0];
@@ -763,45 +863,49 @@ function buildJmaDetail(jma){
       var tempA=ts1[1]&&ts1[1].areas&&ts1[1].areas[0];
       var tMax=tempA&&tempA.tempsMax||[];
       var tMin=tempA&&tempA.tempsMin||[];
-      var tMaxU=tempA&&tempA.tempsMaxUpper||[];
-      var tMinL=tempA&&tempA.tempsMinLower||[];
       var DAYS=t('days');
-      week7Html='<div class="stitle" style="margin-top:10px;margin-bottom:6px">'+t('week7')+'</div><div class="jma-7day"><table class="jma-7tbl"><thead><tr><th>'+t('date')+'</th>';
+      var nowD=new Date();
+      var tomorrowD=new Date(nowD);tomorrowD.setDate(nowD.getDate()+1);
+
+      week7Html='<div class="stitle" style="margin-top:12px;margin-bottom:8px">'+t('week7')+'</div>';
+      week7Html+='<div class="jma-7cards">';
       wTimes.forEach(function(tm,i){
         var d=new Date(tm);
-        // determine day label from actual date / 実際の日付から曜日・日付を判定
-        var now=new Date();var todayStr=now.toDateString();var tmStr=d.toDateString();
-        var tomorrowD=new Date(now);tomorrowD.setDate(now.getDate()+1);
-        var lb;
-        if(tmStr===todayStr) lb=t('today_lbl');
-        else if(tmStr===tomorrowD.toDateString()) lb=t('tomorrow_lbl');
-        else lb=DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
-        lb+='<br><span style="font-size:10px">'+(d.getMonth()+1)+'/'+(d.getDate())+'</span>';
-        week7Html+='<th>'+lb+'</th>';
+        var isToday=d.toDateString()===nowD.toDateString();
+        var isTmrw=d.toDateString()===tomorrowD.toDateString();
+        var dayLb=isToday?t('today_lbl'):isTmrw?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
+        var dateLb=(d.getMonth()+1)+'/'+(d.getDate());
+        var em=wCodes[i]?jmaEmoji(wCodes[i]):'🌡️';
+        var hi=tMax[i]!==undefined&&tMax[i]!==''?tMax[i]+'°':'—';
+        var lo=tMin[i]!==undefined&&tMin[i]!==''?tMin[i]+'°':'—';
+        var pop=wPops[i]!==''&&wPops[i]!==undefined?parseInt(wPops[i]):null;
+        var rel=wRels[i]||'';
+        var relCls=rel==='A'?'jdc-rel-A':rel==='B'?'jdc-rel-B':'jdc-rel-C';
+        var barW=pop!==null?Math.min(100,pop):0;
+        week7Html+='<div class="jma-7card'+(isToday?' today':'')+'">'
+          +'<div class="jdc-day">'+dayLb+'</div>'
+          +'<div class="jdc-date">'+dateLb+'</div>'
+          +'<div class="jdc-em">'+em+'</div>'
+          +'<div class="jdc-hi">'+hi+'</div>'
+          +'<div class="jdc-lo">'+lo+'</div>'
+          +'<div class="jdc-bar"><div class="jdc-fill" style="width:'+barW+'%"></div></div>'
+          +'<div class="jdc-pop">'+(pop!==null?pop+'%':'—')+'</div>'
+          +(rel?'<div class="jdc-rel '+relCls+'">'+rel+'</div>':'')
+          +'</div>';
       });
-      week7Html+='</tr></thead><tbody>';
-      week7Html+='<tr><td style="color:var(--text2);font-size:11px">'+t('weather_lbl')+'</td>';
-      wTimes.forEach(function(tm,i){var ic=wCodes[i]?jmaIcon(wCodes[i]):'ti-cloud';week7Html+='<td><i class="ti '+ic+'" style="font-size:16px"></i></td>';});
-      week7Html+='</tr>';
-      week7Html+='<tr><td style="color:var(--text2);font-size:11px">'+t('hi')+'</td>';
-      wTimes.forEach(function(tm,i){var v=tMax[i]!==undefined&&tMax[i]!==''?tMax[i]+'°':'—';var u=tMaxU[i]!==undefined&&tMaxU[i]!==''?'<span style="font-size:10px;color:var(--text2)"> ~'+tMaxU[i]+'</span>':'';week7Html+='<td style="font-weight:500">'+v+u+'</td>';});
-      week7Html+='</tr>';
-      week7Html+='<tr><td style="color:var(--text2);font-size:11px">'+t('lo')+'</td>';
-      wTimes.forEach(function(tm,i){var v=tMin[i]!==undefined&&tMin[i]!==''?tMin[i]+'°':'—';var l=tMinL[i]!==undefined&&tMinL[i]!==''?'<span style="font-size:10px;color:var(--text2)">'+tMinL[i]+'~</span>':'';week7Html+='<td>'+l+v+'</td>';});
-      week7Html+='</tr>';
-      week7Html+='<tr><td style="color:var(--text2);font-size:11px">'+t('pop')+'</td>';
-      wTimes.forEach(function(tm,i){var v=wPops[i]!==''&&wPops[i]!==undefined?wPops[i]+'%':'—';week7Html+='<td style="color:var(--info-text)">'+v+'</td>';});
-      week7Html+='</tr>';
-      week7Html+='<tr><td style="color:var(--text2);font-size:11px">'+t('reliability')+'</td>';
-      wTimes.forEach(function(tm,i){var r=wRels[i]||'';var cls=r==='A'?'rel-A':r==='B'?'rel-B':'rel-C';week7Html+='<td class="'+cls+'">'+(r||'—')+'</td>';});
-      week7Html+='</tr></tbody></table></div>';
+      week7Html+='</div>';
     }
+
+    // 今日の詳細グリッド
     var gridHtml='<div class="jma-grid">';
-    if(tempMin!=='—'||tempMax!=='—') gridHtml+='<div class="jma-item"><div class="lb"><i class="ti ti-temperature" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('today_temp')+'</div><div class="vl">'+t('hi')+' '+tempMax+'° / '+t('lo')+' '+tempMin+'°</div></div>';
+    if(tempMin!=='—'||tempMax!=='—') gridHtml+='<div class="jma-item"><div class="lb"><i class="ti ti-temperature" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('today_temp')+'</div><div class="vl"><span style="color:#D44000;font-weight:600">'+tempMax+'°</span> / <span style="color:#2A6DB5">'+tempMin+'°</span></div></div>';
     if(windText) gridHtml+='<div class="jma-item"><div class="lb"><i class="ti ti-wind" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('wind_lbl')+'</div><div class="vl" style="font-size:12px;line-height:1.5">'+windText+'</div></div>';
     if(waveText) gridHtml+='<div class="jma-item"><div class="lb"><i class="ti ti-waves" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('wave_lbl')+'</div><div class="vl" style="font-size:12px;line-height:1.5">'+waveText+'</div></div>';
     gridHtml+='</div>';
-    return '<div class="jma-detail"><div class="jma-detail-title"><span class="tag t-jma">'+t('jma_chip')+'</span>'+t('jma_detail')+'</div>'+(weatherText?'<div class="jma-weather-text"><i class="ti ti-news" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>'+weatherText+'</div>':'')+gridHtml+popHtml+week7Html+'</div>';
+
+    return '<div class="jma-detail"><div class="jma-detail-title"><span class="tag t-jma">'+t('jma_chip')+'</span>'+t('jma_detail')+'</div>'
+      +(weatherText?'<div class="jma-weather-text">'+weatherText+'</div>':'')
+      +gridHtml+popHtml+week7Html+'</div>';
   }catch(e){console.warn('JMA detail error',e);return'';}
 }
 
@@ -827,7 +931,33 @@ function buildCharts(om,gfs){
 
   var dCtx=document.getElementById('daily-chart');
   if(dCtx){
-    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omHourly,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:3,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{title:{display:true,text:t('daily_chart'),color:cc.text,font:{size:12}}})})});
+    // 現在時刻のインデックスを特定 / find current hour index
+    var nowHour=now.getHours();
+    var nowIdx=hourLabels.indexOf(nowHour+'時');
+    if(nowIdx<0) nowIdx=hourLabels.findIndex(function(l){return parseInt(l)<=nowHour;});
+    var nowTemp=nowIdx>=0?omHourly[nowIdx]:null;
+
+    // 現在気温を強調するポイントスタイル / highlight current temperature point
+    var pointBg=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});
+    var pointR=omHourly.map(function(_,i){return i===nowIdx?7:3;});
+
+    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omHourly,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:pointR,pointBackgroundColor:pointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{
+      title:{display:false},
+      annotation:undefined,
+      tooltip:{
+        mode:'index',intersect:false,
+        callbacks:{
+          title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},
+          label:function(item){return item.dataset.label+': '+item.raw+'°C';}
+        }
+      }
+    }),scales:Object.assign({},baseOpts.scales,{
+      y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})
+    })})});
+    // 現在時刻ラベルを赤くする / highlight current time label
+    if(nowIdx>=0){
+      _charts.daily.data.datasets[0].pointBorderColor=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});
+    }
   }
 
   // weekly chart: 7-day high/low temperatures / 週次グラフ（7日間最高・最低）
@@ -844,11 +974,19 @@ function buildCharts(om,gfs){
   var wCtx=document.getElementById('weekly-chart');
   if(wCtx){
     _charts.weekly=new Chart(wCtx,{type:'line',data:{labels:weekLabels,datasets:[
-      {label:'OM '+t('max_temp'),data:omMax,borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.08)',tension:0.4,pointRadius:4,fill:false},
-      {label:'OM '+t('min_temp'),data:omMin,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.08)',tension:0.4,pointRadius:4,fill:false},
-      {label:'GFS '+t('max_temp'),data:gfsMax,borderColor:'#E05C2A',borderDash:[5,3],tension:0.4,pointRadius:3,fill:false},
-      {label:'GFS '+t('min_temp'),data:gfsMin,borderColor:'#378ADD',borderDash:[5,3],tension:0.4,pointRadius:3,fill:false},
-    ]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{title:{display:true,text:t('weekly_chart'),color:cc.text,font:{size:12}}})})});
+      {label:'OM '+t('max_temp'),data:omMax,borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#E05C2A',fill:'+1'},
+      {label:'OM '+t('min_temp'),data:omMin,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#378ADD',fill:false},
+      {label:'GFS '+t('max_temp'),data:gfsMax,borderColor:'#E05C2A',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},
+      {label:'GFS '+t('min_temp'),data:gfsMin,borderColor:'#378ADD',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},
+    ]},options:Object.assign({},baseOpts,{
+      plugins:Object.assign({},baseOpts.plugins,{
+        title:{display:false},
+        tooltip:{mode:'index',intersect:false,callbacks:{label:function(item){return item.dataset.label+': '+item.raw+'°';}}}
+      }),
+      scales:Object.assign({},baseOpts.scales,{
+        y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})
+      })
+    })});
   }
 }
 var _activeChart='daily';
@@ -872,8 +1010,8 @@ function buildChartSection(){
     +'<div id="weekly-wrap" class="chart-wrap" style="display:'+(we?'block':'none')+'"><canvas id="weekly-chart"></canvas></div>'
     +'</div>';
 }
-function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
-  window._lastBuildArgs=[loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen];
+function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf){
+  window._lastBuildArgs=[loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf];
   var now=new Date();
   var DAYS=t('days');
   var h0=Math.floor(now.getHours()/3)*3;
@@ -898,8 +1036,9 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
   var dates=om.daily.time.slice(0,7);
   var headHtml=dates.map(function(ds,i){
     var d=new Date(ds);
-    var lb=i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
-    return '<div class="mfhd'+(i===0?' td':'')+'">'+lb+'<br><span style="font-size:10px">'+(d.getMonth()+1)+'/'+(d.getDate())+'</span></div>';
+    var dayLb=i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
+    var dateLb=(d.getMonth()+1)+'/'+(d.getDate());
+    return '<div class="mfhd'+(i===0?' td':'')+'"><div class="dow">'+dayLb+'</div><div class="mdate">'+dateLb+'</div></div>';
   }).join('');
 
   var omCells=dates.map(function(ds,i){return mfc(i===0,omIcon(om.daily.weathercode[i]),Math.round(om.daily.temperature_2m_max[i]),Math.round(om.daily.temperature_2m_min[i]),Math.round(om.daily.precipitation_probability_max[i]),'');}).join('');
@@ -910,9 +1049,32 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
     var mn=ji!==null&&jmaMin[ji]!==undefined&&jmaMin[ji]!==''?jmaMin[ji]:'—';
     var rn=ji!==null&&jmaRain[ji]!==null&&jmaRain[ji]!==undefined?jmaRain[ji]:'—';
     var wc=ji!==null&&jmaCodes[ji]?jmaCodes[ji]:null;
+    var emojiMapJ={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️','ti-wind':'💨'};
     var ic=wc?jmaIcon(wc):'ti-cloud';
-    return '<div class="mfc'+(i===0?' td':'')+'"><div class="ci"><i class="ti '+ic+'"></i></div><div class="ct">'+mx+'°</div><div class="cl">'+mn+'°</div><div class="cr">'+(rn!=='—'?rn+'%':'—')+'</div></div>';
+    var em=emojiMapJ[ic]||'🌡️';
+    var rainNum2=rn!=='—'?parseInt(rn):null;
+    var barW2=rainNum2!==null?Math.min(100,rainNum2):0;
+    return '<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+mx+'°</div><div class="cl">'+mn+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW2+'%"></div></div><div class="cr">'+(rainNum2!==null?rainNum2+'%':'—')+'</div></div>';
   }).join('');
+
+  // Google Weather forecast cells
+  var gwCells='';
+  if(gwf&&gwf.forecastDays&&gwf.forecastDays.length>0){
+    document.getElementById('chip-gw').classList.add('on');
+    gwCells='<div class="mfrow"><div class="mflb" style="background:#E3F2FD;color:#0D47A1">G.Weather</div>'+dates.map(function(ds,i){
+      if(!gwf.forecastDays[i])return '<div class="mfc empty"></div>';
+      var fd=gwf.forecastDays[i];
+      var hiTemp=fd.maxTemperature?Math.round(fd.maxTemperature.degrees):'—';
+      var loTemp=fd.minTemperature?Math.round(fd.minTemperature.degrees):'—';
+      var rainPct=fd.daytimeForecast&&fd.daytimeForecast.precipitation?Math.round(fd.daytimeForecast.precipitation.probability.percent||0):0;
+      var wType=fd.daytimeForecast&&fd.daytimeForecast.weatherCondition?fd.daytimeForecast.weatherCondition.type:'';
+      var gwEmojiMap={CLEAR:'☀️',MOSTLY_CLEAR:'🌤️',PARTLY_CLOUDY:'⛅',MOSTLY_CLOUDY:'🌥️',CLOUDY:'☁️',LIGHT_RAIN:'🌦️',RAIN:'🌧️',RAIN_SHOWERS:'🌧️',SHOWERS:'🌦️',THUNDERSTORM:'⛈️',SNOW:'❄️',LIGHT_SNOW:'🌨️',SLEET:'🌧️',WINDY:'💨',FOG:'🌫️',DRIZZLE:'🌦️'};
+      var em2=gwEmojiMap[wType]||'🌡️';
+      // mfcを直接構築（絵文字用）
+      var rainNum3=parseInt(rainPct)||0;
+      return '<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em2+'</div><div class="ct">'+hiTemp+'°</div><div class="cl">'+loTemp+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+Math.min(100,rainNum3)+'%"></div></div><div class="cr">'+rainNum3+'%</div></div>';
+    }).join('')+'</div>';
+  }
 
   var owmCells='';
   if(owm&&owm.list){
@@ -934,10 +1096,13 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
 
   var hourlyHtml=Array.from({length:8},function(_,i){
     var h=(h0+i*3)%24;
+    var isNowHour=(h===now.getHours()||( h<=now.getHours()&&now.getHours()<h+3));
     var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===h;});
     var temp=idx>=0?Math.round(om.hourly.temperature_2m[idx]):'--';
     var rain=idx>=0?Math.round(om.hourly.precipitation_probability[idx]):'--';
-    return '<div class="hc"><div class="ht">'+String(h).padStart(2,'0')+(getLang()==='ja'?'時':'h')+'</div><div class="hv">'+temp+'°</div><div class="hr">'+rain+'%</div></div>';
+    var wcode=idx>=0?om.hourly.weathercode[idx]:0;
+    var em=weatherEmoji(wcode);
+    return '<div class="hc'+(isNowHour?' now':'')+'"><div class="ht">'+String(h).padStart(2,'0')+(getLang()==='ja'?'時':'h')+'</div><div class="he">'+em+'</div><div class="hv">'+temp+'°</div><div class="hr">'+rain+'%</div></div>';
   }).join('');
 
   var compareRows=om.daily.time.slice(0,5).map(function(ds,i){
@@ -955,14 +1120,42 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
   var wlKey=Object.keys(WL).find(function(k){return parseInt(k)===cCode;})||'';
   var wlText=wlKey?WL[wlKey].split('/')[getLang()==='ja'?0:1]||'—':'—';
 
-  document.getElementById('main-content').innerHTML=
-    '<div class="metrics">'
-    +'<div class="mc"><div class="lb"><i class="ti ti-thermometer" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>'+t('cur_temp')+'</div><div class="vl">'+cTemp+'°C</div><div class="sb">'+wlText+'</div></div>'
-    +'<div class="mc"><div class="lb"><i class="ti ti-temperature-plus" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>'+t('hi_lo')+'</div><div class="vl">'+avgMax+'°/'+avgMin+'°</div><div class="sb">'+t('avg_2src')+'</div></div>'
-    +'<div class="mc"><div class="lb"><i class="ti ti-droplet" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>'+t('rain_prob')+'</div><div class="vl" style="color:var(--info-text)">'+rainToday+'%</div><div class="sb">'+t('today_max')+'</div></div>'
-    +'<div class="mc"><div class="lb"><i class="ti ti-wind" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>'+t('wind')+'</div><div class="vl">'+cWind+'<span style="font-size:14px">m/s</span></div><div class="sb">'+t('current')+'</div></div>'
-    +'<div class="mc"><div class="lb"><i class="ti ti-ripple" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i>'+t('humidity')+'</div><div class="vl">'+cHum+'<span style="font-size:14px">%</span></div><div class="sb">'+t('current')+'</div></div>'
+  // Google Weather 現在気温を優先使用 / use Google Weather current temp if available
+  var displayTemp=cTemp;
+  var displayDesc=wlText;
+  var displayHi=avgMax;
+  var displayLo=avgMin;
+  if(gw&&gw.temperature&&gw.temperature.degrees!==undefined){
+    displayTemp=Math.round(gw.temperature.degrees);
+    if(gw.weatherCondition&&gw.weatherCondition.description) displayDesc=esc(gw.weatherCondition.description.text||wlText);
+    document.getElementById('chip-gw').classList.add('on');
+  }
+  if(gwf&&gwf.forecastDays&&gwf.forecastDays[0]){
+    var fd0=gwf.forecastDays[0];
+    if(fd0.maxTemperature&&fd0.maxTemperature.degrees!==undefined) displayHi=Math.round(fd0.maxTemperature.degrees);
+    if(fd0.minTemperature&&fd0.minTemperature.degrees!==undefined) displayLo=Math.round(fd0.minTemperature.degrees);
+  }
+
+  var heroHtml='<div class="hero">'
+    +'<div class="hero-left">'
+    +'<div class="hero-icon">'+weatherEmoji(cCode)+'</div>'
+    +'<div>'
+    +'<div><span class="hero-temp">'+displayTemp+'</span><span class="hero-unit">°C</span></div>'
+    +'<div class="hero-desc">'+displayDesc+'</div>'
+    +'<div class="hero-loc"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px"></i> '+esc(loc.name)+'</div>'
     +'</div>'
+    +'</div>'
+    +'<div class="hero-right">'
+    +'<div class="hero-hilow">'+displayHi+'°<span>/ '+displayLo+'°</span></div>'
+    +'<div class="hero-stat"><i class="ti ti-droplet"></i>'+t('rain_prob')+' '+rainToday+'%</div>'
+    +'<div class="hero-stat"><i class="ti ti-wind"></i>'+t('wind')+' '+cWind+'m/s</div>'
+    +'<div class="hero-stat"><i class="ti ti-ripple"></i>'+t('humidity')+' '+cHum+'%</div>'
+    +'</div>'
+    +'</div>';
+
+  document.getElementById('main-content').innerHTML=heroHtml
+    +'<div class="stitle">'+t('hourly_forecast')+'</div>'
+    +'<div class="hourly">'+hourlyHtml+'</div>'
     // charts / グラフ
     +buildChartSection()
     +buildJmaDetail(jma)
@@ -971,9 +1164,7 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
     +'<div class="mfrow"><div class="mflb t-om">Open-Meteo</div>'+omCells+'</div>'
     +'<div class="mfrow"><div class="mflb t-gfs">GFS</div>'+gfsCells+'</div>'
     +'<div class="mfrow"><div class="mflb t-jma">'+t('jma_chip')+'</div>'+jmaCells+'</div>'
-    +owmCells+tmrwCells+wapiCells+'</div>'
-    +'<div class="stitle">'+t('hourly_forecast')+'</div>'
-    +'<div class="hourly">'+hourlyHtml+'</div>'
+    +gwCells+owmCells+tmrwCells+wapiCells+'</div>'
     +'<div class="stitle">'+t('compare_5')+'</div>'
     +'<div style="overflow-x:auto;margin-bottom:1.5rem"><table class="ctbl"><thead><tr><th style="width:12%">'+t('date')+'</th><th style="width:28%">Open-Meteo</th><th style="width:20%">GFS</th><th style="width:22%">'+t('jma_chip')+'</th><th style="width:18%">'+t('rain_prob')+'</th></tr></thead><tbody>'+compareRows+'</tbody></table></div>'
     +buildAqSection(aq,pollen)
@@ -987,6 +1178,22 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen){
 
 
 // ==================== Air Quality & Pollen API / 大気質・花粉API ====================
+
+async function fetchGoogleWeather(lat,lon,key){
+  if(!key)return null;
+  try{
+    var r=await fetchWithTimeout('https://weather.googleapis.com/v1/currentConditions:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&unitsSystem=METRIC');
+    if(!r.ok)return null;return r.json();
+  }catch(e){return null;}
+}
+async function fetchGoogleWeatherForecast(lat,lon,key){
+  if(!key)return null;
+  try{
+    var r=await fetchWithTimeout('https://weather.googleapis.com/v1/forecast/days:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&days=10&unitsSystem=METRIC');
+    if(!r.ok)return null;return r.json();
+  }catch(e){return null;}
+}
+
 async function fetchAirQuality(lat,lon){
   try{
     var r=await fetchWithTimeout('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');
@@ -1167,7 +1374,7 @@ async function loadAll(forceRefresh){
       if(age<30){
         dbg('using cache');
         var r=cached.results;
-        buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]);
+        buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9]);
         return;
       }
     } else {
@@ -1189,8 +1396,11 @@ async function loadAll(forceRefresh){
       };
     }
     dbg('fetching all APIs...');
-    var settled=await Promise.allSettled([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchWapi(loc.lat,loc.lon,wk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk)]);
-    var names=['OM','GFS','JMA','OWM','Tmrw','Wapi','AQ','Pollen'];
+    var gwk=localStorage.getItem('gweather_key')||'';
+    // Google Weather API is not yet available in Japan / 日本は未対応のためスキップ
+    var isJapan=!!loc.jma;
+    var settled=await Promise.allSettled([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchWapi(loc.lat,loc.lon,wk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk),isJapan?Promise.resolve(null):fetchGoogleWeather(loc.lat,loc.lon,gwk),isJapan?Promise.resolve(null):fetchGoogleWeatherForecast(loc.lat,loc.lon,gwk)]);
+    var names=['OM','GFS','JMA','OWM','Tmrw','Wapi','AQ','Pollen','GW-Current','GW-Forecast'];
     settled.forEach(function(s,i){dbg(names[i]+': '+(s.status==='fulfilled'?'OK':'FAIL '+(s.reason&&s.reason.message||s.reason)));});
     var results=settled.map(function(s){return s.status==='fulfilled'?s.value:null;});
     if(results[0]&&results[0].daily&&results[1]&&results[1].daily&&results[2]&&Array.isArray(results[2])){
@@ -1201,7 +1411,7 @@ async function loadAll(forceRefresh){
       throw new Error('Required weather data (OM/GFS) unavailable');
     }
     dbg('buildContent start');
-    buildContent(loc,results[0],results[1],results[2],results[3],results[4],results[5],results[6],results[7]);
+    buildContent(loc,results[0],results[1],results[2],results[3],results[4],results[5],results[6],results[7],results[8],results[9]);
   }catch(e){
     dbg('catch: '+e.message);
     var cached=loadCache(loc);
@@ -1209,7 +1419,7 @@ async function loadAll(forceRefresh){
       var age=Math.round((Date.now()-cached.ts)/60000);
       var ageStr=age<60?age+(getLang()==='ja'?'分前':' min ago'):Math.round(age/60)+(getLang()==='ja'?'時間前':' hr ago');
       var r=cached.results;
-      buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7]);
+      buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9]);
       var banner='<div style="background:#FAEEDA;border:0.5px solid #BA7517;border-radius:var(--rm);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#633806;">'
         +'<i class="ti ti-wifi-off" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>'
         +(getLang()==='ja'
@@ -1236,6 +1446,7 @@ window.addEventListener('DOMContentLoaded',function(){
   document.getElementById('tmrw-key').value=localStorage.getItem('tmrw_key')||'';
   document.getElementById('wapi-key').value=localStorage.getItem('wapi_key')||'';
   document.getElementById('pollen-key').value=localStorage.getItem('pollen_key')||'';
+  document.getElementById('gweather-key').value=localStorage.getItem('gweather_key')||'';
   applyI18n();
   renderLocationBar();
   loadAll();

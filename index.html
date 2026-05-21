@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="title">天気予報ダッシュボード</title>
-<!-- v2.1.0 -->
+<!-- v2.2.0 -->
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iMCIgeDI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM1RUQzRkYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0QUEzRkYiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0idzEiIHgxPSIwIiB4Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNkNGRiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFFOTBGRiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJ3MiIgeDE9IjAiIHgyPSIxIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM0NDRkZGIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjNFMEZGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0id2hpdGUiLz48ZyBzdHJva2U9IiNGRkNDMDAiIHN0cm9rZS13aWR0aD0iMi4yIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik00NCAxNmExMCAxMCAwIDAgMSAxMCAxMCIvPjxsaW5lIHgxPSI0NCIgeTE9IjciIHgyPSI0NCIgeTI9IjMiLz48bGluZSB4MT0iNTYiIHkxPSIxOSIgeDI9IjYwIiB5Mj0iMTkiLz48bGluZSB4MT0iNTEiIHkxPSIxMCIgeDI9IjU0IiB5Mj0iNyIvPjxsaW5lIHgxPSI1MiIgeTE9IjI4IiB4Mj0iNTUiIHkyPSIzMSIvPjwvZz48cGF0aCBkPSJNMTggMzkgQzEwIDM5IDkgMjkgMTYgMjcgQzE4IDE4IDI5IDE2IDM1IDIyIEM0MyAyMCA1MCAyNCA1MSAzMiBDNTggMzMgNTcgNDEgNDkgNDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNjKSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTkgNDggQzI5IDQzIDQxIDQ5IDUxIDQ1IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjdzEpIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMSA1NiBDMzEgNTAgNDMgNTcgNTMgNTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCN3MikiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="天気予報">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/dist/tabler-icons.min.css">
-<!-- Early theme init / テーマ早期初期化（フラッシュ防止） -->
 <script>
 (function(){
   var th=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
@@ -45,7 +44,6 @@ button:hover{background:var(--bg2)}
 .preset-btn{font-size:11px;padding:3px 10px;border-radius:99px;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer}
 .preset-btn:hover{background:var(--info-bg);color:var(--info-text)}
 .add-form-note{font-size:11px;color:var(--text2);margin-top:8px}
-/* 地図検索 */
 .map-search-box{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-top:10px;max-width:100%;overflow-x:hidden}
 .map-search-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap;max-width:100%}
 .map-search-row input{flex:1;min-width:0;font-size:13px;padding:6px 10px;border-radius:var(--rm);border:0.5px solid var(--border);background:var(--bg2);color:var(--text);font-family:inherit}
@@ -60,14 +58,12 @@ button:hover{background:var(--bg2)}
 .mc .vl{font-size:22px;font-weight:500}
 .mc .sb{font-size:12px;color:var(--text2);margin-top:2px}
 .stitle{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
-/* グラフ */
 .chart-section{margin-bottom:1.5rem}
 .chart-tabs{display:flex;gap:6px;margin-bottom:10px}
 .chart-tab{font-size:12px;padding:4px 12px;cursor:pointer;border-radius:99px;border:0.5px solid var(--border);background:var(--bg);color:var(--text2)}
 .chart-tab.active{background:var(--info-bg);color:var(--info-text);border-color:transparent}
 .chart-wrap{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px;position:relative;height:220px;max-width:100%;overflow:hidden}
 .chart-wrap canvas{width:100%!important;height:100%!important}
-/* 気象庁詳細 */
 .jma-detail{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:1.5rem;max-width:100%;overflow-x:hidden}
 .jma-detail-title{font-size:13px;font-weight:500;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .jma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:10px}
@@ -77,8 +73,6 @@ button:hover{background:var(--bg2)}
 .jma-item .ji-label{font-size:11px;color:var(--text2);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
 .jma-item .ji-val{font-size:13px;color:var(--text);line-height:1.6;padding-left:2px}
 .jma-item .ji-temp{font-size:22px;font-weight:500}
-
-/* JMA 7day cards / 7日間カード */
 .jma-7cards{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px;overflow-x:auto}
 .jma-7card{background:var(--bg2);border-radius:var(--rm);padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:44px}
 .jma-7card.today{background:var(--info-bg);border:1.5px solid var(--info-text)}
@@ -94,19 +88,13 @@ button:hover{background:var(--bg2)}
 .jdc-rel-A{background:#E6F4EA;color:#1B7F3A}
 .jdc-rel-B{background:#FEF9E7;color:#9A7D0A}
 .jdc-rel-C{background:var(--bg3);color:var(--text2)}
-/* JMA pop bar / 6時間降水確率バー */
 .jma-pop-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:4px;margin-bottom:10px}
 .jma-pop-cell{background:var(--bg2);border-radius:var(--rm);padding:6px 4px;text-align:center}
 .jma-pop-cell .pt{font-size:10px;color:var(--text2)}
 .jma-pop-cell .pv{font-size:14px;font-weight:600;color:var(--info-text)}
 .jma-pop-cell .pb{width:80%;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:2px auto 0}
 .jma-pop-cell .pbf{height:100%;border-radius:2px;background:linear-gradient(90deg,#64B5F6,#1565C0)}
-/* JMA weather text card */
 .jma-weather-text{font-size:13px;color:var(--text);margin-bottom:10px;line-height:1.6;padding:10px 14px;background:var(--bg2);border-radius:var(--rm)}
-
-.jma-pop-cell{background:var(--bg2);border-radius:var(--rm);padding:6px 4px;text-align:center}
-.jma-pop-cell .pt{font-size:10px;color:var(--text2)}
-.jma-pop-cell .pv{font-size:13px;font-weight:500;color:var(--info-text)}
 .jma-7day{overflow-x:auto;margin-bottom:4px}
 .jma-7tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:500px}
 .jma-7tbl th{text-align:center;padding:5px 4px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border);font-size:11px}
@@ -114,7 +102,6 @@ button:hover{background:var(--bg2)}
 .jma-7tbl tr:last-child td{border-bottom:none}
 .rel-A{color:#1B7F3A;font-weight:500}.rel-B{color:#BA7517}.rel-C{color:#9a9a96}
 .today-col{background:var(--info-bg)!important}
-/* マルチソース予報 */
 .mf{margin-bottom:1.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 .mfrow{display:grid;grid-template-columns:90px repeat(7,minmax(44px,1fr));gap:4px;margin-bottom:4px;align-items:center;min-width:400px}
 .mflb{font-size:11px;padding:4px;border-radius:4px;text-align:center;font-weight:500}
@@ -150,8 +137,6 @@ button:hover{background:var(--bg2)}
 .barwrap{display:flex;align-items:center;gap:8px}
 .barbg{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;min-width:40px}
 .barfill{height:100%;border-radius:3px;background:#378ADD}
-
-/* 空気質・花粉パネル */
 .aq-panel{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:1.5rem;max-width:100%}
 .aq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:10px}
 .aq-card{background:var(--bg2);border-radius:var(--rm);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
@@ -169,9 +154,6 @@ button:hover{background:var(--bg2)}
 .pollen-card .pn{font-size:11px;color:var(--text2);margin-bottom:4px}
 .pollen-card .pi{font-size:18px;font-weight:500}
 .pollen-card .pc{font-size:10px;font-weight:500;padding:2px 6px;border-radius:99px;display:inline-block;margin-top:3px}
-
-
-/* Hero card / ヒーローカード */
 .hero{background:linear-gradient(135deg,var(--info-bg) 0%,var(--bg) 100%);border:0.5px solid var(--border);border-radius:var(--rl);padding:20px 24px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .hero-left{display:flex;align-items:center;gap:16px}
 .hero-icon{font-size:64px;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.15))}
@@ -185,7 +167,6 @@ button:hover{background:var(--bg2)}
 .hero-hilow{font-size:18px;font-weight:500;color:var(--text)}
 .hero-hilow span{font-size:13px;color:var(--text2);font-weight:400;margin-left:4px}
 @media(max-width:600px){.hero{padding:14px 16px}.hero-icon{font-size:48px}.hero-temp{font-size:44px}.hero-unit{font-size:18px}}
-
 .keypanel{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:1.5rem;max-width:100%}
 .keyrow{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;max-width:100%}
 .keyrow input{flex:1;min-width:0;font-size:13px;padding:6px 10px;border-radius:var(--rm);border:0.5px solid var(--border);background:var(--bg2);color:var(--text);font-family:inherit}
@@ -195,16 +176,12 @@ button:hover{background:var(--bg2)}
 .footer{font-size:11px;color:var(--text2);margin-top:8px}
 a{color:var(--info-text)}
 @media(max-width:600px){.add-form-row{grid-template-columns:1fr 1fr}.mfrow{grid-template-columns:70px repeat(7,minmax(38px,1fr))}.mflb{font-size:10px}.wrap{padding:1rem 0.5rem}.mc .vl{font-size:18px}.jma-grid{grid-template-columns:1fr 1fr}.aq-grid{grid-template-columns:1fr 1fr}.pollen-grid{grid-template-columns:repeat(3,1fr)}.chart-wrap{height:180px}}
-
-/* ===== メインタブナビ ===== */
 .main-tabs{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
 .main-tab{font-size:13px;padding:7px 16px;cursor:pointer;border-radius:var(--rm);border:0.5px solid var(--border);background:var(--bg);color:var(--text2);font-weight:400;transition:background 0.15s}
 .main-tab:hover{background:var(--bg2)}
 .main-tab.active{background:var(--info-bg);color:var(--info-text);border-color:transparent;font-weight:500}
 .main-panel{display:none}
 .main-panel.active{display:block}
-
-/* ===== 雨雲レーダー ===== */
 #radar-map{width:100%;height:360px;border-radius:var(--rm);border:0.5px solid var(--border);overflow:hidden}
 .radar-ctrl{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
 .radar-timeline{display:flex;gap:3px;flex-wrap:wrap;flex:1;min-width:0}
@@ -217,14 +194,14 @@ a{color:var(--info-text)}
 .radar-legend-swatch{width:12px;height:8px;border-radius:1px}
 .radar-source{font-size:11px;color:var(--text2);margin-top:6px}
 @media(max-width:600px){#radar-map{height:280px}}
-
-/* ===== 天気図 ===== */
 .wxmap-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
 .wxmap-tab{font-size:12px;padding:4px 12px;cursor:pointer;border-radius:99px;border:0.5px solid var(--border);background:var(--bg);color:var(--text2)}
 .wxmap-tab.active{background:var(--info-bg);color:var(--info-text);border-color:transparent}
 .wxmap-img-wrap{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);overflow:hidden;text-align:center;padding:8px}
 .wxmap-img-wrap img{max-width:100%;height:auto;border-radius:4px;display:block;margin:0 auto}
 .wxmap-note{font-size:11px;color:var(--text2);margin-top:8px}
+/* Rainbow.ai キーなし警告 */
+.rb-warn{background:#FEF9E7;border:0.5px solid #C9A000;border-radius:var(--rm);padding:10px 14px;font-size:12px;color:#633806;margin-top:8px}
 </style>
 </head>
 <body>
@@ -254,190 +231,20 @@ a{color:var(--info-text)}
     </div>
     <div class="add-form-presets">
       <div style="display:flex;flex-direction:column;gap:8px;width:100%">
-        <!-- Japan / 日本 -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Hokkaido / 北海道</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Sapporo',43.0642,141.3469,'016000')">Sapporo 札幌</button>
-            <button class="preset-btn" onclick="setPreset('Asahikawa',43.7706,142.3650,'012000')">Asahikawa 旭川</button>
-            <button class="preset-btn" onclick="setPreset('Hakodate',41.7687,140.7290,'017000')">Hakodate 函館</button>
-            <button class="preset-btn" onclick="setPreset('Kushiro',42.9849,144.3819,'014100')">Kushiro 釧路</button>
-            <button class="preset-btn" onclick="setPreset('Wakkanai',45.4122,141.6728,'011000')">Wakkanai 稚内</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Tohoku / 東北</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Aomori',40.8244,140.7400,'020000')">Aomori 青森</button>
-            <button class="preset-btn" onclick="setPreset('Morioka',39.7036,141.1527,'030000')">Morioka 盛岡</button>
-            <button class="preset-btn" onclick="setPreset('Sendai',38.2688,140.8721,'040000')">Sendai 仙台</button>
-            <button class="preset-btn" onclick="setPreset('Akita',39.7200,140.1024,'050000')">Akita 秋田</button>
-            <button class="preset-btn" onclick="setPreset('Yamagata',38.2404,140.3633,'060000')">Yamagata 山形</button>
-            <button class="preset-btn" onclick="setPreset('Fukushima',37.7608,140.4748,'070000')">Fukushima 福島</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kanto / 関東</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Mito',36.3418,140.4468,'080000')">Mito 水戸</button>
-            <button class="preset-btn" onclick="setPreset('Utsunomiya',36.5657,139.8836,'090000')">Utsunomiya 宇都宮</button>
-            <button class="preset-btn" onclick="setPreset('Maebashi',36.3912,139.0608,'100000')">Maebashi 前橋</button>
-            <button class="preset-btn" onclick="setPreset('Saitama',35.8617,139.6455,'110000')">Saitama さいたま</button>
-            <button class="preset-btn" onclick="setPreset('Chiba',35.6050,140.1233,'120000')">Chiba 千葉</button>
-            <button class="preset-btn" onclick="setPreset('Tokyo',35.6895,139.6917,'130000')">Tokyo 東京</button>
-            <button class="preset-btn" onclick="setPreset('Yokohama',35.4478,139.6425,'140000')">Yokohama 横浜</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chubu / 中部</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Niigata',37.9026,139.0232,'150000')">Niigata 新潟</button>
-            <button class="preset-btn" onclick="setPreset('Toyama',36.6953,137.2113,'160000')">Toyama 富山</button>
-            <button class="preset-btn" onclick="setPreset('Kanazawa',36.5944,136.6256,'170000')">Kanazawa 金沢</button>
-            <button class="preset-btn" onclick="setPreset('Fukui',36.0652,136.2219,'180000')">Fukui 福井</button>
-            <button class="preset-btn" onclick="setPreset('Kofu',35.6639,138.5684,'190000')">Kofu 甲府</button>
-            <button class="preset-btn" onclick="setPreset('Nagano',36.6513,138.1812,'200000')">Nagano 長野</button>
-            <button class="preset-btn" onclick="setPreset('Gifu',35.3912,136.7222,'210000')">Gifu 岐阜</button>
-            <button class="preset-btn" onclick="setPreset('Shizuoka',34.9756,138.3828,'220000')">Shizuoka 静岡</button>
-            <button class="preset-btn" onclick="setPreset('Nagoya',35.1815,136.9066,'230000')">Nagoya 名古屋</button>
-            <button class="preset-btn" onclick="setPreset('Tsu',34.7303,136.5086,'240000')">Tsu 津</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kinki / 近畿</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Otsu',35.0045,135.8686,'250000')">Otsu 大津</button>
-            <button class="preset-btn" onclick="setPreset('Kyoto',35.0116,135.7681,'260000')">Kyoto 京都</button>
-            <button class="preset-btn" onclick="setPreset('Osaka',34.6937,135.5023,'270000')">Osaka 大阪</button>
-            <button class="preset-btn" onclick="setPreset('Kobe',34.6913,135.1830,'280000')">Kobe 神戸</button>
-            <button class="preset-btn" onclick="setPreset('Nara',34.6851,135.8325,'290000')">Nara 奈良</button>
-            <button class="preset-btn" onclick="setPreset('Wakayama',34.2260,135.1675,'300000')">Wakayama 和歌山</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chugoku / 中国</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Tottori',35.5011,134.2351,'310000')">Tottori 鳥取</button>
-            <button class="preset-btn" onclick="setPreset('Matsue',35.4723,133.0505,'320000')">Matsue 松江</button>
-            <button class="preset-btn" onclick="setPreset('Okayama',34.6618,133.9344,'330000')">Okayama 岡山</button>
-            <button class="preset-btn" onclick="setPreset('Hiroshima',34.3853,132.4553,'340000')">Hiroshima 広島</button>
-            <button class="preset-btn" onclick="setPreset('Yamaguchi',34.1860,131.4714,'350000')">Yamaguchi 山口</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Shikoku / 四国</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Tokushima',34.0658,134.5593,'360000')">Tokushima 徳島</button>
-            <button class="preset-btn" onclick="setPreset('Takamatsu',34.3401,134.0434,'370000')">Takamatsu 高松</button>
-            <button class="preset-btn" onclick="setPreset('Matsuyama',33.8417,132.7657,'380000')">Matsuyama 松山</button>
-            <button class="preset-btn" onclick="setPreset('Kochi',33.5597,133.5311,'390000')">Kochi 高知</button>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kyushu &amp; Okinawa / 九州・沖縄</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Fukuoka',33.5904,130.4017,'400000')">Fukuoka 福岡</button>
-            <button class="preset-btn" onclick="setPreset('Saga',33.2494,130.2990,'410000')">Saga 佐賀</button>
-            <button class="preset-btn" onclick="setPreset('Nagasaki',32.7503,129.8779,'420000')">Nagasaki 長崎</button>
-            <button class="preset-btn" onclick="setPreset('Kumamoto',32.7898,130.7417,'430000')">Kumamoto 熊本</button>
-            <button class="preset-btn" onclick="setPreset('Oita',33.2382,131.6126,'440000')">Oita 大分</button>
-            <button class="preset-btn" onclick="setPreset('Miyazaki',31.9111,131.4239,'450000')">Miyazaki 宮崎</button>
-            <button class="preset-btn" onclick="setPreset('Kagoshima',31.5602,130.5581,'460100')">Kagoshima 鹿児島</button>
-            <button class="preset-btn" onclick="setPreset('Amami',28.3790,129.4940,'460040')">Amami 奄美</button>
-            <button class="preset-btn" onclick="setPreset('Naha',26.2124,127.6809,'471000')">Naha 那覇</button>
-            <button class="preset-btn" onclick="setPreset('Okinawa-North',26.6958,128.1558,'472000')">Okinawa-N 沖縄北部</button>
-            <button class="preset-btn" onclick="setPreset('Miyako',24.8057,125.2814,'473000')">Miyako 宮古島</button>
-            <button class="preset-btn" onclick="setPreset('Ishigaki',24.3448,124.1564,'474000')">Ishigaki 石垣島</button>
-          </div>
-        </div>
-        <!-- East Asia / 東アジア -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 East Asia</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Seoul',37.5665,126.9780,'')">Seoul</button>
-            <button class="preset-btn" onclick="setPreset('Beijing',39.9042,116.4074,'')">Beijing</button>
-            <button class="preset-btn" onclick="setPreset('Shanghai',31.2304,121.4737,'')">Shanghai</button>
-            <button class="preset-btn" onclick="setPreset('Hong Kong',22.3193,114.1694,'')">Hong Kong</button>
-            <button class="preset-btn" onclick="setPreset('Taipei',25.0330,121.5654,'')">Taipei</button>
-            <button class="preset-btn" onclick="setPreset('Bangkok',13.7563,100.5018,'')">Bangkok</button>
-            <button class="preset-btn" onclick="setPreset('Singapore',1.3521,103.8198,'')">Singapore</button>
-            <button class="preset-btn" onclick="setPreset('Kuala Lumpur',3.1390,101.6869,'')">Kuala Lumpur</button>
-            <button class="preset-btn" onclick="setPreset('Jakarta',-6.2088,106.8456,'')">Jakarta</button>
-            <button class="preset-btn" onclick="setPreset('Manila',14.5995,120.9842,'')">Manila</button>
-            <button class="preset-btn" onclick="setPreset('Ho Chi Minh',10.8231,106.6297,'')">Ho Chi Minh</button>
-          </div>
-        </div>
-        <!-- South Asia & Middle East -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 South Asia / Middle East</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Mumbai',19.0760,72.8777,'')">Mumbai</button>
-            <button class="preset-btn" onclick="setPreset('Delhi',28.6139,77.2090,'')">Delhi</button>
-            <button class="preset-btn" onclick="setPreset('Dubai',25.2048,55.2708,'')">Dubai</button>
-            <button class="preset-btn" onclick="setPreset('Riyadh',24.7136,46.6753,'')">Riyadh</button>
-            <button class="preset-btn" onclick="setPreset('Karachi',24.8607,67.0011,'')">Karachi</button>
-            <button class="preset-btn" onclick="setPreset('Dhaka',23.8103,90.4125,'')">Dhaka</button>
-          </div>
-        </div>
-        <!-- Europe / ヨーロッパ -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Europe</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('London',51.5074,-0.1278,'')">London</button>
-            <button class="preset-btn" onclick="setPreset('Paris',48.8566,2.3522,'')">Paris</button>
-            <button class="preset-btn" onclick="setPreset('Berlin',52.5200,13.4050,'')">Berlin</button>
-            <button class="preset-btn" onclick="setPreset('Madrid',40.4168,-3.7038,'')">Madrid</button>
-            <button class="preset-btn" onclick="setPreset('Rome',41.9028,12.4964,'')">Rome</button>
-            <button class="preset-btn" onclick="setPreset('Amsterdam',52.3676,4.9041,'')">Amsterdam</button>
-            <button class="preset-btn" onclick="setPreset('Moscow',55.7558,37.6176,'')">Moscow</button>
-            <button class="preset-btn" onclick="setPreset('Istanbul',41.0082,28.9784,'')">Istanbul</button>
-            <button class="preset-btn" onclick="setPreset('Zurich',47.3769,8.5417,'')">Zurich</button>
-            <button class="preset-btn" onclick="setPreset('Stockholm',59.3293,18.0686,'')">Stockholm</button>
-          </div>
-        </div>
-        <!-- Africa / アフリカ -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Africa</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Cairo',30.0444,31.2357,'')">Cairo</button>
-            <button class="preset-btn" onclick="setPreset('Lagos',6.5244,3.3792,'')">Lagos</button>
-            <button class="preset-btn" onclick="setPreset('Nairobi',-1.2921,36.8219,'')">Nairobi</button>
-            <button class="preset-btn" onclick="setPreset('Cape Town',-33.9249,18.4241,'')">Cape Town</button>
-            <button class="preset-btn" onclick="setPreset('Johannesburg',-26.2041,28.0473,'')">Johannesburg</button>
-            <button class="preset-btn" onclick="setPreset('Casablanca',33.5731,-7.5898,'')">Casablanca</button>
-          </div>
-        </div>
-        <!-- Americas / 南北アメリカ -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌎 Americas</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('New York',40.7128,-74.0060,'')">New York</button>
-            <button class="preset-btn" onclick="setPreset('Los Angeles',34.0522,-118.2437,'')">Los Angeles</button>
-            <button class="preset-btn" onclick="setPreset('Chicago',41.8781,-87.6298,'')">Chicago</button>
-            <button class="preset-btn" onclick="setPreset('Toronto',43.6532,-79.3832,'')">Toronto</button>
-            <button class="preset-btn" onclick="setPreset('Vancouver',49.2827,-123.1207,'')">Vancouver</button>
-            <button class="preset-btn" onclick="setPreset('Mexico City',19.4326,-99.1332,'')">Mexico City</button>
-            <button class="preset-btn" onclick="setPreset('São Paulo',-23.5505,-46.6333,'')">São Paulo</button>
-            <button class="preset-btn" onclick="setPreset('Buenos Aires',-34.6037,-58.3816,'')">Buenos Aires</button>
-            <button class="preset-btn" onclick="setPreset('Lima',-12.0464,-77.0428,'')">Lima</button>
-            <button class="preset-btn" onclick="setPreset('Bogotá',4.7110,-74.0721,'')">Bogotá</button>
-            <button class="preset-btn" onclick="setPreset('Santiago',-33.4489,-70.6693,'')">Santiago</button>
-          </div>
-        </div>
-        <!-- Oceania / オセアニア -->
-        <div>
-          <div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 Oceania</div>
-          <div class="add-form-presets" style="margin-top:0">
-            <button class="preset-btn" onclick="setPreset('Sydney',-33.8688,151.2093,'')">Sydney</button>
-            <button class="preset-btn" onclick="setPreset('Melbourne',-37.8136,144.9631,'')">Melbourne</button>
-            <button class="preset-btn" onclick="setPreset('Auckland',-36.8509,174.7645,'')">Auckland</button>
-            <button class="preset-btn" onclick="setPreset('Brisbane',-27.4698,153.0251,'')">Brisbane</button>
-            <button class="preset-btn" onclick="setPreset('Perth',-31.9505,115.8605,'')">Perth</button>
-          </div>
-        </div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Hokkaido / 北海道</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Sapporo',43.0642,141.3469,'016000')">Sapporo 札幌</button><button class="preset-btn" onclick="setPreset('Asahikawa',43.7706,142.3650,'012000')">Asahikawa 旭川</button><button class="preset-btn" onclick="setPreset('Hakodate',41.7687,140.7290,'017000')">Hakodate 函館</button><button class="preset-btn" onclick="setPreset('Kushiro',42.9849,144.3819,'014100')">Kushiro 釧路</button><button class="preset-btn" onclick="setPreset('Wakkanai',45.4122,141.6728,'011000')">Wakkanai 稚内</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Tohoku / 東北</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Aomori',40.8244,140.7400,'020000')">Aomori 青森</button><button class="preset-btn" onclick="setPreset('Morioka',39.7036,141.1527,'030000')">Morioka 盛岡</button><button class="preset-btn" onclick="setPreset('Sendai',38.2688,140.8721,'040000')">Sendai 仙台</button><button class="preset-btn" onclick="setPreset('Akita',39.7200,140.1024,'050000')">Akita 秋田</button><button class="preset-btn" onclick="setPreset('Yamagata',38.2404,140.3633,'060000')">Yamagata 山形</button><button class="preset-btn" onclick="setPreset('Fukushima',37.7608,140.4748,'070000')">Fukushima 福島</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kanto / 関東</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Mito',36.3418,140.4468,'080000')">Mito 水戸</button><button class="preset-btn" onclick="setPreset('Utsunomiya',36.5657,139.8836,'090000')">Utsunomiya 宇都宮</button><button class="preset-btn" onclick="setPreset('Maebashi',36.3912,139.0608,'100000')">Maebashi 前橋</button><button class="preset-btn" onclick="setPreset('Saitama',35.8617,139.6455,'110000')">Saitama さいたま</button><button class="preset-btn" onclick="setPreset('Chiba',35.6050,140.1233,'120000')">Chiba 千葉</button><button class="preset-btn" onclick="setPreset('Tokyo',35.6895,139.6917,'130000')">Tokyo 東京</button><button class="preset-btn" onclick="setPreset('Yokohama',35.4478,139.6425,'140000')">Yokohama 横浜</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chubu / 中部</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Niigata',37.9026,139.0232,'150000')">Niigata 新潟</button><button class="preset-btn" onclick="setPreset('Toyama',36.6953,137.2113,'160000')">Toyama 富山</button><button class="preset-btn" onclick="setPreset('Kanazawa',36.5944,136.6256,'170000')">Kanazawa 金沢</button><button class="preset-btn" onclick="setPreset('Fukui',36.0652,136.2219,'180000')">Fukui 福井</button><button class="preset-btn" onclick="setPreset('Kofu',35.6639,138.5684,'190000')">Kofu 甲府</button><button class="preset-btn" onclick="setPreset('Nagano',36.6513,138.1812,'200000')">Nagano 長野</button><button class="preset-btn" onclick="setPreset('Gifu',35.3912,136.7222,'210000')">Gifu 岐阜</button><button class="preset-btn" onclick="setPreset('Shizuoka',34.9756,138.3828,'220000')">Shizuoka 静岡</button><button class="preset-btn" onclick="setPreset('Nagoya',35.1815,136.9066,'230000')">Nagoya 名古屋</button><button class="preset-btn" onclick="setPreset('Tsu',34.7303,136.5086,'240000')">Tsu 津</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kinki / 近畿</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Otsu',35.0045,135.8686,'250000')">Otsu 大津</button><button class="preset-btn" onclick="setPreset('Kyoto',35.0116,135.7681,'260000')">Kyoto 京都</button><button class="preset-btn" onclick="setPreset('Osaka',34.6937,135.5023,'270000')">Osaka 大阪</button><button class="preset-btn" onclick="setPreset('Kobe',34.6913,135.1830,'280000')">Kobe 神戸</button><button class="preset-btn" onclick="setPreset('Nara',34.6851,135.8325,'290000')">Nara 奈良</button><button class="preset-btn" onclick="setPreset('Wakayama',34.2260,135.1675,'300000')">Wakayama 和歌山</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chugoku / 中国</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Tottori',35.5011,134.2351,'310000')">Tottori 鳥取</button><button class="preset-btn" onclick="setPreset('Matsue',35.4723,133.0505,'320000')">Matsue 松江</button><button class="preset-btn" onclick="setPreset('Okayama',34.6618,133.9344,'330000')">Okayama 岡山</button><button class="preset-btn" onclick="setPreset('Hiroshima',34.3853,132.4553,'340000')">Hiroshima 広島</button><button class="preset-btn" onclick="setPreset('Yamaguchi',34.1860,131.4714,'350000')">Yamaguchi 山口</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Shikoku / 四国</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Tokushima',34.0658,134.5593,'360000')">Tokushima 徳島</button><button class="preset-btn" onclick="setPreset('Takamatsu',34.3401,134.0434,'370000')">Takamatsu 高松</button><button class="preset-btn" onclick="setPreset('Matsuyama',33.8417,132.7657,'380000')">Matsuyama 松山</button><button class="preset-btn" onclick="setPreset('Kochi',33.5597,133.5311,'390000')">Kochi 高知</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kyushu &amp; Okinawa / 九州・沖縄</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Fukuoka',33.5904,130.4017,'400000')">Fukuoka 福岡</button><button class="preset-btn" onclick="setPreset('Saga',33.2494,130.2990,'410000')">Saga 佐賀</button><button class="preset-btn" onclick="setPreset('Nagasaki',32.7503,129.8779,'420000')">Nagasaki 長崎</button><button class="preset-btn" onclick="setPreset('Kumamoto',32.7898,130.7417,'430000')">Kumamoto 熊本</button><button class="preset-btn" onclick="setPreset('Oita',33.2382,131.6126,'440000')">Oita 大分</button><button class="preset-btn" onclick="setPreset('Miyazaki',31.9111,131.4239,'450000')">Miyazaki 宮崎</button><button class="preset-btn" onclick="setPreset('Kagoshima',31.5602,130.5581,'460100')">Kagoshima 鹿児島</button><button class="preset-btn" onclick="setPreset('Naha',26.2124,127.6809,'471000')">Naha 那覇</button><button class="preset-btn" onclick="setPreset('Miyako',24.8057,125.2814,'473000')">Miyako 宮古島</button><button class="preset-btn" onclick="setPreset('Ishigaki',24.3448,124.1564,'474000')">Ishigaki 石垣島</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 East Asia</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Seoul',37.5665,126.9780,'')">Seoul</button><button class="preset-btn" onclick="setPreset('Beijing',39.9042,116.4074,'')">Beijing</button><button class="preset-btn" onclick="setPreset('Shanghai',31.2304,121.4737,'')">Shanghai</button><button class="preset-btn" onclick="setPreset('Hong Kong',22.3193,114.1694,'')">Hong Kong</button><button class="preset-btn" onclick="setPreset('Taipei',25.0330,121.5654,'')">Taipei</button><button class="preset-btn" onclick="setPreset('Bangkok',13.7563,100.5018,'')">Bangkok</button><button class="preset-btn" onclick="setPreset('Singapore',1.3521,103.8198,'')">Singapore</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Europe</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('London',51.5074,-0.1278,'')">London</button><button class="preset-btn" onclick="setPreset('Paris',48.8566,2.3522,'')">Paris</button><button class="preset-btn" onclick="setPreset('Berlin',52.5200,13.4050,'')">Berlin</button><button class="preset-btn" onclick="setPreset('Madrid',40.4168,-3.7038,'')">Madrid</button><button class="preset-btn" onclick="setPreset('Rome',41.9028,12.4964,'')">Rome</button><button class="preset-btn" onclick="setPreset('Moscow',55.7558,37.6176,'')">Moscow</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌎 Americas</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('New York',40.7128,-74.0060,'')">New York</button><button class="preset-btn" onclick="setPreset('Los Angeles',34.0522,-118.2437,'')">Los Angeles</button><button class="preset-btn" onclick="setPreset('Chicago',41.8781,-87.6298,'')">Chicago</button><button class="preset-btn" onclick="setPreset('Toronto',43.6532,-79.3832,'')">Toronto</button><button class="preset-btn" onclick="setPreset('São Paulo',-23.5505,-46.6333,'')">São Paulo</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 Oceania</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Sydney',-33.8688,151.2093,'')">Sydney</button><button class="preset-btn" onclick="setPreset('Melbourne',-37.8136,144.9631,'')">Melbourne</button><button class="preset-btn" onclick="setPreset('Auckland',-36.8509,174.7645,'')">Auckland</button></div></div>
       </div>
     </div>
-    <!-- Pick location on map / 地図で場所を選ぶ -->
     <div style="margin-top:10px">
       <button onclick="toggleMapSearch()" style="font-size:12px;padding:4px 10px;border-radius:99px"><i class="ti ti-map" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i><span data-i18n="pick_on_map">地図から選択</span></button>
     </div>
@@ -462,9 +269,9 @@ a{color:var(--info-text)}
     <span class="chip" id="chip-owm">OpenWeatherMap</span>
     <span class="chip" id="chip-tmrw">Tomorrow.io</span>
     <span class="chip" id="chip-wapi">WeatherAPI</span>
+    <span class="chip" id="chip-rainbow">Rainbow.ai</span>
   </div>
 
-  <!-- メインタブナビ -->
   <div class="main-tabs" id="main-tabs">
     <button class="main-tab active" data-panel="forecast" onclick="switchMainTab('forecast')"><i class="ti ti-cloud" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_forecast">予報</span></button>
     <button class="main-tab" data-panel="radar" onclick="switchMainTab('radar')"><i class="ti ti-radar" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_radar">雨雲レーダー</span></button>
@@ -490,7 +297,7 @@ a{color:var(--info-text)}
         </div>
         <span>弱 → 強</span>
       </div>
-      <div class="radar-source" id="radar-source-label">RainViewer</div>
+      <div class="radar-source" id="radar-source-label">Rainbow.ai</div>
     </div>
   </div>
 
@@ -513,17 +320,16 @@ a{color:var(--info-text)}
     </div>
   </div>
 
-  <!-- 大気質パネル（main-contentから同期） -->
+  <!-- 大気質パネル -->
   <div class="main-panel" id="panel-aq"></div>
 
   <div id="main-content">
     <div class="loading"><i class="ti ti-cloud-download" style="font-size:28px;display:block;margin-bottom:8px"></i><span data-i18n="loading">天気データを取得中...</span></div>
   </div>
 
+  <!-- APIキー設定 -->
   <div class="keypanel">
     <div class="stitle" style="margin-bottom:10px" data-i18n="api_keys">APIキー設定（任意・無料）</div>
-
-    <!-- Bulk paste / 一括貼り付け -->
     <div style="margin-bottom:12px;padding:10px 12px;background:var(--bg2);border-radius:var(--rm);border:0.5px solid var(--border)">
       <div style="font-size:12px;color:var(--text2);margin-bottom:6px"><i class="ti ti-clipboard" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="bulk_paste_hint">3行まとめて貼り付け（順番：OpenWeatherMap / Tomorrow.io / WeatherAPI）</span></div>
       <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
@@ -531,7 +337,6 @@ a{color:var(--info-text)}
         <button onclick="applyBulkPaste()" style="white-space:nowrap;align-self:flex-end"><i class="ti ti-arrow-bar-to-down" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="distribute">振り分け</span></button>
       </div>
     </div>
-
     <div class="keyrow"><span class="tag t-owm" style="min-width:120px;text-align:center">OpenWeatherMap</span><input type="text" id="owm-key" data-i18n-placeholder="api_key_ph"></div>
     <div class="keyrow"><span class="tag t-tmrw" style="min-width:120px;text-align:center">Tomorrow.io</span><input type="text" id="tmrw-key" data-i18n-placeholder="api_key_ph"></div>
     <div class="keyrow"><span class="tag t-wapi" style="min-width:120px;text-align:center">WeatherAPI</span><input type="text" id="wapi-key" data-i18n-placeholder="api_key_ph"></div>
@@ -547,17 +352,30 @@ a{color:var(--info-text)}
     <button onclick="applyKeys()" style="margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="apply">適用して更新</span></button>
     <div class="keynote">APIキーはPollen APIのみ・HTTPリファラー制限を推奨。<a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Console</a> で設定できます。</div>
   </div>
+
+  <!-- Rainbow.ai キー設定 -->
+  <div class="keypanel" style="margin-top:0">
+    <div class="stitle" style="margin-bottom:10px">🌈 Rainbow.ai レーダーキー設定</div>
+    <div class="keyrow">
+      <span class="tag" style="min-width:120px;text-align:center;background:#E8F5E9;color:#1B5E20">Rainbow.ai</span>
+      <input type="text" id="rainbow-key" placeholder="APIキーを入力（Primary または Secondary）">
+    </div>
+    <button onclick="applyKeys()" style="margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="apply">適用して更新</span></button>
+    <div class="keynote">
+      🌧️ nowcast +4時間降水予測タイル対応。月30,000コール無料。<br>
+      キーは <a href="https://developer.rainbow.ai/" target="_blank" rel="noopener">developer.rainbow.ai</a> で取得できます。<br>
+      PrimaryキーとSecondaryキーどちらでも使用可能です。
+    </div>
+  </div>
 </div>
 
-<!-- Leaflet map / Leaflet地図 -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
-<!-- Chart.js -->
 <!-- Chart.js v4.4.0 — Note: Chart.js v4.x does not provide SRI hashes (intentional upstream decision) -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" crossorigin="anonymous"></script>
 
 <script>
-// ==================== i18n / Internationalization ====================
+// ==================== i18n ====================
 var I18N={
   ja:{
     title:'天気予報ダッシュボード',app_title:'天気予報ダッシュボード',refresh:'更新',
@@ -587,22 +405,19 @@ var I18N={
     loc_required:'地点名・緯度・経度を入力してください',
     del_confirm:'を削除しますか？',min_loc:'最低1つの地点が必要です',
     updated:'最終更新：',
-    osaka:'大阪',tokyo:'東京',nagoya:'名古屋',sapporo:'札幌',fukuoka:'福岡',naha:'那覇',sendai:'仙台',hiroshima:'広島',kanazawa:'金沢',
     max_temp:'最高気温',min_temp:'最低気温',temp_c:'気温 (°C)',
     bulk_paste_hint:'3行まとめて貼り付け（順番：OpenWeatherMap / Tomorrow.io / WeatherAPI）',
     bulk_paste_ph:'1行目: OpenWeatherMap\n2行目: Tomorrow.io\n3行目: WeatherAPI',
     distribute:'振り分け',
     bulk_done:'振り分けました',
     tab_forecast:'予報',tab_radar:'雨雲レーダー',tab_wxmap:'天気図',tab_aq:'大気質',
-    radar_past:'過去2h（RainViewer）',radar_now:'現在',radar_future:'nowcast（Rainbow.ai）',
+    radar_now:'現在',radar_future:'nowcast',
     radar_loading:'レーダーデータ取得中...',radar_play:'再生',radar_pause:'一時停止',
     wxmap_surface:'地上天気図',wxmap_fcst24:'予想（24h後）',wxmap_fcst48:'予想（48h後）',
     wxmap_source:'出典：気象庁',wxmap_note:'天気図は気象庁が発行するものです。更新は1日数回です。',
     aq_title:'大気質・花粉',pm25:'PM2.5',dust:'黄砂（Dust）',aqi:'大気質指数',
-    pollen_title:'花粉予報（Google）',
-    pollen_na:'データなし',
+    pollen_title:'花粉予報（Google）',pollen_na:'データなし',
     ql_good:'良い',ql_fair:'普通',ql_mod:'やや悪い',ql_poor:'悪い',ql_vpoor:'非常に悪い',
-    gw_note:'Google Weather APIキーを入力するとより精度の高いデータが表示されます。',
     warn_special:'特別警報',warn_warning:'警報',warn_advisory:'注意報',
     warn_label:'気象警報・注意報',warn_none:'現在、警報・注意報はありません',
   },
@@ -634,33 +449,27 @@ var I18N={
     loc_required:'Please enter name, latitude and longitude.',
     del_confirm:' - delete?',min_loc:'At least one location is required.',
     updated:'Updated: ',
-    osaka:'Osaka',tokyo:'Tokyo',nagoya:'Nagoya',sapporo:'Sapporo',fukuoka:'Fukuoka',naha:'Naha',sendai:'Sendai',hiroshima:'Hiroshima',kanazawa:'Kanazawa',
     max_temp:'High',min_temp:'Low',temp_c:'Temp (°C)',
     bulk_paste_hint:'Paste 3 keys at once (order: OpenWeatherMap / Tomorrow.io / WeatherAPI)',
     bulk_paste_ph:'Line 1: OpenWeatherMap\nLine 2: Tomorrow.io\nLine 3: WeatherAPI',
-    distribute:'Distribute',
-    bulk_done:'Keys distributed',
+    distribute:'Distribute',bulk_done:'Keys distributed',
     tab_forecast:'Forecast',tab_radar:'Rain Radar',tab_wxmap:'Weather Map',tab_aq:'Air Quality',
-    radar_past:'Past 2h (RainViewer)',radar_now:'Now',radar_future:'Nowcast (Rainbow.ai)',
+    radar_now:'Now',radar_future:'Nowcast',
     radar_loading:'Loading radar data...',radar_play:'Play',radar_pause:'Pause',
     wxmap_surface:'Surface Analysis',wxmap_fcst24:'Forecast (24h)',wxmap_fcst48:'Forecast (48h)',
     wxmap_source:'Source: Japan Meteorological Agency',wxmap_note:'Weather maps are issued by the Japan Meteorological Agency and updated several times daily.',
     aq_title:'Air Quality & Pollen',pm25:'PM2.5',dust:'Dust (Desert)',aqi:'AQI',
-    pollen_title:'Pollen Forecast (Google)',
-    pollen_na:'No data',
+    pollen_title:'Pollen Forecast (Google)',pollen_na:'No data',
     ql_good:'Good',ql_fair:'Fair',ql_mod:'Moderate',ql_poor:'Poor',ql_vpoor:'Very Poor',
-    gw_note:'Enter a Google Weather API key for enhanced accuracy and additional data.',
     warn_special:'Emergency Warning',warn_warning:'Warning',warn_advisory:'Advisory',
     warn_label:'Weather Warnings & Advisories',warn_none:'No active warnings or advisories',
   }
 };
-function t(k){var l=getLang();return (I18N[l]&&I18N[l][k])||I18N.ja[k]||k;}
+function t(k){var l=getLang();return(I18N[l]&&I18N[l][k])||I18N.ja[k]||k;}
 function getLang(){return document.documentElement.getAttribute('data-lang')||'ja';}
 function applyI18n(){
   document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');el.textContent=t(k);});
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
-    if(el.tagName==='TEXTAREA'||el.tagName==='INPUT') el.placeholder=t(el.getAttribute('data-i18n-placeholder'));
-  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){if(el.tagName==='TEXTAREA'||el.tagName==='INPUT')el.placeholder=t(el.getAttribute('data-i18n-placeholder'));});
   document.title=t('title');
   document.getElementById('lang-btn').textContent=getLang()==='ja'?'EN':'日本語';
   var jmaChip=document.querySelector('[data-i18n-chip="jma"]');if(jmaChip)jmaChip.textContent=t('jma_chip');
@@ -670,41 +479,41 @@ function toggleLang(){
   document.documentElement.setAttribute('data-lang',nl);
   localStorage.setItem('lang',nl);
   applyI18n();
-  if(window._lastBuildArgs) buildContent.apply(null,window._lastBuildArgs);
+  if(window._lastBuildArgs)buildContent.apply(null,window._lastBuildArgs);
 }
 
-// ==================== Theme / テーマ ====================
+// ==================== Theme ====================
 function toggleTheme(){
   var h=document.documentElement;var dark=h.getAttribute('data-theme')==='dark';
   h.setAttribute('data-theme',dark?'light':'dark');
   var btn=document.getElementById('theme-btn');
-  if(btn) btn.textContent=dark?'🌙':'☀️';
+  if(btn)btn.textContent=dark?'🌙':'☀️';
   localStorage.setItem('theme',dark?'light':'dark');
-  if(window._lastBuildArgs) buildContent.apply(null,window._lastBuildArgs);
+  if(window._lastBuildArgs)buildContent.apply(null,window._lastBuildArgs);
 }
 
-// ==================== Location Management / 地点管理 ====================
-// HTML escape / HTMLエスケープ（XSS対策）
+// ==================== Utilities ====================
 function esc(str){
-  if(str===null||str===undefined)return '';
-  return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
+  if(str===null||str===undefined)return'';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function fetchWithTimeout(url,ms){
+  ms=ms||8000;
+  if(typeof AbortController==='undefined')return fetch(url);
+  var ctrl=new AbortController();
+  var timer=setTimeout(function(){ctrl.abort();},ms);
+  return fetch(url,{signal:ctrl.signal}).then(function(r){clearTimeout(timer);return r;},function(e){clearTimeout(timer);throw e;});
 }
 
+// ==================== Location Management ====================
 var DEFAULT_LOCATIONS=[
   {name:'Osaka',lat:34.6937,lon:135.5023,jma:'270000'},
   {name:'Tokyo',lat:35.6895,lon:139.6917,jma:'130000'}
 ];
-[{name:'大阪',lat:34.6937,lon:135.5023,jma:'270000'},{name:'東京',lat:35.6895,lon:139.6917,jma:'130000'}];
 function loadLocations(){try{var s=localStorage.getItem('locations');return s?JSON.parse(s):DEFAULT_LOCATIONS;}catch(e){return DEFAULT_LOCATIONS;}}
 function saveLocations(l){localStorage.setItem('locations',JSON.stringify(l));}
 function getCurrentIdx(){return parseInt(localStorage.getItem('loc_idx')||'0')||0;}
 function setCurrentIdx(i){localStorage.setItem('loc_idx',String(i));}
-
 function renderLocationBar(){
   var locs=loadLocations();var idx=getCurrentIdx();if(idx>=locs.length)idx=0;
   var html=locs.map(function(loc,i){
@@ -744,17 +553,13 @@ function addLocation(){
 }
 function applyBulkPaste(){
   var raw=document.getElementById('bulk-paste').value;
-  // 空行・前後スペースを除いた行を取得
   var lines=raw.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
-  if(lines[0]) document.getElementById('owm-key').value=lines[0];
-  if(lines[1]) document.getElementById('tmrw-key').value=lines[1];
-  if(lines[2]) document.getElementById('wapi-key').value=lines[2];
-  // テキストエリアをクリアしてフィードバック
+  if(lines[0])document.getElementById('owm-key').value=lines[0];
+  if(lines[1])document.getElementById('tmrw-key').value=lines[1];
+  if(lines[2])document.getElementById('wapi-key').value=lines[2];
   document.getElementById('bulk-paste').value='';
   document.getElementById('bulk-paste').placeholder=t('bulk_done')+' ✓';
-  setTimeout(function(){
-    document.getElementById('bulk-paste').placeholder=t('bulk_paste_ph');
-  },2000);
+  setTimeout(function(){document.getElementById('bulk-paste').placeholder=t('bulk_paste_ph');},2000);
 }
 function applyKeys(){
   var o=document.getElementById('owm-key').value.trim();
@@ -762,17 +567,23 @@ function applyKeys(){
   var w=document.getElementById('wapi-key').value.trim();
   var p=document.getElementById('pollen-key').value.trim();
   var gw=document.getElementById('gweather-key').value.trim();
-  if(o)localStorage.setItem('owm_key',o);if(t2)localStorage.setItem('tmrw_key',t2);if(w)localStorage.setItem('wapi_key',w);if(p)localStorage.setItem('pollen_key',p);if(gw)localStorage.setItem('gweather_key',gw);
-  loadAll(true);// force refresh / キャッシュを無視して強制更新
+  var rb=document.getElementById('rainbow-key').value.trim();
+  if(o)localStorage.setItem('owm_key',o);
+  if(t2)localStorage.setItem('tmrw_key',t2);
+  if(w)localStorage.setItem('wapi_key',w);
+  if(p)localStorage.setItem('pollen_key',p);
+  if(gw)localStorage.setItem('gweather_key',gw);
+  if(rb)localStorage.setItem('rainbow_key',rb);
+  loadAll(true);
 }
 
-// ==================== Map Search / 地図検索 ====================
+// ==================== Map Search ====================
 var _map=null,_marker=null,_pickedLat=null,_pickedLon=null,_pickedName='';
 function toggleMapSearch(){
   var box=document.getElementById('map-search-box');
   var show=box.style.display==='none';
   box.style.display=show?'block':'none';
-  if(show&&!_map) initMap();
+  if(show&&!_map)initMap();
 }
 function initMap(){
   var locs=loadLocations();var idx=getCurrentIdx();var loc=locs[idx]||{lat:35.6895,lon:139.6917};
@@ -787,17 +598,13 @@ function reverseGeocode(lat,lon,callback){
     .then(function(data){
       var name='';
       if(data&&data.address){
-        // city > town > village priority / 市区町村 > 町名 > 都市の順で取得
         name=data.address.city||data.address.town||data.address.village||data.address.county||data.address.state||'';
-        // append suburb/neighbourhood if available / さらに細かい地名があれば付加
         var sub=data.address.suburb||data.address.neighbourhood||data.address.quarter||'';
-        if(sub&&name) name=sub+' ('+name+')';
-        else if(sub) name=sub;
+        if(sub&&name)name=sub+' ('+name+')';else if(sub)name=sub;
       }
-      if(!name) name=data&&data.display_name?data.display_name.split(',')[0]:'';
+      if(!name)name=data&&data.display_name?data.display_name.split(',')[0]:'';
       callback(name||'');
-    })
-    .catch(function(){callback('');});
+    }).catch(function(){callback('');});
 }
 function pickLocation(lat,lon,name){
   _pickedLat=lat;_pickedLon=lon;_pickedName=name;
@@ -807,114 +614,45 @@ function pickLocation(lat,lon,name){
   document.getElementById('apply-map-btn').style.display='inline-block';
   document.getElementById('new-lat').value=lat.toFixed(4);
   document.getElementById('new-lon').value=lon.toFixed(4);
-  // fill name only if empty, never use lat/lon as name / 地名欄が空のときだけ地名を入れる（緯度経度は入れない）
-  if(!document.getElementById('new-name').value&&name) document.getElementById('new-name').value=name;
+  if(!document.getElementById('new-name').value&&name)document.getElementById('new-name').value=name;
 }
 function pickLocationWithGeocode(lat,lon){
-  // place marker first, then fill name after reverse geocoding / まずマーカーだけ先に立て、逆ジオコーディング後に地名を反映
   pickLocation(lat,lon,'');
   document.getElementById('map-result').textContent='地名を取得中...';
   reverseGeocode(lat,lon,function(name){
     _pickedName=name;
     document.getElementById('map-result').textContent=t('map_selected')+(esc(name)||lat.toFixed(4)+', '+lon.toFixed(4))+' ('+lat.toFixed(4)+', '+lon.toFixed(4)+')';
-    if(!document.getElementById('new-name').value) document.getElementById('new-name').value=name;
+    if(!document.getElementById('new-name').value)document.getElementById('new-name').value=name;
   });
 }
 function searchPlace(){
-  var q=document.getElementById('map-search-input').value.trim();
-  if(!q)return;
+  var q=document.getElementById('map-search-input').value.trim();if(!q)return;
   var lang=getLang()==='en'?'en':'ja';
   fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q)+'&limit=1&accept-language='+lang)
     .then(function(r){return r.json();})
     .then(function(data){
-      if(data&&data[0]){
-        var lat=parseFloat(data[0].lat),lon=parseFloat(data[0].lon);
-        var name=data[0].display_name.split(',')[0];
-        _map.setView([lat,lon],12);
-        pickLocation(lat,lon,name);
-      }
+      if(data&&data[0]){var lat=parseFloat(data[0].lat),lon=parseFloat(data[0].lon);var name=data[0].display_name.split(',')[0];_map.setView([lat,lon],12);pickLocation(lat,lon,name);}
     });
 }
 function useCurrentLocation(){
   if(!navigator.geolocation){alert('Geolocation not supported');return;}
-  navigator.geolocation.getCurrentPosition(function(pos){
-    var lat=pos.coords.latitude,lon=pos.coords.longitude;
-    _map.setView([lat,lon],12);
-    pickLocationWithGeocode(lat,lon);
-  });
+  navigator.geolocation.getCurrentPosition(function(pos){var lat=pos.coords.latitude,lon=pos.coords.longitude;_map.setView([lat,lon],12);pickLocationWithGeocode(lat,lon);});
 }
 function applyMapLocation(){
   if(_pickedLat===null)return;
   document.getElementById('new-lat').value=_pickedLat.toFixed(4);
   document.getElementById('new-lon').value=_pickedLon.toFixed(4);
-  if(!document.getElementById('new-name').value) document.getElementById('new-name').value=_pickedName;
+  if(!document.getElementById('new-name').value)document.getElementById('new-name').value=_pickedName;
   document.getElementById('map-search-box').style.display='none';
 }
 
-// ==================== Icon Mapping / アイコン変換 ====================
-
-// Weather code to emoji / 天気コードを絵文字に変換
+// ==================== Icon Mapping ====================
 var WE={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',95:'⛈️',96:'⛈️',99:'⛈️'};
 function weatherEmoji(code){return WE[code]||'🌡️';}
-
 var WI={0:'ti-sun',1:'ti-sun',2:'ti-cloud',3:'ti-cloud',45:'ti-mist',48:'ti-mist',51:'ti-cloud-drizzle',53:'ti-cloud-drizzle',55:'ti-cloud-drizzle',61:'ti-cloud-rain',63:'ti-cloud-rain',65:'ti-cloud-rain',71:'ti-snowflake',73:'ti-snowflake',75:'ti-snowflake',80:'ti-cloud-rain',81:'ti-cloud-rain',82:'ti-cloud-rain',95:'ti-cloud-storm',96:'ti-cloud-storm',99:'ti-cloud-storm'};
 var WL={0:'快晴/Clear',1:'晴れ/Sunny',2:'薄曇り/Partly Cloudy',3:'曇り/Cloudy',45:'霧/Fog',51:'霧雨/Drizzle',61:'小雨/Light Rain',63:'雨/Rain',65:'大雨/Heavy Rain',71:'小雪/Light Snow',73:'雪/Snow',80:'にわか雨/Showers',95:'雷雨/Thunderstorm'};
-
-
-// Wind direction parser / 風向きテキストから矢印SVGを生成
-function windDirToArrow(text){
-  // 長い方向名から先にマッチ（北北東より前に北が来ないよう）
-  var dirs=[
-    {k:'北北東',deg:22.5},{k:'北東',deg:45},{k:'東北東',deg:67.5},
-    {k:'東',deg:90},{k:'東南東',deg:112.5},{k:'南東',deg:135},{k:'南南東',deg:157.5},
-    {k:'南',deg:180},{k:'南南西',deg:202.5},{k:'南西',deg:225},{k:'西南西',deg:247.5},
-    {k:'西',deg:270},{k:'西北西',deg:292.5},{k:'北西',deg:315},{k:'北北西',deg:337.5},
-    {k:'北',deg:0}
-  ];
-  // テキスト先頭に近い方向を取得（最初の風向き）
-  // 長い名前から先に探してインデックスが最小のものを採用
-  var found=null;
-  var foundIdx=9999;
-  dirs.forEach(function(d){
-    var idx=text.indexOf(d.k);
-    if(idx>=0&&(idx<foundIdx||(idx===foundIdx&&found&&d.k.length>found.k.length))){
-      foundIdx=idx;found=d;
-    }
-  });
-  if(!found)return '';
-  var deg=found.deg;
-  // 風向き = 風が「吹いてくる」方向なので矢印は逆（180度回転）
-  var arrowDeg=(deg+180)%360;
-  return '<svg width="32" height="32" viewBox="-16 -16 32 32" style="display:inline-block;vertical-align:middle">'
-    +'<circle cx="0" cy="0" r="14" fill="var(--info-bg)" stroke="var(--border)" stroke-width="1"/>'
-    +'<g transform="rotate('+arrowDeg+')">'
-    +'<polygon points="0,-10 4,4 0,1 -4,4" fill="var(--info-text)"/>'
-    +'</g>'
-    +'<text x="0" y="0" text-anchor="middle" dominant-baseline="middle" font-size="7" fill="var(--text2)" transform="rotate('+(arrowDeg>90&&arrowDeg<270?180:0)+') translate(0,'+(arrowDeg>90&&arrowDeg<270?-18:18)+')">'
-    +found.k+'</text>'
-    +'</svg>';
-}
-
-// JMA weather code to emoji / 気象庁天気コードを絵文字に変換
-var JMA_EMOJI={'100':'☀️','101':'🌤️','102':'🌦️','103':'🌦️','104':'🌨️','105':'🌨️',
-  '110':'🌤️','111':'⛅','112':'🌦️','113':'🌦️','114':'🌦️','115':'🌨️',
-  '200':'☁️','201':'🌥️','202':'🌧️','203':'🌧️','204':'🌨️','205':'🌨️',
-  '206':'🌧️','207':'🌨️','208':'⛈️','209':'🌧️','210':'🌧️','211':'🌧️',
-  '212':'🌧️','213':'🌧️','214':'🌧️','215':'🌨️','216':'🌧️','217':'🌨️',
-  '218':'🌧️','219':'🌧️','220':'🌧️','221':'🌧️','222':'🌧️','223':'🌥️',
-  '224':'🌧️','225':'🌨️','226':'🌧️','228':'🌨️','229':'🌧️','230':'🌧️',
-  '231':'🌧️',
-  '300':'🌧️','301':'🌧️','302':'🌧️','303':'🌧️','304':'🌧️','306':'⛈️',
-  '308':'⛈️','309':'🌧️','311':'🌧️','313':'🌧️','314':'🌨️','315':'🌧️',
-  '316':'🌧️','317':'🌧️','320':'🌧️','321':'🌧️','322':'🌧️','323':'🌧️',
-  '324':'🌧️','325':'🌧️','326':'🌨️','327':'🌨️','328':'🌧️','329':'🌧️',
-  '340':'🌨️','350':'🌧️','361':'🌨️','371':'🌨️',
-  '400':'❄️','401':'🌨️','402':'🌨️','403':'🌨️','405':'🌨️','406':'⛈️',
-  '407':'⛈️','409':'🌨️','411':'🌨️','413':'❄️','414':'🌨️','420':'🌨️',
-  '421':'🌨️','422':'❄️','423':'❄️','425':'❄️','426':'🌨️','427':'🌨️',
-  '450':'❄️'};
+var JMA_EMOJI={'100':'☀️','101':'🌤️','102':'🌦️','103':'🌦️','104':'🌨️','105':'🌨️','110':'🌤️','111':'⛅','112':'🌦️','113':'🌦️','114':'🌦️','115':'🌨️','200':'☁️','201':'🌥️','202':'🌧️','203':'🌧️','204':'🌨️','205':'🌨️','206':'🌧️','207':'🌨️','208':'⛈️','209':'🌧️','210':'🌧️','211':'🌧️','212':'🌧️','213':'🌧️','214':'🌧️','215':'🌨️','216':'🌧️','217':'🌨️','218':'🌧️','219':'🌧️','220':'🌧️','221':'🌧️','222':'🌧️','223':'🌥️','224':'🌧️','225':'🌨️','226':'🌧️','228':'🌨️','229':'🌧️','230':'🌧️','231':'🌧️','300':'🌧️','301':'🌧️','302':'🌧️','303':'🌧️','304':'🌧️','306':'⛈️','308':'⛈️','309':'🌧️','311':'🌧️','313':'🌧️','314':'🌨️','315':'🌧️','316':'🌧️','317':'🌧️','320':'🌧️','321':'🌧️','322':'🌧️','323':'🌧️','324':'🌧️','325':'🌧️','326':'🌨️','327':'🌨️','328':'🌧️','329':'🌧️','340':'🌨️','350':'🌧️','361':'🌨️','371':'🌨️','400':'❄️','401':'🌨️','402':'🌨️','403':'🌨️','405':'🌨️','406':'⛈️','407':'⛈️','409':'🌨️','411':'🌨️','413':'❄️','414':'🌨️','420':'🌨️','421':'🌨️','422':'❄️','423':'❄️','425':'❄️','426':'🌨️','427':'🌨️','450':'❄️'};
 function jmaEmoji(code){return JMA_EMOJI[String(code)]||'🌡️';}
-
 var JI={'100':'ti-sun','101':'ti-sun','102':'ti-cloud-rain','103':'ti-cloud-rain','104':'ti-snowflake','105':'ti-snowflake','110':'ti-cloud','111':'ti-cloud','112':'ti-cloud-rain','200':'ti-cloud','201':'ti-cloud','202':'ti-cloud-rain','203':'ti-cloud-rain','204':'ti-snowflake','211':'ti-cloud','212':'ti-cloud-rain','300':'ti-cloud-rain','301':'ti-cloud-rain','306':'ti-cloud-storm','308':'ti-cloud-storm','400':'ti-snowflake','401':'ti-snowflake'};
 function omIcon(c){return WI[c]||'ti-cloud';}
 function jmaIcon(c){return JI[String(c)]||'ti-cloud';}
@@ -922,196 +660,66 @@ function owmIcon(id){if(id>=200&&id<300)return'ti-cloud-storm';if(id>=300&&id<40
 function tmrwIcon(c){if(c===1000)return'ti-sun';if(c===1100||c===1101)return'ti-cloud';if(c===4000||c===4001||c===4200||c===4201)return'ti-cloud-rain';if(c===5000||c===5001||c===5100||c===5101)return'ti-snowflake';if(c===8000)return'ti-cloud-storm';return'ti-cloud';}
 function wapiIcon(c){if(c===1000)return'ti-sun';if(c===1003||c===1006||c===1009)return'ti-cloud';if(c===1030||c===1135)return'ti-mist';if(c>=1063&&c<=1201)return'ti-cloud-rain';if(c===1087||c>=1273)return'ti-cloud-storm';return'ti-cloud';}
 
-// ==================== Data Fetching / データ取得 ====================
-// Fetch with timeout / タイムアウト付きfetch（デフォルト8秒）
-function fetchWithTimeout(url,ms){
-  ms=ms||8000;
-  // AbortController非対応環境のフォールバック / fallback for environments without AbortController
-  if(typeof AbortController==='undefined'){
-    return fetch(url);
-  }
-  var ctrl=new AbortController();
-  var timer=setTimeout(function(){ctrl.abort();},ms);
-  return fetch(url,{signal:ctrl.signal}).then(function(r){clearTimeout(timer);return r;},function(e){clearTimeout(timer);throw e;});
+function windDirToArrow(text){
+  var dirs=[{k:'北北東',deg:22.5},{k:'北東',deg:45},{k:'東北東',deg:67.5},{k:'東',deg:90},{k:'東南東',deg:112.5},{k:'南東',deg:135},{k:'南南東',deg:157.5},{k:'南',deg:180},{k:'南南西',deg:202.5},{k:'南西',deg:225},{k:'西南西',deg:247.5},{k:'西',deg:270},{k:'西北西',deg:292.5},{k:'北西',deg:315},{k:'北北西',deg:337.5},{k:'北',deg:0}];
+  var found=null;var foundIdx=9999;
+  dirs.forEach(function(d){var idx=text.indexOf(d.k);if(idx>=0&&(idx<foundIdx||(idx===foundIdx&&found&&d.k.length>found.k.length))){foundIdx=idx;found=d;}});
+  if(!found)return'';
+  var arrowDeg=(found.deg+180)%360;
+  return'<svg width="32" height="32" viewBox="-16 -16 32 32" style="display:inline-block;vertical-align:middle"><circle cx="0" cy="0" r="14" fill="var(--info-bg)" stroke="var(--border)" stroke-width="1"/><g transform="rotate('+arrowDeg+')"><polygon points="0,-10 4,4 0,1 -4,4" fill="var(--info-text)"/></g><text x="0" y="0" text-anchor="middle" dominant-baseline="middle" font-size="7" fill="var(--text2)" transform="rotate('+(arrowDeg>90&&arrowDeg<270?180:0)+') translate(0,'+(arrowDeg>90&&arrowDeg<270?-18:18)+')">'+found.k+'</text></svg>';
 }
 
+// ==================== Data Fetching ====================
 async function fetchOM(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&hourly=temperature_2m,precipitation_probability,windspeed_10m,relativehumidity_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
 async function fetchGFS(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/gfs?latitude='+lat+'&longitude='+lon+'&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
 async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/forecast/data/forecast/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
-// 気象警報・注意報取得 / Fetch JMA warnings and advisories
-async function fetchWarning(code){
-  if(!code)return null;
-  try{
-    var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+code+'.json');
-    if(!r.ok)return null;
-    return r.json();
-  }catch(e){return null;}
-}
-
-// 警報レベル定義 / Warning level definitions
-// kind.code の先頭1桁: 1=特別警報, 2=警報, 3=注意報
-// 気象庁 警報・注意報コードマスター
-// level: 3=特別警報, 2=警報, 1=注意報
-var WARN_CODES={
-  '02':{name:'暴風雪警報',level:2},
-  '03':{name:'大雨警報',level:2},
-  '04':{name:'洪水警報',level:2},
-  '05':{name:'暴風警報',level:2},
-  '06':{name:'大雪警報',level:2},
-  '07':{name:'波浪警報',level:2},
-  '08':{name:'高潮警報',level:2},
-  '10':{name:'大雨注意報',level:1},
-  '12':{name:'大雪注意報',level:1},
-  '13':{name:'風雪注意報',level:1},
-  '14':{name:'雷注意報',level:1},
-  '15':{name:'強風注意報',level:1},
-  '16':{name:'波浪注意報',level:1},
-  '17':{name:'融雪注意報',level:1},
-  '18':{name:'洪水注意報',level:1},
-  '19':{name:'高潮注意報',level:1},
-  '20':{name:'濃霧注意報',level:1},
-  '21':{name:'乾燥注意報',level:1},
-  '22':{name:'なだれ注意報',level:1},
-  '23':{name:'低温注意報',level:1},
-  '24':{name:'霜注意報',level:1},
-  '25':{name:'着氷注意報',level:1},
-  '26':{name:'着雪注意報',level:1},
-  '32':{name:'暴風雪特別警報',level:3},
-  '33':{name:'大雨特別警報',level:3},
-  '35':{name:'暴風特別警報',level:3},
-  '36':{name:'大雪特別警報',level:3},
-  '37':{name:'波浪特別警報',level:3},
-  '38':{name:'高潮特別警報',level:3},
-  '111':{name:'大雨警報（土砂災害）',level:2},
-  '112':{name:'大雨警報（浸水害）',level:2},
-  '113':{name:'大雨警報（土砂災害・浸水害）',level:2},
-  '114':{name:'大雨注意報',level:1},
-  '115':{name:'洪水注意報',level:1},
-  '116':{name:'大雨警報（土砂）・洪水警報',level:2},
-  '117':{name:'大雨警報（浸水）・洪水警報',level:2},
-  '118':{name:'大雨警報（土砂・浸水）・洪水警報',level:2},
-  '119':{name:'大雨注意報・洪水注意報',level:1},
-  '131':{name:'大雨・洪水・波浪警報',level:2},
-  '133':{name:'大雨・洪水警報',level:2},
-  '134':{name:'大雨・波浪警報',level:2},
-  '135':{name:'洪水・波浪警報',level:2}
-};
-// エリアコード→名称マスター（大阪府主要地点）
-var AREA_NAMES={
-  '270000':'大阪府',
-  '2710000':'大阪市',
-  '2714000':'堺市',
-  '2720200':'岸和田市','2720300':'豊中市','2720400':'池田市','2720500':'吹田市',
-  '2720600':'泉大津市','2720700':'高槻市','2720800':'貝塚市','2720900':'守口市',
-  '2721000':'枚方市','2721100':'茨木市','2721200':'八尾市','2721300':'泉佐野市',
-  '2721400':'富田林市','2721500':'寝屋川市','2721600':'河内長野市','2721700':'松原市',
-  '2721800':'大東市','2721900':'和泉市','2722000':'箕面市','2722100':'柏原市',
-  '2722200':'羽曳野市','2722300':'門真市','2722400':'摂津市','2722500':'高石市',
-  '2722600':'藤井寺市','2722700':'東大阪市','2722800':'泉南市','2722900':'四條畷市',
-  '2723000':'交野市','2723100':'大阪狭山市','2723200':'阪南市',
-  '2730100':'島本町','2732100':'豊能町','2732200':'能勢町',
-  '2734100':'忠岡町','2736100':'熊取町','2736200':'田尻町','2736600':'岬町',
-  '2738100':'太子町','2738200':'河南町','2738300':'千早赤阪村'
-};
-function normalizeWarnCode(code){
-  var c=String(code);
-  return c.length===1?'0'+c:c;
-}
-function getWarnLevel(code){
-  var c=normalizeWarnCode(code);
-  return WARN_CODES[c]?WARN_CODES[c].level:1;
-}
-function getWarnName(code){
-  var c=normalizeWarnCode(code);
-  return WARN_CODES[c]?WARN_CODES[c].name:'警報・注意報('+c+')';
-}
-function getAreaName(code){
-  var c=String(code);
-  return AREA_NAMES[c]||c;
-}
-
-function buildWarningBanner(warning){
-  if(!warning||!warning.areaTypes)return '';
-  // 実際のJSONは area.code / w.code のみ。name はマスターから引く
-  // areaTypes[0] = 府県単位, areaTypes[1] = 市区町村単位
-  // 府県単位(areaTypes[0])のみ使用してシンプルに表示
-  var items=[];
-  try{
-    var prefAreas=warning.areaTypes[0]&&warning.areaTypes[0].areas||[];
-    prefAreas.forEach(function(area){
-      (area.warnings||[]).forEach(function(w){
-        if(w.status==='発表'||w.status==='継続'){
-          items.push({
-            areaCode:String(area.code||''),
-            warnCode:String(w.code||''),
-            level:getWarnLevel(w.code)
-          });
-        }
-      });
-    });
-  }catch(e){}
-  if(items.length===0)return '';
-
-  // 最高レベルを判定してバナー色を決定
-  var maxLevel=0;
-  items.forEach(function(it){if(it.level>maxLevel)maxLevel=it.level;});
-  var isSpecial=maxLevel>=3;
-  var isWarning=maxLevel>=2;
-
-  // 気象庁準拠の配色: 特別警報=紫, 警報=赤, 注意報=黄
-  var bg    =isSpecial?'#6A0DAD':isWarning?'#C0392B':'#F5C400';
-  var border=isSpecial?'#4A0080':isWarning?'#922B21':'#C9A000';
-  var textColor=isSpecial?'#fff':isWarning?'#fff':'#3D2E00';
-  var icon  =isSpecial?'🟣':isWarning?'🔴':'🟡';
-  var labelKey=isSpecial?'warn_special':isWarning?'warn_warning':'warn_advisory';
-
-  // バッジスタイル
-  var levelBg={3:'rgba(255,255,255,0.25)',2:'rgba(255,255,255,0.2)',1:'rgba(0,0,0,0.1)'};
-  var levelBd={3:'rgba(255,255,255,0.5)',2:'rgba(255,255,255,0.4)',1:'rgba(0,0,0,0.25)'};
-
-  // エリアごとにグループ化
-  var areaMap={};
-  items.forEach(function(it){
-    var aName=getAreaName(it.areaCode);
-    if(!areaMap[aName])areaMap[aName]=[];
-    areaMap[aName].push({kind:getWarnName(it.warnCode),level:it.level});
-  });
-
-  var rows=Object.keys(areaMap).map(function(area){
-    var badges=areaMap[area].map(function(k){
-      return '<span style="display:inline-block;background:'+levelBg[k.level]+';border:1px solid '+levelBd[k.level]
-        +';border-radius:3px;padding:1px 7px;margin:2px 2px;font-size:12px;white-space:nowrap">'
-        +esc(k.kind)+'</span>';
-    }).join('');
-    return '<span style="font-weight:700;margin-right:4px">'+esc(area)+'</span>'+badges;
-  }).join('<span style="margin:0 8px;opacity:0.4">|</span>');
-
-  return '<div id="warning-banner" style="'
-    +'background:'+bg+';border:0.5px solid '+border+';border-radius:var(--rm);'
-    +'padding:10px 14px;margin-bottom:1rem;color:'+textColor+';line-height:1.8;">'
-    +'<div style="font-size:13px;font-weight:700;margin-bottom:4px">'+icon+' '+t(labelKey)+'</div>'
-    +'<div style="font-size:13px">'+rows+'</div>'
-    +'</div>';
-}
+async function fetchWarning(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchWapi(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.weatherapi.com/v1/forecast.json?key='+key+'&q='+lat+','+lon+'&days=7&lang=ja');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchGoogleWeather(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://weather.googleapis.com/v1/currentConditions:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&unitsSystem=METRIC');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchGoogleWeatherForecast(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://weather.googleapis.com/v1/forecast/days:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&days=10&unitsSystem=METRIC');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchAirQuality(lat,lon){try{var r=await fetchWithTimeout('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchPollen(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://pollen.googleapis.com/v1/forecast:lookup?key='+key+'&location.longitude='+lon+'&location.latitude='+lat+'&days=5&languageCode='+(getLang()==='en'?'en':'ja'));if(!r.ok)return null;return r.json();}catch(e){return null;}}
 
-function mfc(isToday,icon,max,min,rain,note){
-  // アイコンはTablerクラス名から絵文字に変換 / map icon class to emoji
-  var emojiMap={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️','ti-wind':'💨'};
-  var em=emojiMap[icon]||'🌡️';
-  var rainNum=parseInt(rain)||0;
-  var barW=Math.min(100,rainNum);
-  return '<div class="mfc'+(isToday?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW+'%"></div></div><div class="cr">'+rainNum+'%</div>'+(note?'<div class="cn">'+esc(note)+'</div>':'')+'</div>';
+// ==================== Warning Banner ====================
+var WARN_CODES={'02':{name:'暴風雪警報',level:2},'03':{name:'大雨警報',level:2},'04':{name:'洪水警報',level:2},'05':{name:'暴風警報',level:2},'06':{name:'大雪警報',level:2},'07':{name:'波浪警報',level:2},'08':{name:'高潮警報',level:2},'10':{name:'大雨注意報',level:1},'12':{name:'大雪注意報',level:1},'13':{name:'風雪注意報',level:1},'14':{name:'雷注意報',level:1},'15':{name:'強風注意報',level:1},'16':{name:'波浪注意報',level:1},'17':{name:'融雪注意報',level:1},'18':{name:'洪水注意報',level:1},'19':{name:'高潮注意報',level:1},'20':{name:'濃霧注意報',level:1},'21':{name:'乾燥注意報',level:1},'22':{name:'なだれ注意報',level:1},'23':{name:'低温注意報',level:1},'24':{name:'霜注意報',level:1},'25':{name:'着氷注意報',level:1},'26':{name:'着雪注意報',level:1},'32':{name:'暴風雪特別警報',level:3},'33':{name:'大雨特別警報',level:3},'35':{name:'暴風特別警報',level:3},'36':{name:'大雪特別警報',level:3},'37':{name:'波浪特別警報',level:3},'38':{name:'高潮特別警報',level:3},'111':{name:'大雨警報（土砂災害）',level:2},'112':{name:'大雨警報（浸水害）',level:2},'113':{name:'大雨警報（土砂災害・浸水害）',level:2},'114':{name:'大雨注意報',level:1},'115':{name:'洪水注意報',level:1},'116':{name:'大雨警報（土砂）・洪水警報',level:2},'117':{name:'大雨警報（浸水）・洪水警報',level:2},'118':{name:'大雨警報（土砂・浸水）・洪水警報',level:2},'119':{name:'大雨注意報・洪水注意報',level:1},'131':{name:'大雨・洪水・波浪警報',level:2},'133':{name:'大雨・洪水警報',level:2},'134':{name:'大雨・波浪警報',level:2},'135':{name:'洪水・波浪警報',level:2}};
+var AREA_NAMES={'270000':'大阪府','2710000':'大阪市','2714000':'堺市'};
+function normalizeWarnCode(code){var c=String(code);return c.length===1?'0'+c:c;}
+function getWarnLevel(code){var c=normalizeWarnCode(code);return WARN_CODES[c]?WARN_CODES[c].level:1;}
+function getWarnName(code){var c=normalizeWarnCode(code);return WARN_CODES[c]?WARN_CODES[c].name:'警報・注意報('+c+')';}
+function getAreaName(code){var c=String(code);return AREA_NAMES[c]||c;}
+function buildWarningBanner(warning){
+  if(!warning||!warning.areaTypes)return'';
+  var items=[];
+  try{
+    var prefAreas=warning.areaTypes[0]&&warning.areaTypes[0].areas||[];
+    prefAreas.forEach(function(area){(area.warnings||[]).forEach(function(w){if(w.status==='発表'||w.status==='継続'){items.push({areaCode:String(area.code||''),warnCode:String(w.code||''),level:getWarnLevel(w.code)});}});});
+  }catch(e){}
+  if(items.length===0)return'';
+  var maxLevel=0;items.forEach(function(it){if(it.level>maxLevel)maxLevel=it.level;});
+  var isSpecial=maxLevel>=3;var isWarning=maxLevel>=2;
+  var bg=isSpecial?'#6A0DAD':isWarning?'#C0392B':'#F5C400';
+  var border=isSpecial?'#4A0080':isWarning?'#922B21':'#C9A000';
+  var textColor=isSpecial?'#fff':isWarning?'#fff':'#3D2E00';
+  var icon=isSpecial?'🟣':isWarning?'🔴':'🟡';
+  var labelKey=isSpecial?'warn_special':isWarning?'warn_warning':'warn_advisory';
+  var levelBg={3:'rgba(255,255,255,0.25)',2:'rgba(255,255,255,0.2)',1:'rgba(0,0,0,0.1)'};
+  var levelBd={3:'rgba(255,255,255,0.5)',2:'rgba(255,255,255,0.4)',1:'rgba(0,0,0,0.25)'};
+  var areaMap={};
+  items.forEach(function(it){var aName=getAreaName(it.areaCode);if(!areaMap[aName])areaMap[aName]=[];areaMap[aName].push({kind:getWarnName(it.warnCode),level:it.level});});
+  var rows=Object.keys(areaMap).map(function(area){
+    var badges=areaMap[area].map(function(k){return'<span style="display:inline-block;background:'+levelBg[k.level]+';border:1px solid '+levelBd[k.level]+';border-radius:3px;padding:1px 7px;margin:2px 2px;font-size:12px;white-space:nowrap">'+esc(k.kind)+'</span>';}).join('');
+    return'<span style="font-weight:700;margin-right:4px">'+esc(area)+'</span>'+badges;
+  }).join('<span style="margin:0 8px;opacity:0.4">|</span>');
+  return'<div id="warning-banner" style="background:'+bg+';border:0.5px solid '+border+';border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:'+textColor+';line-height:1.8;"><div style="font-size:13px;font-weight:700;margin-bottom:4px">'+icon+' '+t(labelKey)+'</div><div style="font-size:13px">'+rows+'</div></div>';
 }
 
-// ==================== JMA Detailed Forecast / 気象庁詳細 ====================
+// ==================== JMA Detail ====================
 function buildJmaDetail(jma){
-  if(!jma)return '';
+  if(!jma)return'';
   try{
-    var ts0=jma[0].timeSeries;
-    var ts1=jma[1]&&jma[1].timeSeries;
+    var ts0=jma[0].timeSeries;var ts1=jma[1]&&jma[1].timeSeries;
     var area0=ts0[0]&&ts0[0].areas&&ts0[0].areas[0];
     var weatherText=esc(area0&&area0.weathers&&area0.weathers[0]||'');
     var windText=esc(area0&&area0.winds&&area0.winds[0]||'');
@@ -1119,8 +727,6 @@ function buildJmaDetail(jma){
     var tempArea=ts0[2]&&ts0[2].areas&&ts0[2].areas[0];
     var temps=tempArea&&tempArea.temps||[];
     var tempMin=temps[2]||'—';var tempMax=temps[3]||'—';
-
-    // 6時間降水確率（バー付き）
     var popArea=ts0[1]&&ts0[1].areas&&ts0[1].areas[0];
     var pops=popArea&&popArea.pops||[];
     var popTimes=ts0[1]&&ts0[1].timeDefines||[];
@@ -1133,221 +739,281 @@ function buildJmaDetail(jma){
         var ptDate=pt?(pt.getMonth()+1)+'/'+(pt.getDate()):'';
         var popVal=pops[pi]!==''&&pops[pi]!==undefined?parseInt(pops[pi]):null;
         var barW=popVal!==null?Math.min(100,popVal):0;
-        popHtml+='<div class="jma-pop-cell">'
-          +'<div class="pt">'+ptDate+'<br>'+ptStr+'</div>'
-          +'<div class="pv">'+(popVal!==null?popVal+'%':'—')+'</div>'
-          +'<div class="pb"><div class="pbf" style="width:'+barW+'%"></div></div>'
-          +'</div>';
+        popHtml+='<div class="jma-pop-cell"><div class="pt">'+ptDate+'<br>'+ptStr+'</div><div class="pv">'+(popVal!==null?popVal+'%':'—')+'</div><div class="pb"><div class="pbf" style="width:'+barW+'%"></div></div></div>';
       }
       popHtml+='</div>';
     }
-
-    // 7日間予報（カード形式）
     var week7Html='';
     if(ts1&&ts1[0]&&ts1[0].areas){
-      var wa=ts1[0].areas[0];
-      var wCodes=wa.weatherCodes||[];
-      var wPops=wa.pops||[];
-      var wRels=wa.reliabilities||[];
-      var wTimes=ts1[0].timeDefines||[];
-      var tempA=ts1[1]&&ts1[1].areas&&ts1[1].areas[0];
-      var tMax=tempA&&tempA.tempsMax||[];
-      var tMin=tempA&&tempA.tempsMin||[];
-      var DAYS=t('days');
-      var nowD=new Date();
-      var tomorrowD=new Date(nowD);tomorrowD.setDate(nowD.getDate()+1);
-
-      week7Html='<div class="stitle" style="margin-top:12px;margin-bottom:8px">'+t('week7')+'</div>';
-      week7Html+='<div class="jma-7cards">';
+      var wa=ts1[0].areas[0];var wCodes=wa.weatherCodes||[];var wPops=wa.pops||[];var wRels=wa.reliabilities||[];var wTimes=ts1[0].timeDefines||[];
+      var tempA=ts1[1]&&ts1[1].areas&&ts1[1].areas[0];var tMax=tempA&&tempA.tempsMax||[];var tMin=tempA&&tempA.tempsMin||[];
+      var DAYS=t('days');var nowD=new Date();var tomorrowD=new Date(nowD);tomorrowD.setDate(nowD.getDate()+1);
+      week7Html='<div class="stitle" style="margin-top:12px;margin-bottom:8px">'+t('week7')+'</div><div class="jma-7cards">';
       wTimes.forEach(function(tm,i){
-        var d=new Date(tm);
-        var isToday=d.toDateString()===nowD.toDateString();
-        var isTmrw=d.toDateString()===tomorrowD.toDateString();
+        var d=new Date(tm);var isToday=d.toDateString()===nowD.toDateString();var isTmrw=d.toDateString()===tomorrowD.toDateString();
         var dayLb=isToday?t('today_lbl'):isTmrw?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
         var dateLb=(d.getMonth()+1)+'/'+(d.getDate());
         var em=wCodes[i]?jmaEmoji(wCodes[i]):'🌡️';
         var hi=tMax[i]!==undefined&&tMax[i]!==''?tMax[i]+'°':'—';
         var lo=tMin[i]!==undefined&&tMin[i]!==''?tMin[i]+'°':'—';
         var pop=wPops[i]!==''&&wPops[i]!==undefined?parseInt(wPops[i]):null;
-        var rel=wRels[i]||'';
-        var relCls=rel==='A'?'jdc-rel-A':rel==='B'?'jdc-rel-B':'jdc-rel-C';
-        var barW=pop!==null?Math.min(100,pop):0;
-        week7Html+='<div class="jma-7card'+(isToday?' today':'')+'">'
-          +'<div class="jdc-day">'+dayLb+'</div>'
-          +'<div class="jdc-date">'+dateLb+'</div>'
-          +'<div class="jdc-em">'+em+'</div>'
-          +'<div class="jdc-hi">'+hi+'</div>'
-          +'<div class="jdc-lo">'+lo+'</div>'
-          +'<div class="jdc-bar"><div class="jdc-fill" style="width:'+barW+'%"></div></div>'
-          +'<div class="jdc-pop">'+(pop!==null?pop+'%':'—')+'</div>'
-          +(rel?'<div class="jdc-rel '+relCls+'">'+rel+'</div>':'')
-          +'</div>';
+        var rel=wRels[i]||'';var relCls=rel==='A'?'jdc-rel-A':rel==='B'?'jdc-rel-B':'jdc-rel-C';
+        var barW2=pop!==null?Math.min(100,pop):0;
+        week7Html+='<div class="jma-7card'+(isToday?' today':'')+'"><div class="jdc-day">'+dayLb+'</div><div class="jdc-date">'+dateLb+'</div><div class="jdc-em">'+em+'</div><div class="jdc-hi">'+hi+'</div><div class="jdc-lo">'+lo+'</div><div class="jdc-bar"><div class="jdc-fill" style="width:'+barW2+'%"></div></div><div class="jdc-pop">'+(pop!==null?pop+'%':'—')+'</div>'+(rel?'<div class="jdc-rel '+relCls+'">'+rel+'</div>':'')+'</div>';
       });
       week7Html+='</div>';
     }
-
-    // 今日の詳細グリッド（絵文字付き大型カード）
-    // 天気コードから今日の絵文字を取得
     var todayCode=area0&&area0.weatherCodes&&area0.weatherCodes[0]?area0.weatherCodes[0]:null;
     var todayEm=todayCode?jmaEmoji(todayCode):'🌡️';
-
     var gridHtml='<div class="jma-grid">';
-
-    // 天気マーク + 気温
-    if(tempMin!=='—'||tempMax!=='—'){
-      gridHtml+='<div class="jma-item">'
-        +'<div class="ji-head"><div class="ji-em">'+todayEm+'</div><div class="ji-label">'+t('today_temp')+'</div></div>'
-        +'<div class="ji-temp"><span style="color:#D44000">'+tempMax+'°</span>'
-        +'<span style="font-size:14px;color:var(--text2);font-weight:400;margin:0 4px">/</span>'
-        +'<span style="color:#2A6DB5">'+tempMin+'°</span></div>'
-        +'</div>';
-    }
-
-    // 風
-    if(windText){
-      var windArrow=windDirToArrow(windText);
-      gridHtml+='<div class="jma-item">'
-        +'<div class="ji-head">'
-        +(windArrow?windArrow:'<div class="ji-em">💨</div>')
-        +'<div class="ji-label">'+t('wind_lbl')+'</div></div>'
-        +'<div class="ji-val">'+windText+'</div>'
-        +'</div>';
-    }
-
-    // 波
+    if(tempMin!=='—'||tempMax!=='—'){gridHtml+='<div class="jma-item"><div class="ji-head"><div class="ji-em">'+todayEm+'</div><div class="ji-label">'+t('today_temp')+'</div></div><div class="ji-temp"><span style="color:#D44000">'+tempMax+'°</span><span style="font-size:14px;color:var(--text2);font-weight:400;margin:0 4px">/</span><span style="color:#2A6DB5">'+tempMin+'°</span></div></div>';}
+    if(windText){var windArrow=windDirToArrow(windText);gridHtml+='<div class="jma-item"><div class="ji-head">'+(windArrow?windArrow:'<div class="ji-em">💨</div>')+'<div class="ji-label">'+t('wind_lbl')+'</div></div><div class="ji-val">'+windText+'</div></div>';}
     if(waveText){
-      // 波高テキストから数値を解析して絵文字を変える / parse wave height for emoji selection
-      // 全角数字を半角に変換 / convert full-width numbers to half-width
       var waveTextH=waveText.replace(/[０-９．]/g,function(ch){return String.fromCharCode(ch.charCodeAt(0)-0xFEE0);});
-      var waveNums=waveTextH.match(/[\d.]+/);
-      var waveM=waveNums?parseFloat(waveNums[0]):null;
-      var waveEm='🌊';
-      if(waveM!==null){
-        if(waveM<=0.5) waveEm='🫧';       // 穏やか
-        else if(waveM<=1.0) waveEm='🔵';  // 小波
-        else if(waveM<=2.0) waveEm='🌊';  // 並波
-        else if(waveM<=3.0) waveEm='🌬️'; // やや高い
-        else waveEm='⚠️';                // 高波・危険
-      }
-      gridHtml+='<div class="jma-item">'
-        +'<div class="ji-head"><div class="ji-em">'+waveEm+'</div><div class="ji-label">'+t('wave_lbl')+(waveM!==null?' '+waveM+'m':'')+'</div></div>'
-        +'<div class="ji-val">'+waveText+'</div>'
-        +'</div>';
+      var waveNums=waveTextH.match(/[\d.]+/);var waveM=waveNums?parseFloat(waveNums[0]):null;
+      var waveEm='🌊';if(waveM!==null){if(waveM<=0.5)waveEm='🫧';else if(waveM<=1.0)waveEm='🔵';else if(waveM<=2.0)waveEm='🌊';else if(waveM<=3.0)waveEm='🌬️';else waveEm='⚠️';}
+      gridHtml+='<div class="jma-item"><div class="ji-head"><div class="ji-em">'+waveEm+'</div><div class="ji-label">'+t('wave_lbl')+(waveM!==null?' '+waveM+'m':'')+'</div></div><div class="ji-val">'+waveText+'</div></div>';
     }
-
     gridHtml+='</div>';
-
-    return '<div class="jma-detail"><div class="jma-detail-title"><span class="tag t-jma">'+t('jma_chip')+'</span>'+t('jma_detail')+'</div>'
-      +(weatherText?'<div class="jma-weather-text">'+weatherText+'</div>':'')
-      +gridHtml+popHtml+week7Html+'</div>';
+    return'<div class="jma-detail"><div class="jma-detail-title"><span class="tag t-jma">'+t('jma_chip')+'</span>'+t('jma_detail')+'</div>'+(weatherText?'<div class="jma-weather-text">'+weatherText+'</div>':'')+gridHtml+popHtml+week7Html+'</div>';
   }catch(e){console.warn('JMA detail error',e);return'';}
 }
 
-// ==================== Charts / グラフ ====================
+// ==================== Charts ====================
 var _charts={};
 function destroyCharts(){Object.values(_charts).forEach(function(c){c.destroy();});_charts={};}
-function getChartColors(){
-  var dark=document.documentElement.getAttribute('data-theme')==='dark';
-  return{grid:dark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.08)',text:dark?'#9a9a96':'#6b6b67',bg:dark?'#242422':'#ffffff'};
-}
+function getChartColors(){var dark=document.documentElement.getAttribute('data-theme')==='dark';return{grid:dark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.08)',text:dark?'#9a9a96':'#6b6b67',bg:dark?'#242422':'#ffffff'};}
 function buildCharts(om,gfs){
-  destroyCharts();
-  var cc=getChartColors();
+  destroyCharts();var cc=getChartColors();
   var baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cc.text,font:{size:11}}},tooltip:{mode:'index',intersect:false}},scales:{x:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10}}},y:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10}}}}};
-
-  // daily chart: hourly temperature for today / 日次グラフ（今日の時間別気温）
-  var now=new Date();
-  var hourLabels=[],omHourly=[],gfsLabel=[];
-  for(var i=0;i<24;i++){
-    var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});
-    if(idx>=0){hourLabels.push(i+'時');omHourly.push(Math.round(om.hourly.temperature_2m[idx]));}
-  }
-
+  var now=new Date();var hourLabels=[],omHourly=[];
+  for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){hourLabels.push(i+'時');omHourly.push(Math.round(om.hourly.temperature_2m[idx]));}}
   var dCtx=document.getElementById('daily-chart');
   if(dCtx){
-    // 現在時刻のインデックスを特定 / find current hour index
-    var nowHour=now.getHours();
-    var nowIdx=hourLabels.indexOf(nowHour+'時');
-    if(nowIdx<0) nowIdx=hourLabels.findIndex(function(l){return parseInt(l)<=nowHour;});
-    var nowTemp=nowIdx>=0?omHourly[nowIdx]:null;
-
-    // 現在気温を強調するポイントスタイル / highlight current temperature point
-    var pointBg=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});
-    var pointR=omHourly.map(function(_,i){return i===nowIdx?7:3;});
-
-    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omHourly,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:pointR,pointBackgroundColor:pointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{
-      title:{display:false},
-      annotation:undefined,
-      tooltip:{
-        mode:'index',intersect:false,
-        callbacks:{
-          title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},
-          label:function(item){return item.dataset.label+': '+item.raw+'°C';}
-        }
-      }
-    }),scales:Object.assign({},baseOpts.scales,{
-      y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})
-    })})});
-    // 現在時刻ラベルを赤くする / highlight current time label
-    if(nowIdx>=0){
-      _charts.daily.data.datasets[0].pointBorderColor=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});
-    }
+    var nowHour=now.getHours();var nowIdx=hourLabels.indexOf(nowHour+'時');if(nowIdx<0)nowIdx=hourLabels.findIndex(function(l){return parseInt(l)<=nowHour;});
+    var pointBg=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var pointR=omHourly.map(function(_,i){return i===nowIdx?7:3;});
+    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omHourly,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:pointR,pointBackgroundColor:pointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+'°C';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})})})}); 
   }
-
-  // weekly chart: 7-day high/low temperatures / 週次グラフ（7日間最高・最低）
   var DAYS=t('days');
-  var weekLabels=om.daily.time.slice(0,7).map(function(ds,i){
-    var d=new Date(ds);
-    return i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()];
-  });
-  var omMax=om.daily.temperature_2m_max.slice(0,7).map(Math.round);
-  var omMin=om.daily.temperature_2m_min.slice(0,7).map(Math.round);
-  var gfsMax=gfs.daily.temperature_2m_max.slice(0,7).map(Math.round);
-  var gfsMin=gfs.daily.temperature_2m_min.slice(0,7).map(Math.round);
-
+  var weekLabels=om.daily.time.slice(0,7).map(function(ds,i){var d=new Date(ds);return i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()];});
+  var omMax=om.daily.temperature_2m_max.slice(0,7).map(Math.round);var omMin=om.daily.temperature_2m_min.slice(0,7).map(Math.round);
+  var gfsMax=gfs.daily.temperature_2m_max.slice(0,7).map(Math.round);var gfsMin=gfs.daily.temperature_2m_min.slice(0,7).map(Math.round);
   var wCtx=document.getElementById('weekly-chart');
-  if(wCtx){
-    _charts.weekly=new Chart(wCtx,{type:'line',data:{labels:weekLabels,datasets:[
-      {label:'OM '+t('max_temp'),data:omMax,borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#E05C2A',fill:'+1'},
-      {label:'OM '+t('min_temp'),data:omMin,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#378ADD',fill:false},
-      {label:'GFS '+t('max_temp'),data:gfsMax,borderColor:'#E05C2A',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},
-      {label:'GFS '+t('min_temp'),data:gfsMin,borderColor:'#378ADD',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},
-    ]},options:Object.assign({},baseOpts,{
-      plugins:Object.assign({},baseOpts.plugins,{
-        title:{display:false},
-        tooltip:{mode:'index',intersect:false,callbacks:{label:function(item){return item.dataset.label+': '+item.raw+'°';}}}
-      }),
-      scales:Object.assign({},baseOpts.scales,{
-        y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})
-      })
-    })});
-  }
+  if(wCtx){_charts.weekly=new Chart(wCtx,{type:'line',data:{labels:weekLabels,datasets:[{label:'OM '+t('max_temp'),data:omMax,borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#E05C2A',fill:'+1'},{label:'OM '+t('min_temp'),data:omMin,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#378ADD',fill:false},{label:'GFS '+t('max_temp'),data:gfsMax,borderColor:'#E05C2A',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},{label:'GFS '+t('min_temp'),data:gfsMin,borderColor:'#378ADD',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{label:function(item){return item.dataset.label+': '+item.raw+'°';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})})})}); }
 }
 var _activeChart='daily';
-function switchChart(tab){
-  _activeChart=tab;
-  document.getElementById('daily-wrap').style.display=tab==='daily'?'block':'none';
-  document.getElementById('weekly-wrap').style.display=tab==='weekly'?'block':'none';
-  document.querySelectorAll('.chart-tab').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-tab')===tab);});
+function switchChart(tab){_activeChart=tab;document.getElementById('daily-wrap').style.display=tab==='daily'?'block':'none';document.getElementById('weekly-wrap').style.display=tab==='weekly'?'block':'none';document.querySelectorAll('.chart-tab').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-tab')===tab);});}
+
+// ==================== Air Quality ====================
+function aqiLevel(aqi){if(aqi===null||aqi===undefined)return{cls:'ql-na',lbl:'—'};if(aqi<=20)return{cls:'ql-good',lbl:t('ql_good')};if(aqi<=40)return{cls:'ql-fair',lbl:t('ql_fair')};if(aqi<=60)return{cls:'ql-mod',lbl:t('ql_mod')};if(aqi<=80)return{cls:'ql-poor',lbl:t('ql_poor')};return{cls:'ql-vpoor',lbl:t('ql_vpoor')};}
+function pm25Level(v){if(v===null||v===undefined)return{cls:'ql-na',lbl:'—'};if(v<=10)return{cls:'ql-good',lbl:t('ql_good')};if(v<=20)return{cls:'ql-fair',lbl:t('ql_fair')};if(v<=25)return{cls:'ql-mod',lbl:t('ql_mod')};if(v<=50)return{cls:'ql-poor',lbl:t('ql_poor')};return{cls:'ql-vpoor',lbl:t('ql_vpoor')};}
+function dustLevel(v){if(v===null||v===undefined)return{cls:'ql-na',lbl:'—'};if(v<=50)return{cls:'ql-good',lbl:t('ql_good')};if(v<=200)return{cls:'ql-fair',lbl:t('ql_fair')};if(v<=500)return{cls:'ql-mod',lbl:t('ql_mod')};if(v<=1000)return{cls:'ql-poor',lbl:t('ql_poor')};return{cls:'ql-vpoor',lbl:t('ql_vpoor')};}
+function pollenIndexClass(index){if(index<=0)return{cls:'ql-good',lbl:t('ql_good')};if(index<=1)return{cls:'ql-fair',lbl:t('ql_fair')};if(index<=2)return{cls:'ql-mod',lbl:t('ql_mod')};if(index<=3)return{cls:'ql-poor',lbl:t('ql_poor')};return{cls:'ql-vpoor',lbl:t('ql_vpoor')};}
+function buildAqSection(aq,pollen){
+  var now=new Date();var h=now.getHours();
+  var pm25Val=null,dustVal=null,aqiVal=null;
+  if(aq&&aq.hourly){var idx=aq.hourly.time.findIndex(function(t2){return t2.includes('T'+String(h).padStart(2,'0')+':00');});if(idx<0)idx=0;pm25Val=aq.hourly.pm2_5[idx]!==null?Math.round(aq.hourly.pm2_5[idx]*10)/10:null;dustVal=aq.hourly.dust[idx]!==null?Math.round(aq.hourly.dust[idx]*10)/10:null;aqiVal=aq.hourly.european_aqi[idx]!==null?Math.round(aq.hourly.european_aqi[idx]):null;}
+  var pm25L=pm25Level(pm25Val);var dustL=dustLevel(dustVal);var aqiL=aqiLevel(aqiVal);
+  var aqHtml='<div class="aq-grid"><div class="aq-card"><div class="lb"><i class="ti ti-wind" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('aqi')+' (EU)</div><div class="vl">'+(aqiVal!==null?aqiVal:'—')+'</div><div class="ql '+aqiL.cls+'">'+aqiL.lbl+'</div></div><div class="aq-card"><div class="lb"><i class="ti ti-circle-dotted" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('pm25')+' (μg/m³)</div><div class="vl">'+(pm25Val!==null?pm25Val:'—')+'</div><div class="ql '+pm25L.cls+'">'+pm25L.lbl+'</div></div><div class="aq-card"><div class="lb"><i class="ti ti-wind" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('dust')+' (μg/m³)</div><div class="vl">'+(dustVal!==null?dustVal:'—')+'</div><div class="ql '+dustL.cls+'">'+dustL.lbl+'</div></div></div>';
+  var pollenHtml='';
+  if(pollen&&pollen.dailyInfo&&pollen.dailyInfo.length>0){
+    var today=pollen.dailyInfo[0];
+    var nameMapType={ja:{TREE:'樹木花粉',GRASS:'草花粉',WEED:'雑草花粉'},en:{TREE:'Tree Pollen',GRASS:'Grass Pollen',WEED:'Weed Pollen'}};
+    var nameMapPlant={ja:{JAPANESE_CEDAR:'スギ',JAPANESE_CYPRESS:'ヒノキ',ALDER:'ハンノキ',BIRCH:'シラカバ',GRASS:'イネ科',MUGWORT:'ヨモギ',RAGWEED:'ブタクサ',OAK:'カシ'},en:{JAPANESE_CEDAR:'Japanese Cedar',JAPANESE_CYPRESS:'Japanese Cypress',ALDER:'Alder',BIRCH:'Birch',GRASS:'Grass',MUGWORT:'Mugwort',RAGWEED:'Ragweed',OAK:'Oak'}};
+    var plants=today.plantsInfo||[];var types=today.pollenTypeInfo||[];var pollenCards='';
+    if(plants.length>0){
+      var priority=['JAPANESE_CEDAR','JAPANESE_CYPRESS','ALDER','BIRCH','GRASS','MUGWORT','RAGWEED','OAK'];
+      var sorted=plants.slice().sort(function(a,b){var ai=priority.indexOf(a.code);var bi=priority.indexOf(b.code);if(ai===-1)ai=99;if(bi===-1)bi=99;return ai-bi;});
+      pollenCards=sorted.slice(0,8).map(function(p){var idxVal=(p.indexInfo&&p.indexInfo.value!==undefined)?p.indexInfo.value:null;var cat=esc(p.indexInfo&&p.indexInfo.category?p.indexInfo.category:'');var lvl=idxVal!==null?pollenIndexClass(idxVal):{cls:'ql-na',lbl:t('pollen_na')};var name=esc((nameMapPlant[getLang()]&&nameMapPlant[getLang()][p.code])||p.displayName||p.code);var inSeason=p.inSeason===false?' style="opacity:0.5"':'';var seasonNote=p.inSeason===false?'<div style="font-size:10px;color:var(--text2)">'+(getLang()==='ja'?'シーズン外':'Off-season')+'</div>':'';return'<div class="pollen-card"'+inSeason+'><div class="pn">'+name+'</div><div class="pi">'+(idxVal!==null?idxVal:'—')+'</div><div class="pc '+lvl.cls+'">'+(cat||lvl.lbl)+'</div>'+seasonNote+'</div>';}).join('');
+    }else if(types.length>0){
+      pollenCards=types.map(function(p){var idxVal=(p.indexInfo&&p.indexInfo.value!==undefined)?p.indexInfo.value:null;var cat=esc(p.indexInfo&&p.indexInfo.category?p.indexInfo.category:'');var inSeason=p.inSeason===false?' style="opacity:0.5"':'';var lvl=idxVal!==null?pollenIndexClass(idxVal):{cls:'ql-na',lbl:t('pollen_na')};var name=esc((nameMapType[getLang()]&&nameMapType[getLang()][p.code])||p.displayName||p.code);var seasonNote=p.inSeason===false?'<div style="font-size:10px;color:var(--text2)">'+(getLang()==='ja'?'シーズン外':'Off-season')+'</div>':'';return'<div class="pollen-card"'+inSeason+'><div class="pn">'+name+'</div><div class="pi">'+(idxVal!==null?idxVal:'—')+'</div><div class="pc '+lvl.cls+'">'+(cat||lvl.lbl)+'</div>'+seasonNote+'</div>';}).join('');
+    }
+    if(pollenCards){pollenHtml='<div class="stitle" style="margin-top:12px;margin-bottom:6px">'+t('pollen_title')+'</div><div class="pollen-grid">'+pollenCards+'</div>';}
+  }
+  return'<div class="aq-panel"><div class="stitle">'+t('aq_title')+'</div>'+aqHtml+pollenHtml+'<div style="font-size:11px;color:var(--text2);margin-top:10px">Data: <a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noopener">Open-Meteo Air Quality</a>'+(pollen?' / <a href="https://developers.google.com/maps/documentation/pollen" target="_blank" rel="noopener">Google Pollen API</a>':'')+'</div></div>';
 }
 
-// ==================== Main Render / メイン描画 ====================
+// ==================== Cache ====================
+function cacheKey(loc){return'cache_'+loc.lat+'_'+loc.lon;}
+function saveCache(loc,results){try{var data={ts:Date.now(),results:results};localStorage.setItem(cacheKey(loc),JSON.stringify(data));}catch(e){}}
+function loadCache(loc){try{var raw=localStorage.getItem(cacheKey(loc));if(!raw)return null;return JSON.parse(raw);}catch(e){return null;}}
+
+// ==================== Main Tab Navigation ====================
+var _activeMainTab='forecast';
+function switchMainTab(tab){
+  _activeMainTab=tab;
+  document.querySelectorAll('.main-tab').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-panel')===tab);});
+  var forecastEl=document.getElementById('main-content');
+  if(forecastEl)forecastEl.style.display=(tab==='forecast')?'block':'none';
+  ['radar','wxmap','aq'].forEach(function(p){var el=document.getElementById('panel-'+p);if(el)el.style.display=(tab===p)?'block':'none';});
+  if(tab==='radar'&&!_radarInitialized)initRadarMap();
+  if(tab==='wxmap'&&!_wxmapInitialized)initWxmap();
+  if(tab==='aq')syncAqPanel();
+}
+var _aqSynced=false;
+function syncAqPanel(){
+  var aqPanel=document.getElementById('panel-aq');if(!aqPanel)return;
+  var src=document.querySelector('#main-content .aq-panel');
+  if(src&&!_aqSynced){aqPanel.innerHTML='';var clone=src.cloneNode(true);aqPanel.appendChild(clone);_aqSynced=true;}
+  else if(!src){aqPanel.innerHTML='<div class="loading">'+t('loading')+'</div>';}
+}
+function resetAqSync(){_aqSynced=false;if(_activeMainTab==='aq')syncAqPanel();}
+
+// ==================== Rain Radar (Rainbow.ai) ====================
+var _radarMap=null,_radarLayer=null,_radarFrames=[],_radarIdx=0,_radarTimer=null,_radarInitialized=false;
+var RADAR_INITIAL_ZOOM=6,RADAR_MIN_ZOOM=3,RADAR_MAX_ZOOM=12;
+
+function initRadarMap(){
+  if(_radarInitialized)return;
+  _radarInitialized=true;
+  var locs=loadLocations();var idx=getCurrentIdx();var loc=locs[idx]||{lat:34.6937,lon:135.5023};
+  _radarMap=L.map('radar-map',{minZoom:RADAR_MIN_ZOOM,maxZoom:RADAR_MAX_ZOOM}).setView([loc.lat,loc.lon],RADAR_INITIAL_ZOOM);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',opacity:0.6}).addTo(_radarMap);
+  loadRadarFrames();
+}
+
+function loadRadarFrames(){
+  var tl=document.getElementById('radar-timeline');
+  if(tl)tl.innerHTML='<span style="font-size:11px;color:var(--text2)">'+t('radar_loading')+'</span>';
+
+  var rbKey=localStorage.getItem('rainbow_key')||'';
+  if(!rbKey){
+    if(tl)tl.innerHTML='<div class="rb-warn" style="font-size:11px">🔑 Rainbow.ai APIキーが未設定です。下の「Rainbow.ai レーダーキー設定」欄からキーを入力してください。<br><a href="https://developer.rainbow.ai/" target="_blank" rel="noopener">developer.rainbow.ai でキー取得 →</a></div>';
+    document.getElementById('radar-source-label').textContent='Rainbow.ai（キー未設定）';
+    return;
+  }
+
+  // Step 1: snapshotタイムスタンプを取得（Nginxプロキシ経由）
+  fetch('/rbapi/tiles/v1/snapshot',{
+    headers:{'Ocp-Apim-Subscription-Key':rbKey}
+  })
+  .then(function(r){
+    if(!r.ok)throw new Error('snapshot HTTP '+r.status);
+    return r.json();
+  })
+  .then(function(data){
+    var snapshot=data.snapshot;
+    if(!snapshot)throw new Error('snapshot not found in response');
+    _radarFrames=[];
+
+    // 過去2時間（12フレーム × 10分）forecast_time=0固定、snapshotを10分ずつずらす
+    for(var i=12;i>=0;i--){
+      var ts=snapshot-(i*600);
+      // snapshotは10分アライン済み。2時間前まで取得可能
+      _radarFrames.push({ts:ts,snapshot:ts,forecast:0,type:'past',offsetMin:-i*10});
+    }
+    // nowcast +4時間（24フレーム × 10分）最新snapshotから forecast_time を増やす
+    for(var j=1;j<=24;j++){
+      _radarFrames.push({ts:snapshot+(j*600),snapshot:snapshot,forecast:j*600,type:'future',offsetMin:j*10});
+    }
+
+    // 最新過去フレーム（index 12 = offset 0min = 現在）を初期表示
+    _radarIdx=12;
+    buildRadarTimeline();
+    showRadarFrame(rbKey);
+    document.getElementById('radar-source-label').textContent='Rainbow.ai nowcast +4h ✓';
+    // chip をオン
+    var chip=document.getElementById('chip-rainbow');if(chip)chip.classList.add('on');
+  })
+  .catch(function(e){
+    console.warn('Rainbow.ai error:',e);
+    if(tl)tl.innerHTML='<span style="font-size:11px;color:#A32D2D">レーダーデータの取得に失敗しました（'+esc(e.message)+'）</span>';
+    document.getElementById('radar-source-label').textContent='Rainbow.ai（取得失敗）';
+  });
+}
+
+function buildRadarTimeline(){
+  var tl=document.getElementById('radar-timeline');if(!tl)return;
+  var now=new Date();
+  tl.innerHTML=_radarFrames.map(function(f,i){
+    var offsetMin=f.offsetMin;
+    var lbl;
+    if(offsetMin===0)lbl=t('radar_now');
+    else if(offsetMin<0)lbl=Math.abs(offsetMin)+(getLang()==='ja'?'分前':'m ago');
+    else lbl='+'+(offsetMin)+(getLang()==='ja'?'分':'m');
+    var cls='radar-ts-btn'+(f.type==='future'?' future':'')+(i===_radarIdx?' active':'');
+    return'<button class="'+cls+'" onclick="selectRadarFrame('+i+')">'+lbl+'</button>';
+  }).join('');
+}
+
+function selectRadarFrame(idx){
+  _radarIdx=idx;
+  buildRadarTimeline();
+  var rbKey=localStorage.getItem('rainbow_key')||'';
+  showRadarFrame(rbKey);
+}
+
+function showRadarFrame(rbKey){
+  if(!_radarFrames[_radarIdx])return;
+  var f=_radarFrames[_radarIdx];
+  // Rainbow.ai Tiles API: Nginxプロキシ経由・tokenをクエリパラメータで渡す
+  var url='/rbapi/tiles/v1/precip/'+f.snapshot+'/'+f.forecast+'/{z}/{x}/{y}'
+    +'?color=0&token='+encodeURIComponent(rbKey);
+  if(_radarLayer)_radarMap.removeLayer(_radarLayer);
+  _radarLayer=L.tileLayer(url,{
+    opacity:0.75,
+    attribution:'Rainbow.ai',
+    maxZoom:RADAR_MAX_ZOOM,
+    // Rainbow.ai はズーム0-12対応
+    tileSize:256
+  }).addTo(_radarMap);
+  // ボタンのアクティブ更新
+  document.querySelectorAll('.radar-ts-btn').forEach(function(el,i){el.classList.toggle('active',i===_radarIdx);});
+}
+
+var _radarPlaying=false;
+function toggleRadarPlay(){
+  _radarPlaying=!_radarPlaying;
+  var icon=document.getElementById('radar-play-icon');
+  var lbl=document.getElementById('radar-play-label');
+  if(icon){icon.className='ti '+(_radarPlaying?'ti-player-pause':'ti-player-play');icon.style.fontSize='12px';icon.style.verticalAlign='-1px';}
+  if(lbl)lbl.textContent=_radarPlaying?t('radar_pause'):t('radar_play');
+  if(_radarPlaying){
+    _radarTimer=setInterval(function(){
+      _radarIdx=(_radarIdx+1)%_radarFrames.length;
+      buildRadarTimeline();
+      var rbKey=localStorage.getItem('rainbow_key')||'';
+      showRadarFrame(rbKey);
+    },800);
+  }else{clearInterval(_radarTimer);}
+}
+
+// ==================== Weather Map ====================
+var _wxmapInitialized=false,_activeWxtab='surface',_wxmapList=null;
+function fetchWxmapList(callback){
+  if(_wxmapList){callback(_wxmapList);return;}
+  fetch('/wxmap/bosai/weather_map/data/list.json').then(function(r){return r.json();}).then(function(data){_wxmapList=data;callback(data);}).catch(function(){handleWxmapError();});
+}
+function getWxmapFilename(data,type){
+  var arr;
+  if(type==='surface')arr=data.near&&data.near.now;
+  else if(type==='fcst24')arr=data.near&&data.near.ft24;
+  else if(type==='fcst48')arr=data.near&&data.near.ft48;
+  if(!arr||arr.length===0)return null;
+  return arr[arr.length-1];
+}
+function initWxmap(){if(_wxmapInitialized)return;_wxmapInitialized=true;loadWxmapImage('surface');}
+function switchWxTab(tab){_activeWxtab=tab;document.querySelectorAll('.wxmap-tab').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-wxtab')===tab);});loadWxmapImage(tab);}
+function loadWxmapImage(type){
+  var img=document.getElementById('wxmap-img');if(!img)return;img.style.opacity='0.4';
+  fetchWxmapList(function(data){var filename=getWxmapFilename(data,type);if(!filename){handleWxmapError();return;}img.src='/wxmap/bosai/weather_map/data/png/'+filename;img.onload=function(){img.style.opacity='1';};img.onerror=function(){handleWxmapError();};});
+}
+function handleWxmapError(){var wrap=document.querySelector('.wxmap-img-wrap');if(wrap){wrap.innerHTML='<div style="padding:2rem;text-align:center;color:var(--text2);font-size:13px"><i class="ti ti-photo-off" style="font-size:32px;display:block;margin-bottom:8px;opacity:0.4"></i>画像を直接読み込めませんでした。<br><a href="https://www.jma.go.jp/bosai/weather_map/" target="_blank" rel="noopener" style="color:var(--info-text)">気象庁 天気図ページで確認 →</a></div>';}}
+
+// ==================== Build Content ====================
+function mfc(isToday,icon,max,min,rain,note){
+  var emojiMap={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️','ti-wind':'💨'};
+  var em=emojiMap[icon]||'🌡️';var rainNum=parseInt(rain)||0;var barW=Math.min(100,rainNum);
+  return'<div class="mfc'+(isToday?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW+'%"></div></div><div class="cr">'+rainNum+'%</div>'+(note?'<div class="cn">'+esc(note)+'</div>':'')+'</div>';
+}
 function buildChartSection(){
   var da=_activeChart==='daily';var we=_activeChart==='weekly';
-  return '<div class="chart-section">'
-    +'<div class="stitle">'+t('temp_chart')+'</div>'
-    +'<div class="chart-tabs">'
-    +'<button class="chart-tab'+(da?' active':'')+'" data-tab="daily" onclick="switchChart(this.dataset.tab)">'+t('daily_chart')+'</button>'
-    +'<button class="chart-tab'+(we?' active':'')+'" data-tab="weekly" onclick="switchChart(this.dataset.tab)">'+t('weekly_chart')+'</button>'
-    +'</div>'
-    +'<div id="daily-wrap" class="chart-wrap" style="display:'+(da?'block':'none')+'"><canvas id="daily-chart"></canvas></div>'
-    +'<div id="weekly-wrap" class="chart-wrap" style="display:'+(we?'block':'none')+'"><canvas id="weekly-chart"></canvas></div>'
-    +'</div>';
+  return'<div class="chart-section"><div class="stitle">'+t('temp_chart')+'</div><div class="chart-tabs"><button class="chart-tab'+(da?' active':'')+'" data-tab="daily" onclick="switchChart(this.dataset.tab)">'+t('daily_chart')+'</button><button class="chart-tab'+(we?' active':'')+'" data-tab="weekly" onclick="switchChart(this.dataset.tab)">'+t('weekly_chart')+'</button></div><div id="daily-wrap" class="chart-wrap" style="display:'+(da?'block':'none')+'"><canvas id="daily-chart"></canvas></div><div id="weekly-wrap" class="chart-wrap" style="display:'+(we?'block':'none')+'"><canvas id="weekly-chart"></canvas></div></div>';
 }
+
 function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
   window._lastBuildArgs=[loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning];
-  var now=new Date();
-  var DAYS=t('days');
+  var now=new Date();var DAYS=t('days');
   var h0=Math.floor(now.getHours()/3)*3;
   var hIdx=om.hourly.time.findIndex(function(t2){return t2.includes('T'+String(h0).padStart(2,'0')+':00');});
   var cTemp=hIdx>=0?Math.round(om.hourly.temperature_2m[hIdx]):'--';
@@ -1360,21 +1026,13 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
 
   var jmaDateMap={};var jmaMax=[],jmaMin=[],jmaRain=[],jmaCodes=[];
   if(jma&&jma[1]&&jma[1].timeSeries){
-    var ts1=jma[1].timeSeries;
-    var a0=ts1[0]&&ts1[0].areas&&ts1[0].areas[0];
+    var ts1=jma[1].timeSeries;var a0=ts1[0]&&ts1[0].areas&&ts1[0].areas[0];
     if(a0){jmaCodes=a0.weatherCodes||[];jmaRain=(a0.pops||[]).map(function(p){var v=parseInt(p);return isNaN(v)?null:v;});(ts1[0].timeDefines||[]).forEach(function(t2,i){jmaDateMap[t2.slice(0,10)]=i;});}
-    var a1=ts1[1]&&ts1[1].areas&&ts1[1].areas[0];
-    if(a1){jmaMax=a1.tempsMax||[];jmaMin=a1.tempsMin||[];}
+    var a1=ts1[1]&&ts1[1].areas&&ts1[1].areas[0];if(a1){jmaMax=a1.tempsMax||[];jmaMin=a1.tempsMin||[];}
   }
 
   var dates=om.daily.time.slice(0,7);
-  var headHtml=dates.map(function(ds,i){
-    var d=new Date(ds);
-    var dayLb=i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');
-    var dateLb=(d.getMonth()+1)+'/'+(d.getDate());
-    return '<div class="mfhd'+(i===0?' td':'')+'"><div class="dow">'+dayLb+'</div><div class="mdate">'+dateLb+'</div></div>';
-  }).join('');
-
+  var headHtml=dates.map(function(ds,i){var d=new Date(ds);var dayLb=i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()]+(getLang()==='ja'?'曜':'');var dateLb=(d.getMonth()+1)+'/'+(d.getDate());return'<div class="mfhd'+(i===0?' td':'')+'"><div class="dow">'+dayLb+'</div><div class="mdate">'+dateLb+'</div></div>';}).join('');
   var omCells=dates.map(function(ds,i){return mfc(i===0,omIcon(om.daily.weathercode[i]),Math.round(om.daily.temperature_2m_max[i]),Math.round(om.daily.temperature_2m_min[i]),Math.round(om.daily.precipitation_probability_max[i]),'');}).join('');
   var gfsCells=dates.map(function(ds,i){return mfc(i===0,omIcon(gfs.daily.weathercode?gfs.daily.weathercode[i]:0),Math.round(gfs.daily.temperature_2m_max[i]),Math.round(gfs.daily.temperature_2m_min[i]),Math.round(gfs.daily.precipitation_probability_max[i]),'');}).join('');
   var jmaCells=dates.map(function(ds,i){
@@ -1383,60 +1041,38 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
     var mn=ji!==null&&jmaMin[ji]!==undefined&&jmaMin[ji]!==''?jmaMin[ji]:'—';
     var rn=ji!==null&&jmaRain[ji]!==null&&jmaRain[ji]!==undefined?jmaRain[ji]:'—';
     var wc=ji!==null&&jmaCodes[ji]?jmaCodes[ji]:null;
-    var emojiMapJ={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️','ti-wind':'💨'};
-    var ic=wc?jmaIcon(wc):'ti-cloud';
-    var em=emojiMapJ[ic]||'🌡️';
-    var rainNum2=rn!=='—'?parseInt(rn):null;
-    var barW2=rainNum2!==null?Math.min(100,rainNum2):0;
-    return '<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+mx+'°</div><div class="cl">'+mn+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW2+'%"></div></div><div class="cr">'+(rainNum2!==null?rainNum2+'%':'—')+'</div></div>';
+    var emojiMapJ={'ti-sun':'☀️','ti-cloud':'☁️','ti-cloud-rain':'🌧️','ti-cloud-drizzle':'🌦️','ti-cloud-storm':'⛈️','ti-snowflake':'❄️','ti-mist':'🌫️'};
+    var ic=wc?jmaIcon(wc):'ti-cloud';var em=emojiMapJ[ic]||'🌡️';
+    var rainNum2=rn!=='—'?parseInt(rn):null;var barW2=rainNum2!==null?Math.min(100,rainNum2):0;
+    return'<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+mx+'°</div><div class="cl">'+mn+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW2+'%"></div></div><div class="cr">'+(rainNum2!==null?rainNum2+'%':'—')+'</div></div>';
   }).join('');
 
-  // Google Weather forecast cells
   var gwCells='';
   if(gwf&&gwf.forecastDays&&gwf.forecastDays.length>0){
     document.getElementById('chip-gw').classList.add('on');
     gwCells='<div class="mfrow"><div class="mflb" style="background:#E3F2FD;color:#0D47A1">G.Weather</div>'+dates.map(function(ds,i){
-      if(!gwf.forecastDays[i])return '<div class="mfc empty"></div>';
+      if(!gwf.forecastDays[i])return'<div class="mfc empty"></div>';
       var fd=gwf.forecastDays[i];
-      var hiTemp=fd.maxTemperature?Math.round(fd.maxTemperature.degrees):'—';
-      var loTemp=fd.minTemperature?Math.round(fd.minTemperature.degrees):'—';
+      var hiTemp=fd.maxTemperature?Math.round(fd.maxTemperature.degrees):'—';var loTemp=fd.minTemperature?Math.round(fd.minTemperature.degrees):'—';
       var rainPct=fd.daytimeForecast&&fd.daytimeForecast.precipitation?Math.round(fd.daytimeForecast.precipitation.probability.percent||0):0;
       var wType=fd.daytimeForecast&&fd.daytimeForecast.weatherCondition?fd.daytimeForecast.weatherCondition.type:'';
       var gwEmojiMap={CLEAR:'☀️',MOSTLY_CLEAR:'🌤️',PARTLY_CLOUDY:'⛅',MOSTLY_CLOUDY:'🌥️',CLOUDY:'☁️',LIGHT_RAIN:'🌦️',RAIN:'🌧️',RAIN_SHOWERS:'🌧️',SHOWERS:'🌦️',THUNDERSTORM:'⛈️',SNOW:'❄️',LIGHT_SNOW:'🌨️',SLEET:'🌧️',WINDY:'💨',FOG:'🌫️',DRIZZLE:'🌦️'};
-      var em2=gwEmojiMap[wType]||'🌡️';
-      // mfcを直接構築（絵文字用）
-      var rainNum3=parseInt(rainPct)||0;
-      return '<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em2+'</div><div class="ct">'+hiTemp+'°</div><div class="cl">'+loTemp+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+Math.min(100,rainNum3)+'%"></div></div><div class="cr">'+rainNum3+'%</div></div>';
+      var em2=gwEmojiMap[wType]||'🌡️';var rainNum3=parseInt(rainPct)||0;
+      return'<div class="mfc'+(i===0?' td':'')+'"><div class="ci">'+em2+'</div><div class="ct">'+hiTemp+'°</div><div class="cl">'+loTemp+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+Math.min(100,rainNum3)+'%"></div></div><div class="cr">'+rainNum3+'%</div></div>';
     }).join('')+'</div>';
   }
-
   var owmCells='';
-  if(owm&&owm.list){
-    document.getElementById('chip-owm').classList.add('on');
-    owmCells='<div class="mfrow"><div class="mflb t-owm">OWM</div>'+dates.map(function(ds,i){var items=owm.list.filter(function(it){return it.dt_txt.startsWith(ds);});if(!items.length)return '<div class="mfc empty"></div>';var noon=items.find(function(it){return it.dt_txt.includes('12:00:00');})||items[Math.floor(items.length/2)];return mfc(i===0,owmIcon(noon.weather[0].id),Math.round(Math.max.apply(null,items.map(function(it){return it.main.temp_max;}))),Math.round(Math.min.apply(null,items.map(function(it){return it.main.temp_min;}))),Math.round(Math.max.apply(null,items.map(function(it){return (it.pop||0)*100;}))),esc(noon.weather[0].description));}).join('')+'</div>';
-  }
+  if(owm&&owm.list){document.getElementById('chip-owm').classList.add('on');owmCells='<div class="mfrow"><div class="mflb t-owm">OWM</div>'+dates.map(function(ds,i){var items=owm.list.filter(function(it){return it.dt_txt.startsWith(ds);});if(!items.length)return'<div class="mfc empty"></div>';var noon=items.find(function(it){return it.dt_txt.includes('12:00:00');})||items[Math.floor(items.length/2)];return mfc(i===0,owmIcon(noon.weather[0].id),Math.round(Math.max.apply(null,items.map(function(it){return it.main.temp_max;}))),Math.round(Math.min.apply(null,items.map(function(it){return it.main.temp_min;}))),Math.round(Math.max.apply(null,items.map(function(it){return(it.pop||0)*100;}))),esc(noon.weather[0].description));}).join('')+'</div>';}
   var tmrwCells='';
-  if(tmrw&&tmrw.timelines&&tmrw.timelines.daily){
-    document.getElementById('chip-tmrw').classList.add('on');
-    var td=tmrw.timelines.daily;
-    tmrwCells='<div class="mfrow"><div class="mflb t-tmrw">Tomorrow</div>'+dates.map(function(ds,i){if(!td[i])return '<div class="mfc empty"></div>';var v=td[i].values;return mfc(i===0,tmrwIcon(v.weatherCodeMax||v.weatherCode||0),Math.round(v.temperatureMax),Math.round(v.temperatureMin),Math.round(v.precipitationProbabilityAvg||0),'');}).join('')+'</div>';
-  }
+  if(tmrw&&tmrw.timelines&&tmrw.timelines.daily){document.getElementById('chip-tmrw').classList.add('on');var td=tmrw.timelines.daily;tmrwCells='<div class="mfrow"><div class="mflb t-tmrw">Tomorrow</div>'+dates.map(function(ds,i){if(!td[i])return'<div class="mfc empty"></div>';var v=td[i].values;return mfc(i===0,tmrwIcon(v.weatherCodeMax||v.weatherCode||0),Math.round(v.temperatureMax),Math.round(v.temperatureMin),Math.round(v.precipitationProbabilityAvg||0),'');}).join('')+'</div>';}
   var wapiCells='';
-  if(wapi&&wapi.forecast&&wapi.forecast.forecastday){
-    document.getElementById('chip-wapi').classList.add('on');
-    var fd=wapi.forecast.forecastday;
-    wapiCells='<div class="mfrow"><div class="mflb t-wapi">WeatherAPI</div>'+dates.map(function(ds,i){if(!fd[i])return '<div class="mfc empty"></div>';var day=fd[i].day;return mfc(i===0,wapiIcon(day.condition.code),Math.round(day.maxtemp_c),Math.round(day.mintemp_c),Math.round(day.daily_chance_of_rain),esc(day.condition.text));}).join('')+'</div>';
-  }
+  if(wapi&&wapi.forecast&&wapi.forecast.forecastday){document.getElementById('chip-wapi').classList.add('on');var fdd=wapi.forecast.forecastday;wapiCells='<div class="mfrow"><div class="mflb t-wapi">WeatherAPI</div>'+dates.map(function(ds,i){if(!fdd[i])return'<div class="mfc empty"></div>';var day=fdd[i].day;return mfc(i===0,wapiIcon(day.condition.code),Math.round(day.maxtemp_c),Math.round(day.mintemp_c),Math.round(day.daily_chance_of_rain),esc(day.condition.text));}).join('')+'</div>';}
 
   var hourlyHtml=Array.from({length:8},function(_,i){
-    var h=(h0+i*3)%24;
-    var isNowHour=(h===now.getHours()||( h<=now.getHours()&&now.getHours()<h+3));
+    var h=(h0+i*3)%24;var isNowHour=(h===now.getHours()||(h<=now.getHours()&&now.getHours()<h+3));
     var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===h;});
-    var temp=idx>=0?Math.round(om.hourly.temperature_2m[idx]):'--';
-    var rain=idx>=0?Math.round(om.hourly.precipitation_probability[idx]):'--';
-    var wcode=idx>=0?om.hourly.weathercode[idx]:0;
-    var em=weatherEmoji(wcode);
-    return '<div class="hc'+(isNowHour?' now':'')+'"><div class="ht">'+String(h).padStart(2,'0')+(getLang()==='ja'?'時':'h')+'</div><div class="he">'+em+'</div><div class="hv">'+temp+'°</div><div class="hr">'+rain+'%</div></div>';
+    var temp=idx>=0?Math.round(om.hourly.temperature_2m[idx]):'--';var rain=idx>=0?Math.round(om.hourly.precipitation_probability[idx]):'--';var wcode=idx>=0?om.hourly.weathercode[idx]:0;
+    return'<div class="hc'+(isNowHour?' now':'')+'"><div class="ht">'+String(h).padStart(2,'0')+(getLang()==='ja'?'時':'h')+'</div><div class="he">'+weatherEmoji(wcode)+'</div><div class="hv">'+temp+'°</div><div class="hr">'+rain+'%</div></div>';
   }).join('');
 
   var compareRows=om.daily.time.slice(0,5).map(function(ds,i){
@@ -1447,50 +1083,21 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
     var jMx=ji!==null&&jmaMax[ji]!==undefined&&jmaMax[ji]!==''?jmaMax[ji]:'—';
     var jMn=ji!==null&&jmaMin[ji]!==undefined&&jmaMin[ji]!==''?jmaMin[ji]:'—';
     var bar=jR!==null?Math.round((omR+jR)/2):omR;
-    return '<tr><td style="font-weight:500">'+lb+'</td><td><span class="tag t-om">'+Math.round(om.daily.temperature_2m_max[i])+'°/'+Math.round(om.daily.temperature_2m_min[i])+'° '+omR+'%</span></td><td><span class="tag t-gfs">'+Math.round(gfs.daily.temperature_2m_max[i])+'°/'+Math.round(gfs.daily.temperature_2m_min[i])+'°</span></td><td><span class="tag t-jma">'+jMx+'°/'+jMn+'°'+(jR!==null?' '+jR+'%':'')+'</span></td><td><div class="barwrap"><div class="barbg"><div class="barfill" style="width:'+bar+'%"></div></div><span style="font-size:12px;color:var(--info-text);min-width:32px">'+bar+'%</span></div></td></tr>';
+    return'<tr><td style="font-weight:500">'+lb+'</td><td><span class="tag t-om">'+Math.round(om.daily.temperature_2m_max[i])+'°/'+Math.round(om.daily.temperature_2m_min[i])+'° '+omR+'%</span></td><td><span class="tag t-gfs">'+Math.round(gfs.daily.temperature_2m_max[i])+'°/'+Math.round(gfs.daily.temperature_2m_min[i])+'°</span></td><td><span class="tag t-jma">'+jMx+'°/'+jMn+'°'+(jR!==null?' '+jR+'%':'')+'</span></td><td><div class="barwrap"><div class="barbg"><div class="barfill" style="width:'+bar+'%"></div></div><span style="font-size:12px;color:var(--info-text);min-width:32px">'+bar+'%</span></div></td></tr>';
   }).join('');
 
   document.getElementById('page-title').textContent=loc.name+' '+t('app_title');
   var wlKey=Object.keys(WL).find(function(k){return parseInt(k)===cCode;})||'';
   var wlText=wlKey?WL[wlKey].split('/')[getLang()==='ja'?0:1]||'—':'—';
 
-  // Google Weather 現在気温を優先使用 / use Google Weather current temp if available
-  var displayTemp=cTemp;
-  var displayDesc=wlText;
-  var displayHi=avgMax;
-  var displayLo=avgMin;
-  if(gw&&gw.temperature&&gw.temperature.degrees!==undefined){
-    displayTemp=Math.round(gw.temperature.degrees);
-    if(gw.weatherCondition&&gw.weatherCondition.description) displayDesc=esc(gw.weatherCondition.description.text||wlText);
-    document.getElementById('chip-gw').classList.add('on');
-  }
-  if(gwf&&gwf.forecastDays&&gwf.forecastDays[0]){
-    var fd0=gwf.forecastDays[0];
-    if(fd0.maxTemperature&&fd0.maxTemperature.degrees!==undefined) displayHi=Math.round(fd0.maxTemperature.degrees);
-    if(fd0.minTemperature&&fd0.minTemperature.degrees!==undefined) displayLo=Math.round(fd0.minTemperature.degrees);
-  }
+  var displayTemp=cTemp;var displayDesc=wlText;var displayHi=avgMax;var displayLo=avgMin;
+  if(gw&&gw.temperature&&gw.temperature.degrees!==undefined){displayTemp=Math.round(gw.temperature.degrees);if(gw.weatherCondition&&gw.weatherCondition.description)displayDesc=esc(gw.weatherCondition.description.text||wlText);document.getElementById('chip-gw').classList.add('on');}
+  if(gwf&&gwf.forecastDays&&gwf.forecastDays[0]){var fd0=gwf.forecastDays[0];if(fd0.maxTemperature&&fd0.maxTemperature.degrees!==undefined)displayHi=Math.round(fd0.maxTemperature.degrees);if(fd0.minTemperature&&fd0.minTemperature.degrees!==undefined)displayLo=Math.round(fd0.minTemperature.degrees);}
 
-  var heroHtml='<div class="hero">'
-    +'<div class="hero-left">'
-    +'<div class="hero-icon">'+weatherEmoji(cCode)+'</div>'
-    +'<div>'
-    +'<div><span class="hero-temp">'+displayTemp+'</span><span class="hero-unit">°C</span></div>'
-    +'<div class="hero-desc">'+displayDesc+'</div>'
-    +'<div class="hero-loc"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px"></i> '+esc(loc.name)+'</div>'
-    +'</div>'
-    +'</div>'
-    +'<div class="hero-right">'
-    +'<div class="hero-hilow">'+displayHi+'°<span>/ '+displayLo+'°</span></div>'
-    +'<div class="hero-stat"><i class="ti ti-droplet"></i>'+t('rain_prob')+' '+rainToday+'%</div>'
-    +'<div class="hero-stat"><i class="ti ti-wind"></i>'+t('wind')+' '+cWind+'m/s</div>'
-    +'<div class="hero-stat"><i class="ti ti-ripple"></i>'+t('humidity')+' '+cHum+'%</div>'
-    +'</div>'
-    +'</div>';
+  var heroHtml='<div class="hero"><div class="hero-left"><div class="hero-icon">'+weatherEmoji(cCode)+'</div><div><div><span class="hero-temp">'+displayTemp+'</span><span class="hero-unit">°C</span></div><div class="hero-desc">'+displayDesc+'</div><div class="hero-loc"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px"></i> '+esc(loc.name)+'</div></div></div><div class="hero-right"><div class="hero-hilow">'+displayHi+'°<span>/ '+displayLo+'°</span></div><div class="hero-stat"><i class="ti ti-droplet"></i>'+t('rain_prob')+' '+rainToday+'%</div><div class="hero-stat"><i class="ti ti-wind"></i>'+t('wind')+' '+cWind+'m/s</div><div class="hero-stat"><i class="ti ti-ripple"></i>'+t('humidity')+' '+cHum+'%</div></div></div>';
 
   document.getElementById('main-content').innerHTML=buildWarningBanner(warning)+heroHtml
-    +'<div class="stitle">'+t('hourly_forecast')+'</div>'
-    +'<div class="hourly">'+hourlyHtml+'</div>'
-    // charts / グラフ
+    +'<div class="stitle">'+t('hourly_forecast')+'</div><div class="hourly">'+hourlyHtml+'</div>'
     +buildChartSection()
     +buildJmaDetail(jma)
     +'<div class="stitle">'+t('src_forecast')+'</div>'
@@ -1502,473 +1109,58 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
     +'<div class="stitle">'+t('compare_5')+'</div>'
     +'<div style="overflow-x:auto;margin-bottom:1.5rem"><table class="ctbl"><thead><tr><th style="width:12%">'+t('date')+'</th><th style="width:28%">Open-Meteo</th><th style="width:20%">GFS</th><th style="width:22%">'+t('jma_chip')+'</th><th style="width:18%">'+t('rain_prob')+'</th></tr></thead><tbody>'+compareRows+'</tbody></table></div>'
     +buildAqSection(aq,pollen)
-    +'<div class="footer">v2.0.0 | Data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> / <a href="https://www.jma.go.jp" target="_blank" rel="noopener">JMA</a> / <a href="https://openweathermap.org" target="_blank" rel="noopener">OWM</a> / <a href="https://www.tomorrow.io" target="_blank" rel="noopener">Tomorrow.io</a> / <a href="https://www.weatherapi.com" target="_blank" rel="noopener">WeatherAPI</a> / Radar: <a href="https://www.rainviewer.com" target="_blank" rel="noopener">RainViewer</a> / Map: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a></div>';
+    +'<div class="footer">v2.2.0 | Data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> / <a href="https://www.jma.go.jp" target="_blank" rel="noopener">JMA</a> / <a href="https://openweathermap.org" target="_blank" rel="noopener">OWM</a> / <a href="https://www.tomorrow.io" target="_blank" rel="noopener">Tomorrow.io</a> / <a href="https://www.weatherapi.com" target="_blank" rel="noopener">WeatherAPI</a> / Radar: <a href="https://rainbow.ai" target="_blank" rel="noopener">Rainbow.ai</a> / Map: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a></div>';
 
   document.getElementById('updated-at').textContent=t('updated')+now.toLocaleTimeString(getLang()==='ja'?'ja-JP':'en-US',{hour:'2-digit',minute:'2-digit'})+' | '+loc.name+' ('+loc.lat+', '+loc.lon+')';
-
-  // render charts after DOM is ready / グラフ描画（DOM生成後）
   setTimeout(function(){buildCharts(om,gfs);},50);
-  // 大気質パネル同期リセット
   setTimeout(function(){resetAqSync();},100);
 }
 
-
-// ==================== Air Quality & Pollen API / 大気質・花粉API ====================
-
-async function fetchGoogleWeather(lat,lon,key){
-  if(!key)return null;
-  try{
-    var r=await fetchWithTimeout('https://weather.googleapis.com/v1/currentConditions:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&unitsSystem=METRIC');
-    if(!r.ok)return null;return r.json();
-  }catch(e){return null;}
-}
-async function fetchGoogleWeatherForecast(lat,lon,key){
-  if(!key)return null;
-  try{
-    var r=await fetchWithTimeout('https://weather.googleapis.com/v1/forecast/days:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&days=10&unitsSystem=METRIC');
-    if(!r.ok)return null;return r.json();
-  }catch(e){return null;}
-}
-
-async function fetchAirQuality(lat,lon){
-  try{
-    var r=await fetchWithTimeout('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');
-    if(!r.ok)return null;return r.json();
-  }catch(e){return null;}
-}
-async function fetchPollen(lat,lon,key){
-  if(!key)return null;
-  try{
-    var r=await fetchWithTimeout('https://pollen.googleapis.com/v1/forecast:lookup?key='+key+'&location.longitude='+lon+'&location.latitude='+lat+'&days=5&languageCode='+(getLang()==='en'?'en':'ja'));
-    if(!r.ok)return null;return r.json();
-  }catch(e){return null;}
-}
-
-// AQI level classification / AQI レベル判定
-function aqiLevel(aqi){
-  if(aqi===null||aqi===undefined)return{cls:'ql-na',lbl:'—'};
-  if(aqi<=20)return{cls:'ql-good',lbl:t('ql_good')};
-  if(aqi<=40)return{cls:'ql-fair',lbl:t('ql_fair')};
-  if(aqi<=60)return{cls:'ql-mod',lbl:t('ql_mod')};
-  if(aqi<=80)return{cls:'ql-poor',lbl:t('ql_poor')};
-  return{cls:'ql-vpoor',lbl:t('ql_vpoor')};
-}
-function pm25Level(v){
-  if(v===null||v===undefined)return{cls:'ql-na',lbl:'—'};
-  if(v<=10)return{cls:'ql-good',lbl:t('ql_good')};
-  if(v<=20)return{cls:'ql-fair',lbl:t('ql_fair')};
-  if(v<=25)return{cls:'ql-mod',lbl:t('ql_mod')};
-  if(v<=50)return{cls:'ql-poor',lbl:t('ql_poor')};
-  return{cls:'ql-vpoor',lbl:t('ql_vpoor')};
-}
-function dustLevel(v){
-  if(v===null||v===undefined)return{cls:'ql-na',lbl:'—'};
-  if(v<=50)return{cls:'ql-good',lbl:t('ql_good')};
-  if(v<=200)return{cls:'ql-fair',lbl:t('ql_fair')};
-  if(v<=500)return{cls:'ql-mod',lbl:t('ql_mod')};
-  if(v<=1000)return{cls:'ql-poor',lbl:t('ql_poor')};
-  return{cls:'ql-vpoor',lbl:t('ql_vpoor')};
-}
-function pollenIndexClass(index){
-  if(index<=0)return{cls:'ql-good',lbl:t('ql_good')};
-  if(index<=1)return{cls:'ql-fair',lbl:t('ql_fair')};
-  if(index<=2)return{cls:'ql-mod',lbl:t('ql_mod')};
-  if(index<=3)return{cls:'ql-poor',lbl:t('ql_poor')};
-  return{cls:'ql-vpoor',lbl:t('ql_vpoor')};
-}
-
-// build air quality & pollen section / 大気質・花粉セクションを構築
-function buildAqSection(aq,pollen){
-  var now=new Date();
-  var h=now.getHours();
-  // find current hour index in Open-Meteo hourly data / Open-Meteo hourly の現在時刻インデックス
-  var pm25Val=null,dustVal=null,aqiVal=null;
-  if(aq&&aq.hourly){
-    var idx=aq.hourly.time.findIndex(function(t2){return t2.includes('T'+String(h).padStart(2,'0')+':00');});
-    if(idx<0)idx=0;
-    pm25Val=aq.hourly.pm2_5[idx]!==null?Math.round(aq.hourly.pm2_5[idx]*10)/10:null;
-    dustVal=aq.hourly.dust[idx]!==null?Math.round(aq.hourly.dust[idx]*10)/10:null;
-    aqiVal=aq.hourly.european_aqi[idx]!==null?Math.round(aq.hourly.european_aqi[idx]):null;
-  }
-  var pm25L=pm25Level(pm25Val);
-  var dustL=dustLevel(dustVal);
-  var aqiL=aqiLevel(aqiVal);
-
-  var aqHtml='<div class="aq-grid">'
-    +'<div class="aq-card"><div class="lb"><i class="ti ti-wind" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('aqi')+' (EU)</div>'
-    +'<div class="vl">'+(aqiVal!==null?aqiVal:'—')+'</div>'
-    +'<div class="ql '+aqiL.cls+'">'+aqiL.lbl+'</div></div>'
-    +'<div class="aq-card"><div class="lb"><i class="ti ti-circle-dotted" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('pm25')+' (μg/m³)</div>'
-    +'<div class="vl">'+(pm25Val!==null?pm25Val:'—')+'</div>'
-    +'<div class="ql '+pm25L.cls+'">'+pm25L.lbl+'</div></div>'
-    +'<div class="aq-card"><div class="lb"><i class="ti ti-wind" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>'+t('dust')+' (μg/m³)</div>'
-    +'<div class="vl">'+(dustVal!==null?dustVal:'—')+'</div>'
-    +'<div class="ql '+dustL.cls+'">'+dustL.lbl+'</div></div>'
-    +'</div>';
-
-  // pollen section / 花粉セクション
-  var pollenHtml='';
-  if(pollen&&pollen.dailyInfo&&pollen.dailyInfo.length>0){
-    var today=pollen.dailyInfo[0];
-    var nameMapType={ja:{TREE:'樹木花粉',GRASS:'草花粉',WEED:'雑草花粉'},en:{TREE:'Tree Pollen',GRASS:'Grass Pollen',WEED:'Weed Pollen'}};
-    var nameMapPlant={ja:{JAPANESE_CEDAR:'スギ',JAPANESE_CYPRESS:'ヒノキ',ALDER:'ハンノキ',BIRCH:'シラカバ',GRASS:'イネ科',MUGWORT:'ヨモギ',RAGWEED:'ブタクサ',OAK:'カシ'},en:{JAPANESE_CEDAR:'Japanese Cedar',JAPANESE_CYPRESS:'Japanese Cypress',ALDER:'Alder',BIRCH:'Birch',GRASS:'Grass',MUGWORT:'Mugwort',RAGWEED:'Ragweed',OAK:'Oak'}};
-
-    // prefer plantsInfo (individual species) when available / plantsInfo（個別植物：スギ・ヒノキ等）があれば優先表示
-    var plants=today.plantsInfo||[];
-    var types=today.pollenTypeInfo||[];
-
-    var pollenCards='';
-    if(plants.length>0){
-      // individual plant data available (pollen season active) / 個別植物データあり（花粉シーズン中）
-      var priority=['JAPANESE_CEDAR','JAPANESE_CYPRESS','ALDER','BIRCH','GRASS','MUGWORT','RAGWEED','OAK'];
-      var sorted=plants.slice().sort(function(a,b){
-        var ai=priority.indexOf(a.code);var bi=priority.indexOf(b.code);
-        if(ai===-1)ai=99;if(bi===-1)bi=99;return ai-bi;
-      });
-      pollenCards=sorted.slice(0,8).map(function(p){
-        var idxVal=(p.indexInfo&&p.indexInfo.value!==undefined)?p.indexInfo.value:null;
-        var cat=esc(p.indexInfo&&p.indexInfo.category?p.indexInfo.category:'');
-        var lvl=idxVal!==null?pollenIndexClass(idxVal):{cls:'ql-na',lbl:t('pollen_na')};
-        var name=esc((nameMapPlant[getLang()]&&nameMapPlant[getLang()][p.code])||p.displayName||p.code);
-        var inSeason=p.inSeason===false?' style="opacity:0.5"':'';
-        var seasonNote=p.inSeason===false?'<div style="font-size:10px;color:var(--text2)">'+(getLang()==='ja'?'シーズン外':'Off-season')+'</div>':'';
-        return '<div class="pollen-card"'+inSeason+'><div class="pn">'+name+'</div>'
-          +'<div class="pi">'+(idxVal!==null?idxVal:'—')+'</div>'
-          +'<div class="pc '+lvl.cls+'">'+(cat||lvl.lbl)+'</div>'+seasonNote+'</div>';
-      }).join('');
-    } else if(types.length>0){
-      // シーズン外はタイプ別（TREE/GRASS/WEED）で表示 / off-season: show by pollen type (TREE/GRASS/WEED)
-      pollenCards=types.map(function(p){
-        var idxVal=(p.indexInfo&&p.indexInfo.value!==undefined)?p.indexInfo.value:null;
-        var cat=esc(p.indexInfo&&p.indexInfo.category?p.indexInfo.category:'');
-        var inSeason=p.inSeason===false?' style="opacity:0.5"':'';
-        var lvl=idxVal!==null?pollenIndexClass(idxVal):{cls:'ql-na',lbl:t('pollen_na')};
-        var name=esc((nameMapType[getLang()]&&nameMapType[getLang()][p.code])||p.displayName||p.code);
-        var seasonNote=p.inSeason===false?'<div style="font-size:10px;color:var(--text2)">'+(getLang()==='ja'?'シーズン外':'Off-season')+'</div>':'';
-        return '<div class="pollen-card"'+inSeason+'><div class="pn">'+name+'</div>'
-          +'<div class="pi">'+(idxVal!==null?idxVal:'—')+'</div>'
-          +'<div class="pc '+lvl.cls+'">'+(cat||lvl.lbl)+'</div>'+seasonNote+'</div>';
-      }).join('');
-    }
-    if(pollenCards){
-      pollenHtml='<div class="stitle" style="margin-top:12px;margin-bottom:6px">'+t('pollen_title')+'</div>'
-        +'<div class="pollen-grid">'+pollenCards+'</div>';
-    }
-  }
-
-  return '<div class="aq-panel">'
-    +'<div class="stitle">'+t('aq_title')+'</div>'
-    +aqHtml
-    +pollenHtml
-    +'<div style="font-size:11px;color:var(--text2);margin-top:10px">'
-    +'Data: <a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noopener">Open-Meteo Air Quality</a>'
-    +(pollen?' / <a href="https://developers.google.com/maps/documentation/pollen" target="_blank" rel="noopener">Google Pollen API</a>':'')
-    +'</div>'
-    +'</div>';
-}
-
-// Cache key per location
-function cacheKey(loc){ return 'cache_'+loc.lat+'_'+loc.lon; }
-function saveCache(loc,results){
-  try{
-    var data={ts:Date.now(),results:results};
-    localStorage.setItem(cacheKey(loc),JSON.stringify(data));
-  }catch(e){}
-}
-function loadCache(loc){
-  try{
-    var raw=localStorage.getItem(cacheKey(loc));
-    if(!raw)return null;
-    return JSON.parse(raw);
-  }catch(e){return null;}
-}
-
-// ==================== Main Tab Navigation / メインタブナビ ====================
-var _activeMainTab='forecast';
-function switchMainTab(tab){
-  _activeMainTab=tab;
-  document.querySelectorAll('.main-tab').forEach(function(el){
-    el.classList.toggle('active',el.getAttribute('data-panel')===tab);
-  });
-  // 予報パネルは main-content で制御
-  var forecastEl=document.getElementById('main-content');
-  if(forecastEl) forecastEl.style.display=(tab==='forecast')?'block':'none';
-  ['radar','wxmap','aq'].forEach(function(p){
-    var el=document.getElementById('panel-'+p);
-    if(el) el.style.display=(tab===p)?'block':'none';
-  });
-  // レーダータブ初回表示時に初期化
-  if(tab==='radar'&&!_radarInitialized) initRadarMap();
-  // 天気図タブ初回表示時に画像ロード
-  if(tab==='wxmap'&&!_wxmapInitialized) initWxmap();
-  // 大気質タブは main-content 内の大気質セクションを独立パネルとして移動（初回のみ）
-  if(tab==='aq') syncAqPanel();
-}
-
-// 大気質パネルを panel-aq へ同期
-var _aqSynced=false;
-function syncAqPanel(){
-  var aqPanel=document.getElementById('panel-aq');
-  if(!aqPanel) return;
-  // main-content内の .aq-panel を探してクローン表示
-  var src=document.querySelector('#main-content .aq-panel');
-  if(src&&!_aqSynced){
-    aqPanel.innerHTML='';
-    var clone=src.cloneNode(true);
-    aqPanel.appendChild(clone);
-    _aqSynced=true;
-  } else if(!src){
-    aqPanel.innerHTML='<div class="loading">'+t('loading')+'</div>';
-  }
-}
-// buildContent完了後に大気質パネルの同期フラグをリセット
-function resetAqSync(){ _aqSynced=false; if(_activeMainTab==='aq') syncAqPanel(); }
-
-// ==================== Rain Radar / 雨雲レーダー ====================
-var _radarMap=null,_radarLayer=null,_radarFrames=[],_radarIdx=0,_radarTimer=null,_radarInitialized=false;
-var RADAR_SIZE=512,RADAR_COLOR=6,RADAR_SMOOTH=1,RADAR_SNOW=1;
-var RADAR_INITIAL_ZOOM=6,RADAR_MIN_ZOOM=3,RADAR_MAX_ZOOM=7;
-
-function initRadarMap(){
-  if(_radarInitialized) return;
-  _radarInitialized=true;
-  var locs=loadLocations();var idx=getCurrentIdx();var loc=locs[idx]||{lat:34.6937,lon:135.5023};
-  _radarMap=L.map('radar-map',{
-    minZoom:RADAR_MIN_ZOOM,
-    maxZoom:RADAR_MAX_ZOOM
-  }).setView([loc.lat,loc.lon],RADAR_INITIAL_ZOOM);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',opacity:0.6,minZoom:RADAR_MIN_ZOOM,maxZoom:RADAR_MAX_ZOOM}).addTo(_radarMap);
-  loadRadarFrames();
-}
-
-function loadRadarFrames(){
-  var tl=document.getElementById('radar-timeline');
-  if(tl) tl.innerHTML='<span style="font-size:11px;color:var(--text2)">'+t('radar_loading')+'</span>';
-  fetch('https://api.rainviewer.com/public/weather-maps.json')
-    .then(function(r){return r.json();})
-    .then(function(data){
-      _radarFrames=[];
-      // 過去フレーム
-      if(data.radar&&data.radar.past){
-        data.radar.past.forEach(function(f){_radarFrames.push({ts:f.time,path:f.path,type:'past'});});
-      }
-      // nowcast（将来）
-      if(data.radar&&data.radar.nowcast){
-        data.radar.nowcast.forEach(function(f){_radarFrames.push({ts:f.time,path:f.path,type:'future'});});
-      }
-      // 最新フレームを表示
-      _radarIdx=_radarFrames.filter(function(f){return f.type==='past';}).length-1;
-      if(_radarIdx<0)_radarIdx=0;
-      buildRadarTimeline(data.host||'https://tilecache.rainviewer.com');
-      showRadarFrame(data.host||'https://tilecache.rainviewer.com');
-    })
-    .catch(function(){
-      if(tl) tl.innerHTML='<span style="font-size:11px;color:#A32D2D">レーダーデータの取得に失敗しました</span>';
-    });
-}
-
-var _radarHost='https://tilecache.rainviewer.com';
-function buildRadarTimeline(host){
-  _radarHost=host;
-  var tl=document.getElementById('radar-timeline');
-  if(!tl) return;
-  var now=new Date();
-  tl.innerHTML=_radarFrames.map(function(f,i){
-    var d=new Date(f.ts*1000);
-    var diff=Math.round((d-now)/60000);
-    var lbl=diff===0?t('radar_now'):(diff<0?Math.abs(diff)+'分前':'+'+diff+'分');
-    var cls='radar-ts-btn'+(f.type==='future'?' future':'')+(i===_radarIdx?' active':'');
-    return '<button class="'+cls+'" onclick="selectRadarFrame('+i+')">'+lbl+'</button>';
-  }).join('');
-}
-
-function selectRadarFrame(idx){
-  _radarIdx=idx;
-  buildRadarTimeline(_radarHost);
-  showRadarFrame(_radarHost);
-}
-
-function showRadarFrame(host){
-  host=host||_radarHost;
-  if(!_radarFrames[_radarIdx]) return;
-  var f=_radarFrames[_radarIdx];
-  var url=host+f.path+'/'+RADAR_SIZE+'/{z}/{x}/{y}/'+RADAR_COLOR+'/'+RADAR_SMOOTH+'_'+RADAR_SNOW+'.png';
-  if(_radarLayer) _radarMap.removeLayer(_radarLayer);
-  _radarLayer=L.tileLayer(url,{opacity:0.7,attribution:'RainViewer',minZoom:RADAR_MIN_ZOOM,maxZoom:RADAR_MAX_ZOOM,maxNativeZoom:RADAR_MAX_ZOOM}).addTo(_radarMap);
-  // ボタンのアクティブ更新
-  document.querySelectorAll('.radar-ts-btn').forEach(function(el,i){
-    el.classList.toggle('active',i===_radarIdx);
-  });
-}
-
-var _radarPlaying=false;
-function toggleRadarPlay(){
-  _radarPlaying=!_radarPlaying;
-  var icon=document.getElementById('radar-play-icon');
-  var lbl=document.getElementById('radar-play-label');
-  if(icon){icon.className='ti '+((_radarPlaying)?'ti-player-pause':'ti-player-play')+' ti-'+16+'px';icon.style.fontSize='12px';icon.style.verticalAlign='-1px';}
-  if(lbl) lbl.textContent=_radarPlaying?t('radar_pause'):t('radar_play');
-  if(_radarPlaying){
-    _radarTimer=setInterval(function(){
-      _radarIdx=(_radarIdx+1)%_radarFrames.length;
-      buildRadarTimeline(_radarHost);
-      showRadarFrame(_radarHost);
-    },800);
-  } else {
-    clearInterval(_radarTimer);
-  }
-}
-
-// ==================== Weather Map / 天気図 ====================
-var _wxmapInitialized=false,_activeWxtab='surface';
-
-// 気象庁天気図：list.jsonから最新ファイル名を取得する方式
-// list.json構造: {near:{now:[...],ft24:[...],ft48:[...]}, asia:{...}, ...}
-var _wxmapList=null;
-
-function fetchWxmapList(callback){
-  if(_wxmapList){callback(_wxmapList);return;}
-  fetch('/wxmap/bosai/weather_map/data/list.json')
-    .then(function(r){return r.json();})
-    .then(function(data){
-      _wxmapList=data;
-      callback(data);
-    })
-    .catch(function(){handleWxmapError();});
-}
-
-function getWxmapFilename(data,type){
-  var arr;
-  if(type==='surface')  arr=data.near&&data.near.now;
-  else if(type==='fcst24') arr=data.near&&data.near.ft24;
-  else if(type==='fcst48') arr=data.near&&data.near.ft48;
-  if(!arr||arr.length===0) return null;
-  return arr[arr.length-1]; // 末尾=最新
-}
-
-function initWxmap(){
-  if(_wxmapInitialized) return;
-  _wxmapInitialized=true;
-  loadWxmapImage('surface');
-}
-
-function switchWxTab(tab){
-  _activeWxtab=tab;
-  document.querySelectorAll('.wxmap-tab').forEach(function(el){
-    el.classList.toggle('active',el.getAttribute('data-wxtab')===tab);
-  });
-  loadWxmapImage(tab);
-}
-
-function loadWxmapImage(type){
-  var img=document.getElementById('wxmap-img');
-  if(!img) return;
-  img.style.opacity='0.4';
-  fetchWxmapList(function(data){
-    var filename=getWxmapFilename(data,type);
-    if(!filename){handleWxmapError();return;}
-    img.src='/wxmap/bosai/weather_map/data/png/'+filename;
-    img.onload=function(){img.style.opacity='1';};
-    img.onerror=function(){handleWxmapError();};
-  });
-}
-
-function handleWxmapError(){
-  // 取得失敗時はJMA天気図ページへのリンクを表示
-  var wrap=document.querySelector('.wxmap-img-wrap');
-  if(wrap){
-    wrap.innerHTML='<div style="padding:2rem;text-align:center;color:var(--text2);font-size:13px">'
-      +'<i class="ti ti-photo-off" style="font-size:32px;display:block;margin-bottom:8px;opacity:0.4"></i>'
-      +'画像を直接読み込めませんでした。<br>'
-      +'<a href="https://www.jma.go.jp/bosai/weather_map/" target="_blank" rel="noopener" style="color:var(--info-text)">気象庁 天気図ページで確認 →</a>'
-      +'</div>';
-  }
-}
-
+// ==================== loadAll ====================
 async function loadAll(forceRefresh){
   document.getElementById('main-content').innerHTML='<div class="loading" id="loading-msg"><i class="ti ti-cloud-download" style="font-size:28px;display:block;margin-bottom:8px"></i>'+t('loading')+'</div><div id="debug-log"></div>';
   document.getElementById('chip-owm').classList.remove('on');document.getElementById('chip-tmrw').classList.remove('on');document.getElementById('chip-wapi').classList.remove('on');
   var locs=loadLocations();var idx=getCurrentIdx();if(idx>=locs.length)idx=0;var loc=locs[idx];
-
-  // 画面上デバッグ表示（?debug=1 付きでアクセス時のみ）
   var debugMode=location.search.indexOf('debug=1')!==-1;
-  function dbg(msg){
-    var el=document.getElementById('debug-log');
-    if(!el)return;
-    var line=document.createElement('div');
-    line.style.cssText='font-size:12px;color:#333;padding:2px 8px;font-family:monospace;background:#f5f5f5;border-bottom:1px solid #ddd';
-    line.textContent=new Date().toLocaleTimeString()+' '+msg;
-    el.appendChild(line);
-    if(!debugMode) el.style.display='none';
-  }
-
+  function dbg(msg){var el=document.getElementById('debug-log');if(!el)return;var line=document.createElement('div');line.style.cssText='font-size:12px;color:#333;padding:2px 8px;font-family:monospace;background:#f5f5f5;border-bottom:1px solid #ddd';line.textContent=new Date().toLocaleTimeString()+' '+msg;el.appendChild(line);if(!debugMode)el.style.display='none';}
   dbg('start loc='+loc.name+' force='+!!forceRefresh);
-
   if(!forceRefresh){
     var cached=loadCache(loc);
     if(cached&&cached.results&&Array.isArray(cached.results[2])){
       var age=Math.round((Date.now()-cached.ts)/60000);
       dbg('cache found, age='+age+'min');
-      if(age<30){
-        dbg('using cache');
-        var r=cached.results;
-        buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9],r[10]);
-        return;
-      }
-    } else {
-      dbg('no valid cache');
-    }
+      if(age<30){dbg('using cache');var r=cached.results;buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9],r[10]);return;}
+    }else{dbg('no valid cache');}
   }
-
   try{
     var ok=localStorage.getItem('owm_key')||'';
     var tk=localStorage.getItem('tmrw_key')||'';
     var wk=localStorage.getItem('wapi_key')||'';
     var pk=localStorage.getItem('pollen_key')||'';
-    // Promise.allSettled polyfill for older iOS / 古いiOS向けポリフィル
-    if(!Promise.allSettled){
-      Promise.allSettled=function(promises){
-        return Promise.all(promises.map(function(p){
-          return Promise.resolve(p).then(function(v){return{status:'fulfilled',value:v};},function(e){return{status:'rejected',reason:e};});
-        }));
-      };
-    }
-    dbg('fetching all APIs...');
     var gwk=localStorage.getItem('gweather_key')||'';
-    // Google Weather API is not yet available in Japan / 日本は未対応のためスキップ
+    if(!Promise.allSettled){Promise.allSettled=function(promises){return Promise.all(promises.map(function(p){return Promise.resolve(p).then(function(v){return{status:'fulfilled',value:v};},function(e){return{status:'rejected',reason:e};});}));};}
+    dbg('fetching all APIs...');
     var isJapan=!!loc.jma;
     var settled=await Promise.allSettled([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchWapi(loc.lat,loc.lon,wk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk),isJapan?Promise.resolve(null):fetchGoogleWeather(loc.lat,loc.lon,gwk),isJapan?Promise.resolve(null):fetchGoogleWeatherForecast(loc.lat,loc.lon,gwk),fetchWarning(loc.jma)]);
     var names=['OM','GFS','JMA','OWM','Tmrw','Wapi','AQ','Pollen','GW-Current','GW-Forecast','Warning'];
     settled.forEach(function(s,i){dbg(names[i]+': '+(s.status==='fulfilled'?'OK':'FAIL '+(s.reason&&s.reason.message||s.reason)));});
     var results=settled.map(function(s){return s.status==='fulfilled'?s.value:null;});
-    if(results[0]&&results[0].daily&&results[1]&&results[1].daily&&results[2]&&Array.isArray(results[2])){
-      saveCache(loc,results);
-      dbg('cache saved');
-    }
-    if(!results[0]||!results[0].daily||!results[1]||!results[1].daily){
-      throw new Error('Required weather data (OM/GFS) unavailable');
-    }
+    if(results[0]&&results[0].daily&&results[1]&&results[1].daily&&results[2]&&Array.isArray(results[2])){saveCache(loc,results);dbg('cache saved');}
+    if(!results[0]||!results[0].daily||!results[1]||!results[1].daily){throw new Error('Required weather data (OM/GFS) unavailable');}
     dbg('buildContent start');
     buildContent(loc,results[0],results[1],results[2],results[3],results[4],results[5],results[6],results[7],results[8],results[9],results[10]);
   }catch(e){
     dbg('catch: '+e.message);
-    var cached=loadCache(loc);
-    if(cached&&cached.results){
-      var age=Math.round((Date.now()-cached.ts)/60000);
-      var ageStr=age<60?age+(getLang()==='ja'?'分前':' min ago'):Math.round(age/60)+(getLang()==='ja'?'時間前':' hr ago');
-      var r=cached.results;
-      buildContent(loc,r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[8],r[9],r[10]);
-      var banner='<div style="background:#FAEEDA;border:0.5px solid #BA7517;border-radius:var(--rm);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#633806;">'
-        +'<i class="ti ti-wifi-off" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>'
-        +(getLang()==='ja'
-          ?'通信エラーのため前回のデータを表示しています（'+ageStr+'）'
-          :'Showing cached data due to network error ('+ageStr+')')
-        +'</div>';
+    var cached2=loadCache(loc);
+    if(cached2&&cached2.results){
+      var age2=Math.round((Date.now()-cached2.ts)/60000);
+      var ageStr=age2<60?age2+(getLang()==='ja'?'分前':' min ago'):Math.round(age2/60)+(getLang()==='ja'?'時間前':' hr ago');
+      var r2=cached2.results;
+      buildContent(loc,r2[0],r2[1],r2[2],r2[3],r2[4],r2[5],r2[6],r2[7],r2[8],r2[9],r2[10]);
+      var banner='<div style="background:#FAEEDA;border:0.5px solid #BA7517;border-radius:var(--rm);padding:8px 12px;margin-bottom:1rem;font-size:12px;color:#633806;"><i class="ti ti-wifi-off" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>'+(getLang()==='ja'?'通信エラーのため前回のデータを表示しています（'+ageStr+'）':'Showing cached data due to network error ('+ageStr+')')+'</div>';
       document.getElementById('main-content').innerHTML=banner+document.getElementById('main-content').innerHTML;
-    } else {
-      document.getElementById('main-content').innerHTML='<div class="errmsg"><i class="ti ti-alert-circle"></i> '
-        +(getLang()==='ja'?'データを取得できませんでした。通信状況を確認してください。':'Failed to load data. Please check your connection.')
-        +'<br><small>'+esc(e.message)+'</small></div>';
+    }else{
+      document.getElementById('main-content').innerHTML='<div class="errmsg"><i class="ti ti-alert-circle"></i> '+(getLang()==='ja'?'データを取得できませんでした。通信状況を確認してください。':'Failed to load data. Please check your connection.')+'<br><small>'+esc(e.message)+'</small></div>';
     }
   }
 }
@@ -1977,20 +1169,16 @@ window.addEventListener('DOMContentLoaded',function(){
   var savedLang=localStorage.getItem('lang')||'ja';
   document.documentElement.setAttribute('data-lang',savedLang);
   var currentTheme=document.documentElement.getAttribute('data-theme')||'light';
-  var btn=document.getElementById('theme-btn');
-  if(btn) btn.textContent=currentTheme==='dark'?'☀️':'🌙';
+  var btn=document.getElementById('theme-btn');if(btn)btn.textContent=currentTheme==='dark'?'☀️':'🌙';
   document.getElementById('owm-key').value=localStorage.getItem('owm_key')||'';
   document.getElementById('tmrw-key').value=localStorage.getItem('tmrw_key')||'';
   document.getElementById('wapi-key').value=localStorage.getItem('wapi_key')||'';
   document.getElementById('pollen-key').value=localStorage.getItem('pollen_key')||'';
   document.getElementById('gweather-key').value=localStorage.getItem('gweather_key')||'';
+  document.getElementById('rainbow-key').value=localStorage.getItem('rainbow_key')||'';
   applyI18n();
   renderLocationBar();
-  // 初期パネル状態：予報タブのみ表示、他は非表示
-  ['radar','wxmap','aq'].forEach(function(p){
-    var el=document.getElementById('panel-'+p);
-    if(el) el.style.display='none';
-  });
+  ['radar','wxmap','aq'].forEach(function(p){var el=document.getElementById('panel-'+p);if(el)el.style.display='none';});
   loadAll();
 });
 </script>

@@ -1,10 +1,10 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![Version](https://img.shields.io/badge/version-2.2.0-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step, no backend, and no server-side processing are required.
 
-The dashboard compares forecasts from Open-Meteo, GFS, and the Japan Meteorological Agency (JMA), with optional support for OpenWeatherMap, Tomorrow.io, WeatherAPI, Google Weather, and Google Pollen API. It also includes air quality data, rain radar, JMA weather maps, and JMA weather warnings/advisories.
+The dashboard compares forecasts from Open-Meteo, GFS, and the Japan Meteorological Agency (JMA), with optional support for OpenWeatherMap, Tomorrow.io, WeatherAPI, Google Weather, and Google Pollen API. It also includes air quality data, rain radar with +4-hour nowcast, JMA weather maps, and JMA weather warnings/advisories.
 
 ---
 
@@ -13,13 +13,47 @@ The dashboard compares forecasts from Open-Meteo, GFS, and the Japan Meteorologi
 Upload these files to any static web server:
 
 ```text
-osaka_weather_dashboard.html
+index.html
 apple-touch-icon.png
+sw.js
 ```
 
-If your production page is named `index.html`, rename or copy `osaka_weather_dashboard.html` to `index.html` before uploading.
-
 No dependencies need to be installed. CDN assets are loaded directly in the browser.
+
+---
+
+## Server Configuration
+
+This dashboard is designed to run behind a reverse proxy (Caddy + Nginx on FreeBSD/Bastille). Two Nginx proxy paths are required:
+
+### JMA weather map proxy
+
+```nginx
+location /wxmap/ {
+    proxy_pass https://www.jma.go.jp/;
+    proxy_set_header Host www.jma.go.jp;
+    proxy_set_header Origin "";
+    proxy_set_header Referer "";
+    proxy_ssl_server_name on;
+    add_header Access-Control-Allow-Origin *;
+}
+```
+
+### Rainbow.ai radar proxy
+
+```nginx
+location /rbapi/ {
+    proxy_pass https://api.rainbow.ai/;
+    proxy_set_header Host api.rainbow.ai;
+    proxy_set_header Ocp-Apim-Subscription-Key $http_ocp_apim_subscription_key;
+    proxy_set_header Origin "";
+    proxy_set_header Referer "";
+    proxy_ssl_server_name on;
+    add_header Access-Control-Allow-Origin *;
+}
+```
+
+Both blocks are required because browsers block direct cross-origin requests to these external APIs.
 
 ---
 
@@ -31,8 +65,7 @@ No dependencies need to be installed. CDN assets are loaded directly in the brow
 - Hero card with current conditions, temperature, high/low, wind, humidity, and precipitation probability
 - JMA detailed forecast with weather text, wind, waves, 6-hour precipitation probability, and 7-day outlook
 - JMA weather warnings and advisories banner using official JMA warning data
-- Correct JMA warning/advisory code mapping, including `14 = 雷注意報` and `21 = 乾燥注意報`
-- RainViewer rain radar with timeline controls and play/pause animation
+- Rainbow.ai rain radar with past 2-hour history and +4-hour nowcast timeline
 - JMA weather map panel for surface analysis, 24-hour forecast, and 48-hour forecast maps
 - Open-Meteo Air Quality panel for PM2.5, dust/yellow sand, and European AQI
 - Google Pollen API support for pollen indexes and plant-specific pollen cards when available
@@ -58,7 +91,6 @@ No dependencies need to be installed. CDN assets are loaded directly in the brow
 | [GFS via Open-Meteo](https://open-meteo.com/en/docs/gfs-api) | 7-day GFS model forecast |
 | [Japan Meteorological Agency](https://www.jma.go.jp) | Official Japan forecast, detailed JMA forecast, warnings/advisories, weather maps |
 | [Open-Meteo Air Quality](https://open-meteo.com/en/docs/air-quality-api) | PM2.5, dust/yellow sand, European AQI |
-| [RainViewer](https://www.rainviewer.com/api.html) | Rain radar tiles and nowcast frames |
 | [OpenStreetMap](https://www.openstreetmap.org) | Base map tiles |
 | [Nominatim](https://nominatim.org) | Reverse geocoding for the map-based location picker |
 
@@ -68,6 +100,7 @@ Enter keys in the API key panels at the bottom of the page. Keys are stored only
 
 | Service | Data | Notes |
 | --- | --- | --- |
+| [Rainbow.ai](https://developer.rainbow.ai) | Rain radar tiles with +4h nowcast | Free tier: 30,000 calls/month. Requires Nginx `/rbapi/` proxy. Authentication: `Ocp-Apim-Subscription-Key` header |
 | [OpenWeatherMap](https://openweathermap.org/api) | 5-day forecast | Free keys can take time to activate |
 | [Tomorrow.io](https://app.tomorrow.io/signup) | 7-day forecast | Optional comparison source |
 | [WeatherAPI](https://www.weatherapi.com) | 7-day forecast | Optional comparison source |
@@ -111,11 +144,19 @@ For debugging on mobile, open the page with:
 - After uploading, force-refresh the browser with `Ctrl + F5`.
 - If installed as a home-screen web app, clear the web app/browser cache if old content remains.
 - The JMA weather map panel loads JMA map images from `/wxmap/bosai/weather_map/data/...`; if your server does not proxy or host those paths, the panel falls back to a link to the official JMA weather map page.
-- The footer in the current HTML still displays `v2.0.0`, while the file header and README version are `v2.1.0`.
+- The Rainbow.ai radar panel requires the `/rbapi/` Nginx proxy. Without it, the browser blocks the request due to CORS. If no Rainbow.ai API key is set, a prompt is shown in the radar panel.
 
 ---
 
 ## Changelog
+
+### v2.2.0 - Rainbow.ai nowcast radar
+
+- Replaced RainViewer radar with Rainbow.ai Tiles API.
+- Rain radar now shows past 2 hours (13 frames) plus +4-hour nowcast (24 frames) at 10-minute intervals.
+- Added Rainbow.ai API key input in the key settings panel.
+- Added `Rainbow.ai` source chip in the data source indicator bar.
+- Added Nginx `/rbapi/` reverse proxy for CORS bypass. Authentication uses `Ocp-Apim-Subscription-Key` header; tile images use `?token=` query parameter.
 
 ### v2.1.0 - JMA warnings/advisories fix
 
@@ -123,7 +164,6 @@ For debugging on mobile, open the page with:
 - Fixed JMA warning/advisory code mapping.
 - Corrected the issue where Osaka's `乾燥注意報` could be displayed as `雷注意報`.
 - Added warning code normalization so one-digit codes are safely handled as zero-padded codes.
-- Confirmed JavaScript syntax with a local script parse check.
 
 ### v2.0.0 - Tabbed layout, rain radar, and weather map
 

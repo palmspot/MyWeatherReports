@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="title">天気予報ダッシュボード</title>
-<!-- v2.2.0 -->
+<!-- v2.2.1 -->
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iMCIgeDI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM1RUQzRkYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0QUEzRkYiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0idzEiIHgxPSIwIiB4Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNkNGRiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFFOTBGRiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJ3MiIgeDE9IjAiIHgyPSIxIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM0NDRkZGIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjNFMEZGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0id2hpdGUiLz48ZyBzdHJva2U9IiNGRkNDMDAiIHN0cm9rZS13aWR0aD0iMi4yIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik00NCAxNmExMCAxMCAwIDAgMSAxMCAxMCIvPjxsaW5lIHgxPSI0NCIgeTE9IjciIHgyPSI0NCIgeTI9IjMiLz48bGluZSB4MT0iNTYiIHkxPSIxOSIgeDI9IjYwIiB5Mj0iMTkiLz48bGluZSB4MT0iNTEiIHkxPSIxMCIgeDI9IjU0IiB5Mj0iNyIvPjxsaW5lIHgxPSI1MiIgeTE9IjI4IiB4Mj0iNTUiIHkyPSIzMSIvPjwvZz48cGF0aCBkPSJNMTggMzkgQzEwIDM5IDkgMjkgMTYgMjcgQzE4IDE4IDI5IDE2IDM1IDIyIEM0MyAyMCA1MCAyNCA1MSAzMiBDNTggMzMgNTcgNDEgNDkgNDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNjKSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTkgNDggQzI5IDQzIDQxIDQ5IDUxIDQ1IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjdzEpIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMSA1NiBDMzEgNTAgNDMgNTcgNTMgNTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCN3MikiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1020,10 +1020,10 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
   var cTemp=hIdx>=0?Math.round(om.hourly.temperature_2m[hIdx]):'--';
   var cWind=hIdx>=0?Math.round(om.hourly.windspeed_10m[hIdx]):'--';
   var cHum=hIdx>=0?Math.round(om.hourly.relativehumidity_2m[hIdx]):'--';
+  var cRain=hIdx>=0?Math.round(om.hourly.precipitation_probability[hIdx]):'--';
   var cCode=hIdx>=0?om.hourly.weathercode[hIdx]:0;
   var avgMax=Math.round((om.daily.temperature_2m_max[0]+gfs.daily.temperature_2m_max[0])/2);
   var avgMin=Math.round((om.daily.temperature_2m_min[0]+gfs.daily.temperature_2m_min[0])/2);
-  var rainToday=Math.round(om.daily.precipitation_probability_max[0]);
 
   var jmaDateMap={};var jmaMax=[],jmaMin=[],jmaRain=[],jmaCodes=[];
   if(jma&&jma[1]&&jma[1].timeSeries){
@@ -1095,7 +1095,7 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
   if(gw&&gw.temperature&&gw.temperature.degrees!==undefined){displayTemp=Math.round(gw.temperature.degrees);if(gw.weatherCondition&&gw.weatherCondition.description)displayDesc=esc(gw.weatherCondition.description.text||wlText);document.getElementById('chip-gw').classList.add('on');}
   if(gwf&&gwf.forecastDays&&gwf.forecastDays[0]){var fd0=gwf.forecastDays[0];if(fd0.maxTemperature&&fd0.maxTemperature.degrees!==undefined)displayHi=Math.round(fd0.maxTemperature.degrees);if(fd0.minTemperature&&fd0.minTemperature.degrees!==undefined)displayLo=Math.round(fd0.minTemperature.degrees);}
 
-  var heroHtml='<div class="hero"><div class="hero-left"><div class="hero-icon">'+weatherEmoji(cCode)+'</div><div><div><span class="hero-temp">'+displayTemp+'</span><span class="hero-unit">°C</span></div><div class="hero-desc">'+displayDesc+'</div><div class="hero-loc"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px"></i> '+esc(loc.name)+'</div></div></div><div class="hero-right"><div class="hero-hilow">'+displayHi+'°<span>/ '+displayLo+'°</span></div><div class="hero-stat"><i class="ti ti-droplet"></i>'+t('rain_prob')+' '+rainToday+'%</div><div class="hero-stat"><i class="ti ti-wind"></i>'+t('wind')+' '+cWind+'m/s</div><div class="hero-stat"><i class="ti ti-ripple"></i>'+t('humidity')+' '+cHum+'%</div></div></div>';
+  var heroHtml='<div class="hero"><div class="hero-left"><div class="hero-icon">'+weatherEmoji(cCode)+'</div><div><div><span class="hero-temp">'+displayTemp+'</span><span class="hero-unit">°C</span></div><div class="hero-desc">'+displayDesc+'</div><div class="hero-loc"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px"></i> '+esc(loc.name)+'</div></div></div><div class="hero-right"><div class="hero-hilow">'+displayHi+'°<span>/ '+displayLo+'°</span></div><div class="hero-stat"><i class="ti ti-droplet"></i>'+t('rain_prob')+' '+cRain+'%</div><div class="hero-stat"><i class="ti ti-wind"></i>'+t('wind')+' '+cWind+'m/s</div><div class="hero-stat"><i class="ti ti-ripple"></i>'+t('humidity')+' '+cHum+'%</div></div></div>';
 
   document.getElementById('main-content').innerHTML=buildWarningBanner(warning)+heroHtml
     +'<div class="stitle">'+t('hourly_forecast')+'</div><div class="hourly">'+hourlyHtml+'</div>'
@@ -1110,7 +1110,7 @@ function buildContent(loc,om,gfs,jma,owm,tmrw,wapi,aq,pollen,gw,gwf,warning){
     +'<div class="stitle">'+t('compare_5')+'</div>'
     +'<div style="overflow-x:auto;margin-bottom:1.5rem"><table class="ctbl"><thead><tr><th style="width:12%">'+t('date')+'</th><th style="width:28%">Open-Meteo</th><th style="width:20%">GFS</th><th style="width:22%">'+t('jma_chip')+'</th><th style="width:18%">'+t('rain_prob')+'</th></tr></thead><tbody>'+compareRows+'</tbody></table></div>'
     +buildAqSection(aq,pollen)
-    +'<div class="footer">v2.2.0 | Data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> / <a href="https://www.jma.go.jp" target="_blank" rel="noopener">JMA</a> / <a href="https://openweathermap.org" target="_blank" rel="noopener">OWM</a> / <a href="https://www.tomorrow.io" target="_blank" rel="noopener">Tomorrow.io</a> / <a href="https://www.weatherapi.com" target="_blank" rel="noopener">WeatherAPI</a> / Radar: <a href="https://rainbow.ai" target="_blank" rel="noopener">Rainbow.ai</a> / Map: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a></div>';
+    +'<div class="footer">v2.2.1 | Data: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> / <a href="https://www.jma.go.jp" target="_blank" rel="noopener">JMA</a> / <a href="https://openweathermap.org" target="_blank" rel="noopener">OWM</a> / <a href="https://www.tomorrow.io" target="_blank" rel="noopener">Tomorrow.io</a> / <a href="https://www.weatherapi.com" target="_blank" rel="noopener">WeatherAPI</a> / Radar: <a href="https://rainbow.ai" target="_blank" rel="noopener">Rainbow.ai</a> / Map: <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a></div>';
 
   document.getElementById('updated-at').textContent=t('updated')+now.toLocaleTimeString(getLang()==='ja'?'ja-JP':'en-US',{hour:'2-digit',minute:'2-digit'})+' | '+loc.name+' ('+loc.lat+', '+loc.lon+')';
   setTimeout(function(){buildCharts(om,gfs);},50);

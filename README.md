@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.2.0-blue)
+![Version](https://img.shields.io/badge/version-2.2.1-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step, no backend, and no server-side processing are required.
 
@@ -149,6 +149,10 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.2.1 - Current rain probability
+
+- Changed the hero rain probability from the daily maximum to the Open-Meteo hourly value nearest the current time.
 
 ### v2.2.0 - Rainbow.ai nowcast radar
 

@@ -41,13 +41,13 @@ foreach ($file in $files) {
     $localPath = Join-Path $repoRoot $file
 
     Write-Host "Uploading $file to $stagingPath..."
-    & scp.exe -i $privateKey -- $localPath "${remote}:$stagingPath/$file"
+    & scp.exe -i $privateKey -o BatchMode=yes -o StrictHostKeyChecking=accept-new -- $localPath "${remote}:$stagingPath/$file"
     if ($LASTEXITCODE -ne 0) {
         throw "Upload failed for $file."
     }
 
     Write-Host "Publishing $file..."
-    & ssh.exe -i $privateKey -- $remote "sudo -n '$publishCommand' '$file'"
+    & ssh.exe -i $privateKey -o BatchMode=yes -o StrictHostKeyChecking=accept-new -- $remote "sudo -n '$publishCommand' '$file'"
     if ($LASTEXITCODE -ne 0) {
         throw "Publish failed for $file. Check that $publishCommand exists and is allowed with sudo NOPASSWD."
     }

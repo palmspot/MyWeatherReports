@@ -15,6 +15,20 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Deploy to FreeBSD Jail",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "cd \"${workspaceFolder}\" && ./deploy_to_jail.sh --once"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
         }
     ]
 }

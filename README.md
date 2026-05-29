@@ -39,6 +39,8 @@ location /wxmap/ {
 }
 ```
 
+This same `/wxmap/` proxy path is also used by the JMA Nowcast rain radar panel, so no additional proxy route is required for `nowc` data.
+
 ### Rainbow.ai radar proxy
 
 ```nginx

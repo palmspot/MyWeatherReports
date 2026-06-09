@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.2.1-blue)
+![Version](https://img.shields.io/badge/version-2.2.2-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step, no backend, and no server-side processing are required.
 
@@ -151,6 +151,13 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.2.2 - Radar zoom and Warning logic improvements
+
+- Adjusted rain radar initial zoom level and fixed rendering issue when switching tabs.
+- Improved JMA warning/advisory logic to handle area names more accurately and prevent duplicate display.
+- Added a "no warnings" message for locations with clear weather.
+- Added support for "Linear Rainband" (顕著な大雨に関する情報) in warning codes.
 
 ### v2.2.1 - Current rain probability
 

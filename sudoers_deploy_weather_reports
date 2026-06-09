@@ -1,6 +1,0 @@
-# sudoers snippet for passwordless deploy to FreeBSD jail
-# Place this on the remote host in /usr/local/etc/sudoers.d/deploy_weather_reports
-# and ensure permissions are 440.
-
-Cmnd_Alias DEPLOY_CMDS = /bin/mkdir, /usr/bin/tar
-DEPLOY_USER ALL=(root) NOPASSWD: DEPLOY_CMDS

@@ -660,7 +660,7 @@ function windDirToArrow(text){
 async function fetchOM(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&hourly=temperature_2m,precipitation_probability,windspeed_10m,relativehumidity_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,windspeed_10m_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
 async function fetchGFS(lat,lon){var r=await fetchWithTimeout('https://api.open-meteo.com/v1/gfs?latitude='+lat+'&longitude='+lon+'&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&forecast_days=7');return r.json();}
 async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/forecast/data/forecast/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
-async function fetchWarning(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
+async function fetchWarning(code){if(!code)return null;try{var c=String(code).substring(0,6);var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json',{cache:'no-store'});if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchGoogleWeather(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://weather.googleapis.com/v1/currentConditions:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&unitsSystem=METRIC');if(!r.ok)return null;return r.json();}catch(e){return null;}}
@@ -668,22 +668,32 @@ async function fetchGoogleWeatherForecast(lat,lon,key){if(!key)return null;try{v
 async function fetchAirQuality(lat,lon){try{var r=await fetchWithTimeout('https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+lat+'&longitude='+lon+'&hourly=pm2_5,dust,european_aqi&timezone=Asia%2FTokyo&forecast_days=1');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchPollen(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://pollen.googleapis.com/v1/forecast:lookup?key='+key+'&location.longitude='+lon+'&location.latitude='+lat+'&days=5&languageCode='+(getLang()==='en'?'en':'ja'));if(!r.ok)return null;return r.json();}catch(e){return null;}}
 
+var _jmaAreas=null;
+async function fetchJmaAreas(){if(_jmaAreas)return _jmaAreas;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/common/const/area.json');if(!r.ok)return null;_jmaAreas=await r.json();return _jmaAreas;}catch(e){return null;}}
+
 // ==================== Warning Banner ====================
 var WARN_CODES={'02':{name:'暴風雪警報',level:2},'03':{name:'大雨警報',level:2},'04':{name:'洪水警報',level:2},'05':{name:'暴風警報',level:2},'06':{name:'大雪警報',level:2},'07':{name:'波浪警報',level:2},'08':{name:'高潮警報',level:2},'10':{name:'大雨注意報',level:1},'12':{name:'大雪注意報',level:1},'13':{name:'風雪注意報',level:1},'14':{name:'雷注意報',level:1},'15':{name:'強風注意報',level:1},'16':{name:'波浪注意報',level:1},'17':{name:'融雪注意報',level:1},'18':{name:'洪水注意報',level:1},'19':{name:'高潮注意報',level:1},'20':{name:'濃霧注意報',level:1},'21':{name:'乾燥注意報',level:1},'22':{name:'なだれ注意報',level:1},'23':{name:'低温注意報',level:1},'24':{name:'霜注意報',level:1},'25':{name:'着氷注意報',level:1},'26':{name:'着雪注意報',level:1},'32':{name:'暴風雪特別警報',level:3},'33':{name:'大雨特別警報',level:3},'35':{name:'暴風特別警報',level:3},'36':{name:'大雪特別警報',level:3},'37':{name:'波浪特別警報',level:3},'38':{name:'高潮特別警報',level:3},'39':{name:'顕著な大雨に関する情報',level:3},'111':{name:'大雨警報（土砂災害）',level:2},'112':{name:'大雨警報（浸水害）',level:2},'113':{name:'大雨警報（土砂災害・浸水害）',level:2},'114':{name:'大雨注意報',level:1},'115':{name:'洪水注意報',level:1},'116':{name:'大雨警報（土砂）・洪水警報',level:2},'117':{name:'大雨警報（浸水）・洪水警報',level:2},'118':{name:'大雨警報（土砂・浸水）・洪水警報',level:2},'119':{name:'大雨注意報・洪水注意報',level:1},'131':{name:'大雨・洪水・波浪警報',level:2},'133':{name:'大雨・洪水警報',level:2},'134':{name:'大雨・波浪警報',level:2},'135':{name:'洪水・波浪警報',level:2}};
-var AREA_NAMES={'270000':'大阪府','2710000':'大阪市','2714000':'堺市'};
 function normalizeWarnCode(code){var c=String(code);return c.length===1?'0'+c:c;}
 function getWarnLevel(code){var c=normalizeWarnCode(code);return WARN_CODES[c]?WARN_CODES[c].level:1;}
 function getWarnName(code){var c=normalizeWarnCode(code);return WARN_CODES[c]?WARN_CODES[c].name:'警報・注意報('+c+')';}
-function getAreaName(code){var c=String(code);return AREA_NAMES[c]||c;}
+function getAreaName(code){
+  var c=String(code);
+  if(!_jmaAreas) return c;
+  var pools=['offices','class10s','class15s','class20s'];
+  for(var i=0;i<pools.length;i++){
+    var p=pools[i]; if(_jmaAreas[p]&&_jmaAreas[p][c]) return _jmaAreas[p][c].name;
+  }
+  return c;
+}
 function buildWarningBanner(warning){
   if(!warning||!warning.areaTypes)return'';
   var items=[];
   var seen={};
   try{
-    // areaTypes[0] (都道府県レベルの集約) を優先して使用することで重複を避ける
-    var at = (warning.areaTypes || [])[0];
-    if(at && at.areas){
-      at.areas.forEach(function(area){
+    // すべてのareaTypes（府県予報区、一次細分区域、市区町村レベル）を網羅して最新の注意報・警報を取得
+    (warning.areaTypes || []).forEach(function(at){
+      if(at.areas){
+        at.areas.forEach(function(area){
         // 数字のみのコードが名前として入っている場合は、マッピングを試みるか、コードを隠す
         var aName = area.name && !/^\d+$/.test(area.name) ? area.name : getAreaName(area.code);
         if(/^\d+$/.test(aName)) aName = '発表中の地域'; 
@@ -696,10 +706,13 @@ function buildWarningBanner(warning){
             }
           }
         });
-      });
-    }
+      });}
+    });
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';
+
+  var pubTime = warning.reportDatetime ? new Date(warning.reportDatetime).toLocaleString(getLang()==='ja'?'ja-JP':'en-US', {hour:'2-digit',minute:'2-digit'}) : '';
+  var timeInfo = pubTime ? '<span style="font-size:11px;font-weight:400;opacity:0.8;margin-left:8px">'+pubTime+(getLang()==='ja'?'発表':' Announced')+'</span>' : '';
 
   var maxLevel=0;items.forEach(function(it){if(it.level>maxLevel)maxLevel=it.level;});
   var isSpecial=maxLevel>=3;var isWarning=maxLevel>=2;
@@ -716,7 +729,7 @@ function buildWarningBanner(warning){
     var badges=areaMap[area].map(function(k){return'<span style="display:inline-block;background:'+levelBg[k.level]+';border:1px solid '+levelBd[k.level]+';border-radius:3px;padding:1px 7px;margin:2px 2px;font-size:12px;white-space:nowrap">'+esc(k.kind)+'</span>';}).join('');
     return'<span style="font-weight:700;margin-right:4px">'+esc(area)+'</span>'+badges;
   }).join('<span style="margin:0 8px;opacity:0.4">|</span>');
-  return'<div id="warning-banner" style="background:'+bg+';border:0.5px solid '+border+';border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:'+textColor+';line-height:1.8;"><div style="font-size:13px;font-weight:700;margin-bottom:4px">'+icon+' '+t(labelKey)+'</div><div style="font-size:13px">'+rows+'</div></div>';
+  return'<div id="warning-banner" style="background:'+bg+';border:0.5px solid '+border+';border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:'+textColor+';line-height:1.8;"><div style="font-size:13px;font-weight:700;margin-bottom:4px">'+icon+' '+t(labelKey)+timeInfo+'</div><div style="font-size:13px">'+rows+'</div></div>';
 }
 function someKeys(obj){var res=[];for(var k in obj)if(obj.hasOwnProperty(k))res.push(k);return res;}
 
@@ -1159,6 +1172,7 @@ async function loadAll(forceRefresh){
     var pk=localStorage.getItem('pollen_key')||'';
     var gwk=localStorage.getItem('gweather_key')||'';
     if(!Promise.allSettled){Promise.allSettled=function(promises){return Promise.all(promises.map(function(p){return Promise.resolve(p).then(function(v){return{status:'fulfilled',value:v};},function(e){return{status:'rejected',reason:e};});}));};}
+    await fetchJmaAreas();
     dbg('fetching all APIs...');
     var isJapan=!!loc.jma;
     var settled=await Promise.allSettled([fetchOM(loc.lat,loc.lon),fetchGFS(loc.lat,loc.lon),fetchJMA(loc.jma),fetchOWM(loc.lat,loc.lon,ok),fetchTmrw(loc.lat,loc.lon,tk),fetchAirQuality(loc.lat,loc.lon),fetchPollen(loc.lat,loc.lon,pk),isJapan?Promise.resolve(null):fetchGoogleWeather(loc.lat,loc.lon,gwk),isJapan?Promise.resolve(null):fetchGoogleWeatherForecast(loc.lat,loc.lon,gwk),fetchWarning(loc.jma)]);

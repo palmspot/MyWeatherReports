@@ -663,6 +663,7 @@ async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTime
 async function fetchWarning(code){
   if(!code)return null;
   try{
+  try {
     var c = String(code).substring(0, 6); var p = c.substring(0, 2);
     var r = 'r3';
     if(p==='01') r='r1'; else if(p>='02'&&p<='07') r='r2';
@@ -672,6 +673,13 @@ async function fetchWarning(code){
     else if((p>='25'&&p<='30')||(p>='36'&&p<='39')||p==='47') r='r8';
     
     var urls=['https://www.jma.go.jp/bosai/warning/data/'+r+'/'+c+'.json?_='+Date.now(), 'https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?_='+Date.now()];
+    var rDir = 'r3';
+    if(p==='01') rDir='r1'; else if(p>='02'&&p<='07') rDir='r2';
+    else if((p>='08'&&p<='14')||p==='19'||p==='20') rDir='r3';
+    else if(p>='15'&&p<='18') rDir='r4'; else if(p>='21'&&p<='24') rDir='r5';
+    else if(p>='31'&&p<='35') rDir='r6'; else if(p>='40'&&p<='46') rDir='r7';
+    else if((p>='25'&&p<='30')||(p>='36'&&p<='39')||p==='47') rDir='r8';
+    var urls=['https://www.jma.go.jp/bosai/warning/data/'+rDir+'/'+c+'.json?t='+Date.now(), 'https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?t='+Date.now()];
     for(var i=0; i<urls.length; i++){
       try{var res=await fetchWithTimeout(urls[i],{cache:'no-store'}); if(res.ok)return await res.json();}catch(e){}
     }
@@ -730,6 +738,7 @@ function buildWarningBanner(warning){
     // offices(都道府県)およびclass10s(一次細分区域)から、広域な警告を抽出
     (warning.areaTypes||[]).forEach(function(at){
       var isGlobal=(at.code==="offices"||at.code==="class10s");
+      var isGlobal=(at.code==='offices'||at.code==='class10s');
       (at.areas||[]).forEach(function(area){
         var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
         (area.warnings||[]).forEach(function(w){
@@ -737,6 +746,7 @@ function buildWarningBanner(warning){
           var status=String(w.status||'');
           if(wCode&&(status==='発表'||status==='継続')){
             if(isGlobal)globalCodes[wCode]=true;
+            if(isGlobal) globalCodes[wCode]=true;
             items.push({areaName:aName,warnCode:wCode,level:getWarnLevel(wCode),type:at.code});
           }
         });
@@ -751,8 +761,14 @@ function buildWarningBanner(warning){
     // 3. ただし、松江の雷注意報のように、地域限定で出ているものは確実に表示
     var filtered=items.filter(function(it){
       return(it.type==='offices'||it.type==='class10s')||!globalCodes[it.warnCode];
+      return (it.type==='offices'||it.type==='class10s')||!globalCodes[it.warnCode];
     });
     var deduped=[];filtered.forEach(function(it){var k=it.areaName+'_'+it.warnCode;if(!seen[k]){deduped.push(it);seen[k]=true;}});
+    var deduped=[];
+    filtered.forEach(function(it){
+      var k=it.areaName+'_'+it.warnCode;
+      if(!seen[k]){deduped.push(it);seen[k]=true;}
+    });
     items=deduped;
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';

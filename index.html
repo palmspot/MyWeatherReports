@@ -663,25 +663,25 @@ async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTime
 async function fetchWarning(code){
   if(!code)return null;
   try{
-    var c=String(code);
-    // 7桁の市区町村コードの場合、親となる府県予報区（6桁）を特定（大阪2710000 -> 270000）
-    // JMAの最新仕様では警報JSONは府県予報区（6桁）単位で管理されています
-    // 7桁（市区町村）が渡された場合は、適切に6桁の親コードに変換します
-    if(c.length===7){
-      if(_jmaAreas&&_jmaAreas.class20s&&_jmaAreas.class20s[c]) { var c10=_jmaAreas.class20s[c].parent; c=_jmaAreas.class10s[c10].parent; }
-      else { c=c.substring(0,2)+'0000'; }
-      if(_jmaAreas && _jmaAreas.class20s && _jmaAreas.class20s[c]){
-        var p10 = _jmaAreas.class20s[c].parent;
-        if(_jmaAreas.class10s && _jmaAreas.class10s[p10]) c = _jmaAreas.class10s[p10].parent;
-      } else {
-        c = c.substring(0, 2) + '0000'; // 汎用的な変換
-      }
-    }
-    // 強力なキャッシュバスター (?_timestamp) を追加して最新情報を強制取得
-    var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?_='+Date.now(),{cache:'no-store'});
-    // 最新システム（/warning/data/warning/）のURLを使用し、タイムスタンプでキャッシュを完全にバイパス
-    var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?t='+Date.now(),{cache:'no-store'});
-    if(!r.ok)return null;return r.json();}catch(e){return null;}}
+    var c = String(code).substring(0, 6);
+    var pref = c.substring(0, 2);
+    // 2024年5月29日以降の最新ディレクトリ(r1-r8)マッピング
+    var rDir = 'r3';
+    if (pref === '01') rDir = 'r1';
+    else if (['02','03','04','05','06','07'].indexOf(pref) >= 0) rDir = 'r2';
+    else if (['08','09','10','11','12','13','14','19','20','22'].indexOf(pref) >= 0) rDir = 'r3';
+    else if (['15','16','17','18'].indexOf(pref) >= 0) rDir = 'r4';
+    else if (['21','23','24'].indexOf(pref) >= 0) rDir = 'r5';
+    else if (['31','32','33','34','35'].indexOf(pref) >= 0) rDir = 'r6'; // 島根(32)はr6
+    else if (['40','41','42','43','44','45','46'].indexOf(pref) >= 0) rDir = 'r7';
+    else if (['25','26','27','28','29','30','36','37','38','39','47'].indexOf(pref) >= 0) rDir = 'r8'; // 大阪(27)はr8
+
+    var url = 'https://www.jma.go.jp/bosai/warning/data/' + rDir + '/' + c + '.json?t=' + Date.now();
+    var res = await fetchWithTimeout(url, { cache: 'no-store' });
+    if(!res.ok) return null;
+    return await res.json();
+  } catch (e) { return null; }
+}
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchGoogleWeather(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://weather.googleapis.com/v1/currentConditions:lookup?key='+key+'&location.latitude='+lat+'&location.longitude='+lon+'&unitsSystem=METRIC');if(!r.ok)return null;return r.json();}catch(e){return null;}}
@@ -711,24 +711,23 @@ function buildWarningBanner(warning){
   var items=[];
   var seen={};
   try{
-    // areaTypes[0] は都道府県レベルの集約。ここから取得することで市区町村ごとの重複を避ける
-    var topLevel = (warning.areaTypes || [])[0];
-    var aName = '発表中の地域';
-    if(topLevel && topLevel.areas) {
-      topLevel.areas.forEach(function(area){
-        aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
+    // 一次細分区域(class10s)を対象にすることで、松江や大阪の注意報を漏らさず、かつ東京での市区町村単位の重複を避ける
+    var targetTypes = (warning.areaTypes || []).filter(function(at){ return at.code === "class10s" || at.code === "offices"; });
+    if(targetTypes.length === 0 && warning.areaTypes.length > 0) targetTypes = [warning.areaTypes[0]];
+
+    targetTypes.forEach(function(at){
+      (at.areas || []).forEach(function(area){
+        var aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
         (area.warnings || []).forEach(function(w){
           var wCode = String(w.code || w.kindCode || '');
           var status = String(w.status || '');
           if(wCode && (status==='発表' || status==='継続')) {
-            if(!seen[wCode]) {
-              items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode)});
-              seen[wCode] = true;
-            }
+            var key = aName + '_' + wCode;
+            if(!seen[key]){ items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode)}); seen[key] = true; }
           }
         });
       });
-    }
+    });
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';
 

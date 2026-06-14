@@ -685,6 +685,7 @@ async function fetchWarning(code){
     }
   var c = String(code).substring(0, 6);
   // 最新の気象庁運用に基づき、集約警告JSONの正規パスを使用（rNディレクトリはタイル用のため404になる）
+  // 最新の気象庁運用(2024/5/27改正以降)の集約警告JSONパスを使用
   var url = 'https://www.jma.go.jp/bosai/warning/data/warning/' + c + '.json?t=' + Date.now();
   try {
     var res = await fetchWithTimeout(url, { cache: 'no-store' });
@@ -692,6 +693,8 @@ async function fetchWarning(code){
     return null;
   } catch (e) { console.warn('JMA Warning fetch failed:', e); return null; }
   } catch (e) { return null; }
+  } catch (e) { console.warn('JMA Warning fetch failed:', e); }
+  return null;
 }
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
@@ -722,54 +725,32 @@ function buildWarningBanner(warning){
   var items=[];
   var seen={};
   try{
-    var globalCodes = {};
-    // offices/class10s(広域)を優先しつつ、詳細な警告もスキャン
-    (warning.areaTypes || []).forEach(function(at){
-      var isHigh = (at.code === "offices" || at.code === "class10s");
-      (at.areas || []).forEach(function(area){
-        var aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
-        (area.warnings || []).forEach(function(w){
-          var wCode = String(w.code || w.kindCode || '');
-          var status = String(w.status || '');
-          if(wCode && (status==='発表' || status==='継続')) {
-            if(isHigh) globalCodes[wCode] = true;
-            items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode), type:at.code});
     var globalCodes={};
-    // offices(都道府県)およびclass10s(一次細分区域)から、広域な警告を抽出
+    // 都道府県(offices)および一次細分区域(class10s)を優先的にスキャン
     (warning.areaTypes||[]).forEach(function(at){
-      var isGlobal=(at.code==="offices"||at.code==="class10s");
       var isGlobal=(at.code==='offices'||at.code==='class10s');
       (at.areas||[]).forEach(function(area){
         var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
         (area.warnings||[]).forEach(function(w){
           var wCode=String(w.code||w.kindCode||'');
           var status=String(w.status||'');
-          if(wCode&&(status==='発表'||status==='継続')){
-            if(isGlobal)globalCodes[wCode]=true;
+          if(wCode && (status==='発表'||status==='継続')){
             if(isGlobal) globalCodes[wCode]=true;
             items.push({areaName:aName,warnCode:wCode,level:getWarnLevel(wCode),type:at.code});
           }
         });
       });
     });
-    // 広域レベルで既に発表されている警告は、詳細レベル(市町村)では非表示にして重複を防ぐ
-    items = items.filter(function(it){ return (it.type === 'offices' || it.type === 'class10s') || !globalCodes[it.warnCode]; });
-    var deduped = []; items.forEach(function(it){ var k = it.areaName + '_' + it.warnCode; if(!seen[k]){ deduped.push(it); seen[k] = true; } });
-    items = deduped;
-    // 1. 都道府県レベルで出ているものはそのまま採用
-    // 2. 市区町村レベルのものは、広域レベルで既に出ている場合は表示をスキップして重複を防ぐ（東京などの対策）
-    // 3. ただし、松江の雷注意報のように、地域限定で出ているものは確実に表示
-    var filtered=items.filter(function(it){
-      return(it.type==='offices'||it.type==='class10s')||!globalCodes[it.warnCode];
-      return (it.type==='offices'||it.type==='class10s')||!globalCodes[it.warnCode];
+    // 広域で出ているものはそのまま表示、詳細地域(市町村)限定のものは広域と被らない場合のみ表示
+    var filtered = items.filter(function(it){
+      return (it.type==='offices'||it.type==='class10s') || !globalCodes[it.warnCode];
     });
-    var deduped=[];filtered.forEach(function(it){var k=it.areaName+'_'+it.warnCode;if(!seen[k]){deduped.push(it);seen[k]=true;}});
-    var deduped=[];
+    var deduped = [];
     filtered.forEach(function(it){
-      var k=it.areaName+'_'+it.warnCode;
-      if(!seen[k]){deduped.push(it);seen[k]=true;}
+      var k = it.areaName + '_' + it.warnCode;
+      if(!seen[k]){ deduped.push(it); seen[k]=true; }
     });
-    items=deduped;
+    items = deduped;
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';
 

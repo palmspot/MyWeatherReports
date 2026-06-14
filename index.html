@@ -675,12 +675,33 @@ async function fetchWarning(code){
     else if (['31','32','33','34','35'].indexOf(pref) >= 0) rDir = 'r6'; // 島根(32)はr6
     else if (['40','41','42','43','44','45','46'].indexOf(pref) >= 0) rDir = 'r7';
     else if (['25','26','27','28','29','30','36','37','38','39','47'].indexOf(pref) >= 0) rDir = 'r8'; // 大阪(27)はr8
+    var p = c.substring(0, 2);
+    var r = 'r3';
+    // 2024年5月29日から運用中の全47都道府県ディレクトリ・マッピング
+    if (p === '01') r = 'r1'; // 北海道
+    else if (p >= '02' && p <= '07') r = 'r2'; // 東北
+    else if ((p >= '08' && p <= '14') || p === '19' || p === '20') r = 'r3'; // 関東・甲信
+    else if (p >= '15' && p <= '18') r = 'r4'; // 北陸
+    else if (p >= '21' && p <= '24') r = 'r5'; // 東海
+    else if (p >= '31' && p <= '35') r = 'r6'; // 中国
+    else if (p >= '40' && p <= '46') r = 'r7'; // 九州
+    else if ((p >= '25' && p <= '30') || (p >= '36' && p <= '39') || p === '47') r = 'r8'; // 近畿・四国・沖縄
 
     var url = 'https://www.jma.go.jp/bosai/warning/data/' + rDir + '/' + c + '.json?t=' + Date.now();
+    var url = 'https://www.jma.go.jp/bosai/warning/data/' + r + '/' + c + '.json?t=' + Date.now();
     var res = await fetchWithTimeout(url, { cache: 'no-store' });
     if(!res.ok) return null;
+    if (!res.ok) {
+      // 旧パスへのフォールバック（移行期間対応）
+      res = await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/' + c + '.json?t=' + Date.now(), { cache: 'no-store' });
+    }
+    if (!res.ok) return null;
     return await res.json();
   } catch (e) { return null; }
+  } catch (e) {
+    console.warn('Warning fetch failed:', e);
+    return null;
+  }
 }
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
@@ -712,11 +733,14 @@ function buildWarningBanner(warning){
   var seen={};
   try{
     // 一次細分区域(class10s)を対象にすることで、松江や大阪の注意報を漏らさず、かつ東京での市区町村単位の重複を避ける
+    // class10s（一次細分区域）を主対象にすることで、市区町村単位の重複を避けつつ、地域ごとの詳細な注意報を網羅
     var targetTypes = (warning.areaTypes || []).filter(function(at){ return at.code === "class10s" || at.code === "offices"; });
     if(targetTypes.length === 0 && warning.areaTypes.length > 0) targetTypes = [warning.areaTypes[0]];
 
+    
     targetTypes.forEach(function(at){
       (at.areas || []).forEach(function(area){
+        // 地域名（"兵庫県南部" "島根県東部" など）を取得
         var aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
         (area.warnings || []).forEach(function(w){
           var wCode = String(w.code || w.kindCode || '');

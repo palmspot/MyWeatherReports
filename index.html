@@ -711,24 +711,24 @@ function buildWarningBanner(warning){
   var items=[];
   var seen={};
   try{
-    (warning.areaTypes || []).forEach(function(at){
-      if(at.areas){
-        at.areas.forEach(function(area){
-        var aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
-        if(/^\d+$/.test(aName)) aName = '発表中の地域';
-        (area.warnings||[]).forEach(function(w){
+    // areaTypes[0] は都道府県レベルの集約。ここから取得することで市区町村ごとの重複を避ける
+    var topLevel = (warning.areaTypes || [])[0];
+    var aName = '発表中の地域';
+    if(topLevel && topLevel.areas) {
+      topLevel.areas.forEach(function(area){
+        aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
+        (area.warnings || []).forEach(function(w){
           var wCode = String(w.code || w.kindCode || '');
           var status = String(w.status || '');
-          if(wCode && (status==='発表'||status==='継続')){
-            var key = aName + ':' + wCode;
-            if(!seen[key]){
-              items.push({areaName:aName,warnCode:wCode,level:getWarnLevel(wCode)});
-              seen[key]=true;
+          if(wCode && (status==='発表' || status==='継続')) {
+            if(!seen[wCode]) {
+              items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode)});
+              seen[wCode] = true;
             }
           }
         });
-      });}
-    });
+      });
+    }
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';
 

@@ -662,37 +662,21 @@ async function fetchGFS(lat,lon){var r=await fetchWithTimeout('https://api.open-
 async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTimeout('https://www.jma.go.jp/bosai/forecast/data/forecast/'+code+'.json');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchWarning(code){
   if(!code)return null;
-  try{
-  try {
-    var c = String(code).substring(0, 6); var p = c.substring(0, 2);
-    var r = 'r3';
-    if(p==='01') r='r1'; else if(p>='02'&&p<='07') r='r2';
-    else if((p>='08'&&p<='14')||p==='19'||p==='20') r='r3';
-    else if(p>='15'&&p<='18') r='r4'; else if(p>='21'&&p<='24') r='r5';
-    else if(p>='31'&&p<='35') r='r6'; else if(p>='40'&&p<='46') r='r7';
-    else if((p>='25'&&p<='30')||(p>='36'&&p<='39')||p==='47') r='r8';
-    
-    var urls=['https://www.jma.go.jp/bosai/warning/data/'+r+'/'+c+'.json?_='+Date.now(), 'https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?_='+Date.now()];
-    var rDir = 'r3';
-    if(p==='01') rDir='r1'; else if(p>='02'&&p<='07') rDir='r2';
-    else if((p>='08'&&p<='14')||p==='19'||p==='20') rDir='r3';
-    else if(p>='15'&&p<='18') rDir='r4'; else if(p>='21'&&p<='24') rDir='r5';
-    else if(p>='31'&&p<='35') rDir='r6'; else if(p>='40'&&p<='46') rDir='r7';
-    else if((p>='25'&&p<='30')||(p>='36'&&p<='39')||p==='47') rDir='r8';
-    var urls=['https://www.jma.go.jp/bosai/warning/data/'+rDir+'/'+c+'.json?t='+Date.now(), 'https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?t='+Date.now()];
-    for(var i=0; i<urls.length; i++){
-      try{var res=await fetchWithTimeout(urls[i],{cache:'no-store'}); if(res.ok)return await res.json();}catch(e){}
-    }
   var c = String(code).substring(0, 6);
-  // 最新の気象庁運用に基づき、集約警告JSONの正規パスを使用（rNディレクトリはタイル用のため404になる）
-  // 最新の気象庁運用(2024/5/27改正以降)の集約警告JSONパスを使用
-  var url = 'https://www.jma.go.jp/bosai/warning/data/warning/' + c + '.json?t=' + Date.now();
+  var p = c.substring(0, 2);
+  var r = 'r3';
+  if(p === '01') r = 'r1';
+  else if(p >= '02' && p <= '07') r = 'r2';
+  else if((p >= '08' && p <= '14') || p === '19' || p === '20') r = 'r3';
+  else if(p >= '15' && p <= '18') r = 'r4';
+  else if(p >= '21' && p <= '24') r = 'r5';
+  else if(p >= '31' && p <= '35') r = 'r6';
+  else if(p >= '40' && p <= '46') r = 'r7';
+  else if((p >= '25' && p <= '30') || (p >= '36' && p <= '39') || p === '47') r = 'r8';
+  var url = 'https://www.jma.go.jp/bosai/warning/data/' + r + '/' + c + '.json?t=' + Date.now();
   try {
     var res = await fetchWithTimeout(url, { cache: 'no-store' });
     if (res.ok) return await res.json();
-    return null;
-  } catch (e) { console.warn('JMA Warning fetch failed:', e); return null; }
-  } catch (e) { return null; }
   } catch (e) { console.warn('JMA Warning fetch failed:', e); }
   return null;
 }
@@ -725,30 +709,28 @@ function buildWarningBanner(warning){
   var items=[];
   var seen={};
   try{
-    var globalCodes={};
-    // 都道府県(offices)および一次細分区域(class10s)を優先的にスキャン
+    var globalCodes = {};
+    // offices(都道府県)およびclass10s(一次細分区域)から、広域な警告を抽出
     (warning.areaTypes||[]).forEach(function(at){
-      var isGlobal=(at.code==='offices'||at.code==='class10s');
+      var isGlobal = (at.code === 'offices' || at.code === 'class10s');
       (at.areas||[]).forEach(function(area){
         var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
         (area.warnings||[]).forEach(function(w){
           var wCode=String(w.code||w.kindCode||'');
           var status=String(w.status||'');
-          if(wCode && (status==='発表'||status==='継続')){
-            if(isGlobal) globalCodes[wCode]=true;
-            items.push({areaName:aName,warnCode:wCode,level:getWarnLevel(wCode),type:at.code});
+          if(wCode && (status === '発表' || status === '継続')){
+            if(isGlobal) globalCodes[wCode] = true;
+            items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode), type:at.code});
           }
         });
       });
     });
-    // 広域で出ているものはそのまま表示、詳細地域(市町村)限定のものは広域と被らない場合のみ表示
-    var filtered = items.filter(function(it){
-      return (it.type==='offices'||it.type==='class10s') || !globalCodes[it.warnCode];
-    });
+    // 広域で出ているものを優先し、市町村レベルの重複をフィルタリング
+    var filtered = items.filter(function(it){ return (it.type === 'offices' || it.type === 'class10s') || !globalCodes[it.warnCode]; });
     var deduped = [];
     filtered.forEach(function(it){
       var k = it.areaName + '_' + it.warnCode;
-      if(!seen[k]){ deduped.push(it); seen[k]=true; }
+      if(!seen[k]){ deduped.push(it); seen[k] = true; }
     });
     items = deduped;
   }catch(e){}

@@ -663,30 +663,20 @@ async function fetchJMA(code){if(!code)return null;try{var r=await fetchWithTime
 async function fetchWarning(code){
   if(!code)return null;
   try{
-    var c = String(code).substring(0, 6);
-    var p = c.substring(0, 2);
+    var c = String(code).substring(0, 6); var p = c.substring(0, 2);
     var r = 'r3';
-    // JMA地域ディレクトリ(r1-r8) 47都道府県完全マッピング
-    if (p === '01') r = 'r1';
-    else if (p >= '02' && p <= '07') r = 'r2';
-    else if ((p >= '08' && p <= '14') || p === '19' || p === '20') r = 'r3';
-    else if (p >= '15' && p <= '18') r = 'r4';
-    else if (p >= '21' && p <= '24') r = 'r5';
-    else if (p >= '31' && p <= '35') r = 'r6';
-    else if (p >= '40' && p <= '46') r = 'r7';
-    else if ((p >= '25' && p <= '30') || (p >= '36' && p <= '39') || p === '47') r = 'r8';
-
-    var url = 'https://www.jma.go.jp/bosai/warning/data/' + r + '/' + c + '.json?t=' + Date.now();
-    var res = await fetchWithTimeout(url, { cache: 'no-store' });
-    if (!res.ok) {
-      res = await fetchWithTimeout('https://www.jma.go.jp/bosai/warning/data/warning/' + c + '.json?t=' + Date.now(), { cache: 'no-store' });
+    if(p==='01') r='r1'; else if(p>='02'&&p<='07') r='r2';
+    else if((p>='08'&&p<='14')||p==='19'||p==='20') r='r3';
+    else if(p>='15'&&p<='18') r='r4'; else if(p>='21'&&p<='24') r='r5';
+    else if(p>='31'&&p<='35') r='r6'; else if(p>='40'&&p<='46') r='r7';
+    else if((p>='25'&&p<='30')||(p>='36'&&p<='39')||p==='47') r='r8';
+    
+    var urls=['https://www.jma.go.jp/bosai/warning/data/'+r+'/'+c+'.json?_='+Date.now(), 'https://www.jma.go.jp/bosai/warning/data/warning/'+c+'.json?_='+Date.now()];
+    for(var i=0; i<urls.length; i++){
+      try{var res=await fetchWithTimeout(urls[i],{cache:'no-store'}); if(res.ok)return await res.json();}catch(e){}
     }
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) {
-    console.warn('JMA Warning fetch failed:', e);
     return null;
-  }
+  } catch (e) { console.warn('JMA Warning fetch failed:', e); return null; }
 }
 async function fetchOWM(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lon+'&appid='+key+'&units=metric&lang=ja&cnt=40');if(!r.ok)return null;return r.json();}catch(e){return null;}}
 async function fetchTmrw(lat,lon,key){if(!key)return null;try{var r=await fetchWithTimeout('https://api.tomorrow.io/v4/weather/forecast?location='+lat+','+lon+'&apikey='+key+'&units=metric&timesteps=1d');if(!r.ok)return null;return r.json();}catch(e){return null;}}
@@ -717,22 +707,26 @@ function buildWarningBanner(warning){
   var items=[];
   var seen={};
   try{
-    // 一次細分区域(class10s)を優先スキャンし、市区町村単位の重複を避けつつ地域ごとの詳細な注意報を網羅
-    var targetTypes = (warning.areaTypes || []).filter(function(at){ return at.code === "class10s" || at.code === "offices"; });
-    targetTypes.forEach(function(at){
+    var globalCodes = {};
+    // offices/class10s(広域)を優先しつつ、詳細な警告もスキャン
+    (warning.areaTypes || []).forEach(function(at){
+      var isHigh = (at.code === "offices" || at.code === "class10s");
       (at.areas || []).forEach(function(area){
-        // 地域名（"兵庫県南部" "島根県東部" など）を取得
         var aName = (area.name && !/^\d+$/.test(area.name)) ? area.name : getAreaName(area.code);
         (area.warnings || []).forEach(function(w){
           var wCode = String(w.code || w.kindCode || '');
           var status = String(w.status || '');
           if(wCode && (status==='発表' || status==='継続')) {
-            var key = aName + '_' + wCode;
-            if(!seen[key]){ items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode)}); seen[key] = true; }
+            if(isHigh) globalCodes[wCode] = true;
+            items.push({areaName:aName, warnCode:wCode, level:getWarnLevel(wCode), type:at.code});
           }
         });
       });
     });
+    // 広域レベルで既に発表されている警告は、詳細レベル(市町村)では非表示にして重複を防ぐ
+    items = items.filter(function(it){ return (it.type === 'offices' || it.type === 'class10s') || !globalCodes[it.warnCode]; });
+    var deduped = []; items.forEach(function(it){ var k = it.areaName + '_' + it.warnCode; if(!seen[k]){ deduped.push(it); seen[k] = true; } });
+    items = deduped;
   }catch(e){}
   if(items.length===0) return '<div id="warning-banner" style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rm);padding:10px 14px;margin-bottom:1rem;color:var(--text2);font-size:13px;"><i class="ti ti-info-circle" style="vertical-align:-1px;margin-right:4px"></i>' + t('warn_none') + '</div>';
 

@@ -152,6 +152,11 @@ For debugging on mobile, open the page with:
 
 ## Changelog
 
+### 2026-06-15 - Bug Fixed
+
+- Fixed JMA warning/advisory area name handling for the new warning JSON format.
+- Removed the initial weather map image error caused by an empty image source.
+
 ### v2.2.2 - Radar zoom and Warning logic improvements
 
 - Adjusted rain radar initial zoom level and fixed rendering issue when switching tabs.

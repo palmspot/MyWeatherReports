@@ -729,6 +729,13 @@ function getAreaName(code){
   }
   return c;
 }
+function getWarningAreaName(area){
+  var src=(area&&area.area)?area.area:area;
+  if(!src)return '';
+  if(src.name&&!/^\d+$/.test(src.name))return src.name;
+  if(src.code)return getAreaName(src.code);
+  return '';
+}
 function collectWarningItems(warning){
   var items=[];
   if(Array.isArray(warning)){
@@ -737,7 +744,7 @@ function collectWarningItems(warning){
       if(!w)return;
       ['class20Items','class15Items','class10Items','officeItems'].forEach(function(key){
         (w[key]||[]).forEach(function(area){
-          var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
+          var aName=getWarningAreaName(area);
           (area.kinds||area.warnings||[]).forEach(function(kind){
             if(!isActiveWarnStatus(kind.status))return;
             items.push({
@@ -758,7 +765,7 @@ function collectWarningItems(warning){
   (warning.areaTypes||[]).forEach(function(at){
     var isGlobal = (at.code === 'offices' || at.code === 'class10s');
     (at.areas||[]).forEach(function(area){
-      var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
+      var aName=getWarningAreaName(area);
       (area.warnings||[]).forEach(function(w){
         var wCode=String(w.code||w.kindCode||'');
         if(wCode && isActiveWarnStatus(w.status)){
@@ -797,7 +804,7 @@ function buildWarningBanner(warning){
     (warning.areaTypes||[]).forEach(function(at){
       var isGlobal = (at.code === 'offices' || at.code === 'class10s');
       (at.areas||[]).forEach(function(area){
-        var aName=(area.name&&!/^\d+$/.test(area.name))?area.name:getAreaName(area.code);
+        var aName=getWarningAreaName(area);
         (area.warnings||[]).forEach(function(w){
           var wCode=String(w.code||w.kindCode||'');
           var status=String(w.status||'');

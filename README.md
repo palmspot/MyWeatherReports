@@ -134,7 +134,7 @@ The expected API response is JSON:
 Configure Caddy to proxy `/push/*` to the `notify` jail before the normal web proxy:
 
 ```caddyfile
-tenki.migimigi.cc {
+your-domain.com {
     reverse_proxy /push/* 10.0.0.5:3000
     reverse_proxy 10.0.0.3:80
 }
@@ -145,7 +145,7 @@ Reload Caddy and test from the public domain:
 ```sh
 sudo bastille cmd caddy caddy validate --config /usr/local/etc/caddy/Caddyfile
 sudo bastille service caddy caddy reload
-curl -i https://tenki.migimigi.cc/push/vapid-public-key
+curl -i https://your-domain.com/push/vapid-public-key
 ```
 
 When a browser enables notifications, registration should appear in the notify log:

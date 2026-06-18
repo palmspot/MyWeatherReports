@@ -1,0 +1,13 @@
+{
+  "name": "myweatherreports-notify",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web Push notification backend for myweatherreports",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
+  }
+}

@@ -1,0 +1,5 @@
+node_modules/
+vapid.json
+subscriptions.json
+warned.json
+*.log

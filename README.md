@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/version-2.2.2-blue)
 
-A multi-source weather forecast dashboard in a single static HTML file. No build step, no backend, and no server-side processing are required.
+A multi-source weather forecast dashboard in a single static HTML file. No build step is required. Forecast, radar, map, and air-quality views run without an application backend; Web Push notifications require a small server-side API.
 
 The dashboard compares forecasts from Open-Meteo, GFS, and the Japan Meteorological Agency (JMA), with optional support for OpenWeatherMap, Tomorrow.io, WeatherAPI, Google Weather, and Google Pollen API. It also includes air quality data, rain radar with +4-hour nowcast, JMA weather maps, and JMA weather warnings/advisories.
 
@@ -19,6 +19,24 @@ sw.js
 ```
 
 No dependencies need to be installed. CDN assets are loaded directly in the browser.
+
+Web Push notifications are optional. If the `/push/...` endpoints are not configured, the notification button will show a setup error instead of enabling notifications.
+
+For the optional notification backend, keep these files in the repository:
+
+```text
+server.js
+setup-notify.sh
+package.json
+```
+
+Do not commit runtime secrets or operational state:
+
+```text
+vapid.json
+subscriptions.json
+warned.json
+```
 
 ---
 
@@ -56,6 +74,85 @@ location /rbapi/ {
 ```
 
 Both blocks are required because browsers block direct cross-origin requests to these external APIs.
+
+### Optional Web Push API
+
+The notification button expects these same-origin endpoints:
+
+```text
+GET  /push/vapid-public-key  -> {"publicKey":"..."}
+POST /push/subscribe         -> {} or another JSON response
+POST /push/unsubscribe       -> {} or another JSON response
+```
+
+The server must create and store Web Push subscriptions and send notifications with your VAPID key pair. Without these endpoints, browser notification permission alone is not enough to deliver warning/advisory alerts.
+
+#### Bastille notify jail deployment
+
+This repository includes a small Node.js Web Push backend intended to run in the `notify` jail. The examples below assume:
+
+```text
+notify jail IP: 10.0.0.5
+web jail IP:    10.0.0.3
+caddy jail IP:  10.0.0.2
+```
+
+Copy the backend files to the host user's home directory:
+
+```sh
+scp server.js package.json setup-notify.sh user@example.com:/home/palmspot/
+```
+
+If you already have existing VAPID keys or subscriptions, copy these runtime files too, but keep them out of Git:
+
+```sh
+scp vapid.json subscriptions.json user@example.com:/home/palmspot/
+```
+
+Run the setup script on the Bastille host:
+
+```sh
+sudo sh /home/palmspot/setup-notify.sh
+```
+
+The script copies the backend into the `notify` jail, installs Node.js/npm dependencies, registers an rc.d service, enables it in `rc.conf`, and starts the service.
+
+Verify the backend inside the private network:
+
+```sh
+sudo bastille cmd notify sockstat -4 -l
+curl -i http://10.0.0.5:3000/push/vapid-public-key
+sudo bastille cmd notify tail -n 100 /var/log/notify.log
+```
+
+The expected API response is JSON:
+
+```json
+{"publicKey":"..."}
+```
+
+Configure Caddy to proxy `/push/*` to the `notify` jail before the normal web proxy:
+
+```caddyfile
+tenki.migimigi.cc {
+    reverse_proxy /push/* 10.0.0.5:3000
+    reverse_proxy 10.0.0.3:80
+}
+```
+
+Reload Caddy and test from the public domain:
+
+```sh
+sudo bastille cmd caddy caddy validate --config /usr/local/etc/caddy/Caddyfile
+sudo bastille service caddy caddy reload
+curl -i https://tenki.migimigi.cc/push/vapid-public-key
+```
+
+When a browser enables notifications, registration should appear in the notify log:
+
+```sh
+sudo bastille cmd notify tail -f /var/log/notify.log
+```
 
 ---
 

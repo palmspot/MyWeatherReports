@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.3.1-blue)
+![Version](https://img.shields.io/badge/version-2.3.2-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step is required. Forecast, radar, map, and air-quality views run without an application backend; Web Push notifications require a small server-side API.
 
@@ -248,6 +248,11 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.3.2 - Minor fixes
+
+- Fixed a JavaScript syntax error that prevented chart initialization from parsing, restoring combined hourly charts and the windrose display.
+- Consolidated hourly visualizations into a combined overlay (temperature / humidity / wind speed) and a per-hour windrose.
 
 ### v2.3.1 - Hourly humidity, wind speed, and wind direction charts
 

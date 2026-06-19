@@ -377,7 +377,7 @@ var I18N={
     src_forecast:'ソース別 7日間予報',
     hourly_forecast:'本日の時間別予報',
     compare_5:'ソース別 比較（5日間）',
-    temp_chart:'気温グラフ',daily_chart:'日次（24時間）',weekly_chart:'週次（7日間）',humidity_chart:'湿度グラフ',windspeed_chart:'風速グラフ',winddirection_chart:'風向グラフ',
+    temp_chart:'気温グラフ',daily_chart:'日次（24時間）',weekly_chart:'週次（7日間）',humidity_chart:'湿度グラフ',windspeed_chart:'風速グラフ',winddirection_chart:'風向グラフ',combined_chart:'統合（気温・湿度・風速）',windrose_chart:'風向ローズ（風向分布）',
     today_lbl:'今日',tomorrow_lbl:'明日',
     days:['日','月','火','水','木','金','土'],
     jma_chip:'気象庁',
@@ -421,7 +421,7 @@ var I18N={
     src_forecast:'7-Day Forecast by Source',
     hourly_forecast:"Today's Hourly Forecast",
     compare_5:'5-Day Comparison by Source',
-    temp_chart:'Temperature Chart',daily_chart:'Daily (24h)',weekly_chart:'Weekly (7d)',humidity_chart:'Humidity Chart',windspeed_chart:'Wind Speed Chart',winddirection_chart:'Wind Direction Chart',
+    temp_chart:'Temperature Chart',daily_chart:'Daily (24h)',weekly_chart:'Weekly (7d)',humidity_chart:'Humidity Chart',windspeed_chart:'Wind Speed Chart',winddirection_chart:'Wind Direction Chart',combined_chart:'Combined (Temp/Humidity/Wind)',windrose_chart:'Windrose (Direction Distribution)',
     today_lbl:'Today',tomorrow_lbl:'Tomorrow',
     days:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
     jma_chip:'JMA',
@@ -921,14 +921,14 @@ function destroyCharts(){Object.values(_charts).forEach(function(c){c.destroy();
 function getChartColors(){var dark=document.documentElement.getAttribute('data-theme')==='dark';return{grid:dark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.08)',text:dark?'#9a9a96':'#6b6b67',bg:dark?'#242422':'#ffffff'};}
 function buildCharts(om,gfs){
   destroyCharts();var cc=getChartColors();
-  var baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cc.text,font:{size:11}}},tooltip:{mode:'index',intersect:false}},scales:{x:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10}}},y:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10}}}}};
-  var now=new Date();var hourLabels=[],omHourly=[];
-  for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){hourLabels.push(i+'時');omHourly.push(Math.round(om.hourly.temperature_2m[idx]));}}
+  var baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cc.text,font:{size:11}}},tooltip:{mode:'index',intersect:false}},scales:{x:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10}}}}};
+  var now=new Date();var hourLabels=[],omTemp=[];
+  for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){hourLabels.push(i+'時');omTemp.push(Math.round(om.hourly.temperature_2m[idx]));}}
+  var nowHour=now.getHours();var nowIdx=hourLabels.indexOf(nowHour+'時');if(nowIdx<0)nowIdx=hourLabels.findIndex(function(l){return parseInt(l)<=nowHour;});
   var dCtx=document.getElementById('daily-chart');
   if(dCtx){
-    var nowHour=now.getHours();var nowIdx=hourLabels.indexOf(nowHour+'時');if(nowIdx<0)nowIdx=hourLabels.findIndex(function(l){return parseInt(l)<=nowHour;});
-    var pointBg=omHourly.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var pointR=omHourly.map(function(_,i){return i===nowIdx?7:3;});
-    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omHourly,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:pointR,pointBackgroundColor:pointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+'°C';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})})})}); 
+    var pointBg=omTemp.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var pointR=omTemp.map(function(_,i){return i===nowIdx?7:3;});
+    _charts.daily=new Chart(dCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Open-Meteo',data:omTemp,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:pointR,pointBackgroundColor:pointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+'°C';}}}}),scales:Object.assign({},baseOpts.scales,{y:{grid:{color:cc.grid},ticks:{color:cc.text,font:{size:10},callback:function(v){return v+'°';}}}})})});
   }
   var DAYS=t('days');
   var weekLabels=om.daily.time.slice(0,7).map(function(ds,i){var d=new Date(ds);return i===0?t('today_lbl'):i===1?t('tomorrow_lbl'):DAYS[d.getDay()];});
@@ -936,24 +936,25 @@ function buildCharts(om,gfs){
   var gfsMax=gfs.daily.temperature_2m_max.slice(0,7).map(Math.round);var gfsMin=gfs.daily.temperature_2m_min.slice(0,7).map(Math.round);
   var wCtx=document.getElementById('weekly-chart');
   if(wCtx){_charts.weekly=new Chart(wCtx,{type:'line',data:{labels:weekLabels,datasets:[{label:'OM '+t('max_temp'),data:omMax,borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#E05C2A',fill:'+1'},{label:'OM '+t('min_temp'),data:omMin,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.12)',tension:0.4,pointRadius:5,pointBackgroundColor:'#378ADD',fill:false},{label:'GFS '+t('max_temp'),data:gfsMax,borderColor:'#E05C2A',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5},{label:'GFS '+t('min_temp'),data:gfsMin,borderColor:'#378ADD',borderDash:[4,3],tension:0.4,pointRadius:3,fill:false,borderWidth:1.5}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{label:function(item){return item.dataset.label+': '+item.raw+'°';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}})})})})}); }
-  var omHumidity=[];for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){omHumidity.push(Math.round(om.hourly.relativehumidity_2m[idx]));}}
-  var hCtx=document.getElementById('humidity-chart');
-  if(hCtx){
-    var humPointBg=omHumidity.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var humPointR=omHumidity.map(function(_,i){return i===nowIdx?7:3;});
-    _charts.humidity=new Chart(hCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Humidity',data:omHumidity,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:humPointR,pointBackgroundColor:humPointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+'%';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'%';}}),min:0,max:100})})})}); 
+  // build combined chart: temperature, humidity, wind speed (shared x: hourLabels)
+  var omHumidity=[];var omWindspeed=[];
+  for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){omHumidity.push(Math.round(om.hourly.relativehumidity_2m[idx]));omWindspeed.push(Math.round(om.hourly.windspeed_10m[idx]*10)/10);} }
+  var cCtx=document.getElementById('combined-chart');
+  if(cCtx){
+    var tempPointBg=omTemp.map(function(_,i){return i===nowIdx?'#E05C2A':'#E05C2A';});var tempPointR=omTemp.map(function(_,i){return i===nowIdx?6:3;});
+    var humPointBg=omHumidity.map(function(_,i){return i===nowIdx?'#378ADD':'#378ADD';});var humPointR=omHumidity.map(function(_,i){return i===nowIdx?6:3;});
+    var wsPointBg=omWindspeed.map(function(_,i){return i===nowIdx?'#22AA22':'#22AA22';});var wsPointR=omWindspeed.map(function(_,i){return i===nowIdx?6:3;});
+    _charts.combined=new Chart(cCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:t('temp_chart'),data:omTemp,yAxisID:'y_temp',borderColor:'#E05C2A',backgroundColor:'rgba(224,92,42,0.08)',tension:0.3,pointRadius:tempPointR,pointBackgroundColor:tempPointBg,fill:false},{label:t('humidity_chart'),data:omHumidity,yAxisID:'y_hum',borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.06)',tension:0.3,pointRadius:humPointR,pointBackgroundColor:humPointBg,fill:'+1'},{label:t('windspeed_chart'),data:omWindspeed,yAxisID:'y_ws',borderColor:'#22AA22',backgroundColor:'rgba(34,170,34,0.06)',tension:0.3,pointRadius:wsPointR,pointBackgroundColor:wsPointBg,fill:false}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');}}}}),scales:Object.assign({},baseOpts.scales,{
+      y_temp:{position:'left',grid:{color:cc.grid},ticks:{color:cc.text,callback:function(v){return v+'°';}}},
+      y_hum:{position:'right',grid:{drawOnChartArea:false,color:cc.grid},ticks:{color:cc.text,callback:function(v){return v+'%';}},min:0,max:100},
+      y_ws:{position:'right',grid:{drawOnChartArea:false,color:cc.grid},ticks:{color:cc.text,callback:function(v){return v+' m/s';}}}
+    })})});
   }
-  var omWindspeed=[];for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){omWindspeed.push(Math.round(om.hourly.windspeed_10m[idx]*10)/10);}}
-  var wsCtx=document.getElementById('windspeed-chart');
-  if(wsCtx){
-    var wsPointBg=omWindspeed.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var wsPointR=omWindspeed.map(function(_,i){return i===nowIdx?7:3;});
-    _charts.windspeed=new Chart(wsCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Wind Speed (m/s)',data:omWindspeed,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:wsPointR,pointBackgroundColor:wsPointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+' m/s';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'m/s';}})})})})}); 
-  }
-  var omWinddirection=[];for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0){omWinddirection.push(Math.round(om.hourly.wind_direction_10m[idx]));}}
-  var wdCtx=document.getElementById('winddirection-chart');
-  if(wdCtx){
-    var wdPointBg=omWinddirection.map(function(_,i){return i===nowIdx?'#E05C2A':'#378ADD';});var wdPointR=omWinddirection.map(function(_,i){return i===nowIdx?7:3;});
-    _charts.winddirection=new Chart(wdCtx,{type:'line',data:{labels:hourLabels,datasets:[{label:'Wind Direction (°)',data:omWinddirection,borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',tension:0.4,pointRadius:wdPointR,pointBackgroundColor:wdPointBg,fill:true}]},options:Object.assign({},baseOpts,{plugins:Object.assign({},baseOpts.plugins,{tooltip:{mode:'index',intersect:false,callbacks:{title:function(items){return items[0].label+(getLang()==='ja'?'時':'h');},label:function(item){return item.dataset.label+': '+item.raw+'°';}}}}),scales:Object.assign({},baseOpts.scales,{y:Object.assign({},baseOpts.scales.y,{ticks:Object.assign({},baseOpts.scales.y.ticks,{callback:function(v){return v+'°';}}),min:0,max:360})})})}); 
-  }
+  // build windrose (polar area) using 8 compass sectors, weighted by wind speed
+  var sectors=['N','NE','E','SE','S','SW','W','NW'];var sectorSums=[0,0,0,0,0,0,0,0];
+  for(var i=0;i<24;i++){var idx=om.hourly.time.findIndex(function(t2){var d=new Date(t2);return d.getDate()===now.getDate()&&d.getHours()===i;});if(idx>=0&&om.hourly.wind_direction_10m&&om.hourly.windspeed_10m){var dir=om.hourly.wind_direction_10m[idx];var sp=om.hourly.windspeed_10m[idx]||0;var sIdx=Math.floor((((dir%360)+360)+22.5)%360/45);sectorSums[sIdx]+=sp;}}
+  var wrCtx=document.getElementById('windrose-chart');
+  if(wrCtx){var colors=['#E05C2A','#F6A36D','#FFD166','#8FD9A8','#22AA22','#5EC6C4','#378ADD','#A084E7'];_charts.windrose=new Chart(wrCtx,{type:'polarArea',data:{labels:sectors,datasets:[{data:sectorSums,backgroundColor:colors}]},options:{responsive:true,plugins:{legend:{labels:{color:cc.text}},tooltip:{callbacks:{label:function(item){return item.label+': '+(Math.round(item.raw*10)/10)+' m/s';}}}},scales:{r:{ticks:{color:cc.text,backdropColor:'transparent'},grid:{color:cc.grid}}}}}); }
 }
 var _activeChart='daily';
 function switchChart(tab){_activeChart=tab;document.getElementById('daily-wrap').style.display=tab==='daily'?'block':'none';document.getElementById('weekly-wrap').style.display=tab==='weekly'?'block':'none';document.querySelectorAll('.chart-tab').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-tab')===tab);});}
@@ -1179,8 +1180,10 @@ function mfc(isToday,icon,max,min,rain,note){
   return'<div class="mfc'+(isToday?' td':'')+'"><div class="ci">'+em+'</div><div class="ct">'+max+'°</div><div class="cl">'+min+'°</div><div class="rain-bar"><div class="rain-fill" style="width:'+barW+'%"></div></div><div class="cr">'+rainNum+'%</div>'+(note?'<div class="cn">'+esc(note)+'</div>':'')+'</div>';
 }
 function buildChartSection(){
-  var da=_activeChart==='daily';var we=_activeChart==='weekly';var hu=_activeChart==='humidity';var ws=_activeChart==='windspeed';var wd=_activeChart==='winddirection';
-  return'<div class="chart-section"><div class="stitle">'+t('temp_chart')+'</div><div class="chart-tabs"><button class="chart-tab'+(da?' active':'')+'" data-tab="daily" onclick="switchChart(this.dataset.tab)">'+t('daily_chart')+'</button><button class="chart-tab'+(we?' active':'')+'" data-tab="weekly" onclick="switchChart(this.dataset.tab)">'+t('weekly_chart')+'</button></div><div id="daily-wrap" class="chart-wrap" style="display:'+(da?'block':'none')+'"><canvas id="daily-chart"></canvas></div><div id="weekly-wrap" class="chart-wrap" style="display:'+(we?'block':'none')+'"><canvas id="weekly-chart"></canvas></div></div><div class="chart-section"><div class="stitle">'+t('humidity_chart')+'</div><div id="humidity-wrap" class="chart-wrap"><canvas id="humidity-chart"></canvas></div></div><div class="chart-section"><div class="stitle">'+t('windspeed_chart')+'</div><div id="windspeed-wrap" class="chart-wrap"><canvas id="windspeed-chart"></canvas></div></div><div class="chart-section"><div class="stitle">'+t('winddirection_chart')+'</div><div id="winddirection-wrap" class="chart-wrap"><canvas id="winddirection-chart"></canvas></div></div>';
+  var da=_activeChart==='daily';var we=_activeChart==='weekly';
+  return '<div class="chart-section"><div class="stitle">'+t('temp_chart')+'</div><div class="chart-tabs"><button class="chart-tab'+(da?' active':'')+'" data-tab="daily" onclick="switchChart(this.dataset.tab)">'+t('daily_chart')+'</button><button class="chart-tab'+(we?' active':'')+'" data-tab="weekly" onclick="switchChart(this.dataset.tab)">'+t('weekly_chart')+'</button></div><div id="daily-wrap" class="chart-wrap" style="display:'+(da?'block':'none')+'"><canvas id="daily-chart"></canvas></div><div id="weekly-wrap" class="chart-wrap" style="display:'+(we?'block':'none')+'"><canvas id="weekly-chart"></canvas></div></div>'+
+         '<div class="chart-section"><div class="stitle">'+t('combined_chart')+'</div><div class="chart-wrap"><canvas id="combined-chart"></canvas></div></div>'+
+         '<div class="chart-section"><div class="stitle">'+t('windrose_chart')+'</div><div class="chart-wrap"><canvas id="windrose-chart" height="240"></canvas></div></div>';
 }
 
 function buildContent(loc,om,gfs,jma,owm,tmrw,aq,pollen,gw,gwf,warning){

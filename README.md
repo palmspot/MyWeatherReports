@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.2.3-blue)
+![Version](https://img.shields.io/badge/version-2.3.0-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step is required. Forecast, radar, map, and air-quality views run without an application backend; Web Push notifications require a small server-side API.
 
@@ -248,6 +248,14 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.3.0 - Hourly humidity, wind speed, and wind direction charts
+
+- Added `wind_direction_10m` to Open-Meteo API request.
+- Added hourly humidity chart (relative humidity % by hour for the current day).
+- Added hourly wind speed chart (10m wind speed in m/s by hour for the current day).
+- Added hourly wind direction chart (10m wind direction in degrees by hour for the current day).
+- All three new charts are displayed in dedicated sections below the temperature chart.
 
 ### v2.2.3 - iOS notch support
 

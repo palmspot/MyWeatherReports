@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.2.2-blue)
+![Version](https://img.shields.io/badge/version-2.2.3-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step is required. Forecast, radar, map, and air-quality views run without an application backend; Web Push notifications require a small server-side API.
 
@@ -248,6 +248,12 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.2.3 - iOS notch support
+
+- Added `viewport-fit=cover` meta tag for full-screen support on notched iPhones.
+- Changed Apple PWA status bar style to `black-translucent` for seamless integration with the app.
+- Added `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)` CSS padding to prevent content overlap with system UI.
 
 ### 2026-06-15 - Bug Fixed
 

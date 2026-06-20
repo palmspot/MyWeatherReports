@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light" data-lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title data-i18n="title">天気予報ダッシュボード</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iMCIgeDI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM1RUQzRkYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0QUEzRkYiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0idzEiIHgxPSIwIiB4Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwNkNGRiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFFOTBGRiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJ3MiIgeDE9IjAiIHgyPSIxIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjM0NDRkZGIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjNFMEZGIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0id2hpdGUiLz48ZyBzdHJva2U9IiNGRkNDMDAiIHN0cm9rZS13aWR0aD0iMi4yIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik00NCAxNmExMCAxMCAwIDAgMSAxMCAxMCIvPjxsaW5lIHgxPSI0NCIgeTE9IjciIHgyPSI0NCIgeTI9IjMiLz48bGluZSB4MT0iNTYiIHkxPSIxOSIgeDI9IjYwIiB5Mj0iMTkiLz48bGluZSB4MT0iNTEiIHkxPSIxMCIgeDI9IjU0IiB5Mj0iNyIvPjxsaW5lIHgxPSI1MiIgeTE9IjI4IiB4Mj0iNTUiIHkyPSIzMSIvPjwvZz48cGF0aCBkPSJNMTggMzkgQzEwIDM5IDkgMjkgMTYgMjcgQzE4IDE4IDI5IDE2IDM1IDIyIEM0MyAyMCA1MCAyNCA1MSAzMiBDNTggMzMgNTcgNDEgNDkgNDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNjKSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTkgNDggQzI5IDQzIDQxIDQ5IDUxIDQ1IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjdzEpIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMSA1NiBDMzEgNTAgNDMgNTcgNTMgNTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCN3MikiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="天気予報">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/dist/tabler-icons.min.css">
+<script>
+{{THEME_SCRIPT}}
+</script>
+<style>
+{{STYLES}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <div class="title"><i class="ti ti-map-pin" style="font-size:16px;vertical-align:-2px;margin-right:4px"></i><span id="page-title" data-i18n="app_title">天気予報ダッシュボード</span></div>
+      <div class="meta" id="updated-at"></div>
+    </div>
+    <div class="acts">
+      <button class="icon-btn" onclick="toggleLang()" id="lang-btn" title="日本語/English">EN</button>
+      <button class="icon-btn" onclick="toggleTheme()" title="テーマ切替" id="theme-btn">🌙</button>
+      <button class="icon-btn" onclick="togglePushNotification()" id="push-btn" title="プッシュ通知">🔔</button>
+      <button onclick="loadAll(true)"><i class="ti ti-refresh" style="font-size:14px;vertical-align:-2px"></i> <span data-i18n="refresh">更新</span></button>
+    </div>
+  </div>
+
+  <div class="location-bar" id="location-bar"></div>
+
+  <div class="add-form" id="add-form" style="display:none">
+    <div style="font-size:13px;font-weight:500;margin-bottom:10px"><i class="ti ti-map-pin" style="font-size:14px;vertical-align:-2px;margin-right:4px"></i><span data-i18n="add_location">地点を追加</span></div>
+    <div class="add-form-row">
+      <div><label data-i18n="loc_name">地点名</label><input type="text" id="new-name" data-i18n-placeholder="loc_name_ph"></div>
+      <div><label data-i18n="latitude">緯度</label><input type="number" id="new-lat" placeholder="34.6937" step="0.0001"></div>
+      <div><label data-i18n="longitude">経度</label><input type="number" id="new-lon" placeholder="135.5023" step="0.0001"></div>
+      <div><label data-i18n="jma_code">気象庁コード（任意）</label><input type="text" id="new-jma" placeholder="270000"></div>
+      <div style="padding-bottom:0"><button onclick="addLocation()"><i class="ti ti-plus" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="add">追加</span></button></div>
+    </div>
+    <div class="add-form-presets">
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Hokkaido / 北海道</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Sapporo',43.0642,141.3469,'016000')">Sapporo 札幌</button><button class="preset-btn" onclick="setPreset('Asahikawa',43.7706,142.3650,'012000')">Asahikawa 旭川</button><button class="preset-btn" onclick="setPreset('Hakodate',41.7687,140.7290,'017000')">Hakodate 函館</button><button class="preset-btn" onclick="setPreset('Kushiro',42.9849,144.3819,'014100')">Kushiro 釧路</button><button class="preset-btn" onclick="setPreset('Wakkanai',45.4122,141.6728,'011000')">Wakkanai 稚内</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Tohoku / 東北</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Aomori',40.8244,140.7400,'020000')">Aomori 青森</button><button class="preset-btn" onclick="setPreset('Morioka',39.7036,141.1527,'030000')">Morioka 盛岡</button><button class="preset-btn" onclick="setPreset('Sendai',38.2688,140.8721,'040000')">Sendai 仙台</button><button class="preset-btn" onclick="setPreset('Akita',39.7200,140.1024,'050000')">Akita 秋田</button><button class="preset-btn" onclick="setPreset('Yamagata',38.2404,140.3633,'060000')">Yamagata 山形</button><button class="preset-btn" onclick="setPreset('Fukushima',37.7608,140.4748,'070000')">Fukushima 福島</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kanto / 関東</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Mito',36.3418,140.4468,'080000')">Mito 水戸</button><button class="preset-btn" onclick="setPreset('Utsunomiya',36.5657,139.8836,'090000')">Utsunomiya 宇都宮</button><button class="preset-btn" onclick="setPreset('Maebashi',36.3912,139.0608,'100000')">Maebashi 前橋</button><button class="preset-btn" onclick="setPreset('Saitama',35.8617,139.6455,'110000')">Saitama さいたま</button><button class="preset-btn" onclick="setPreset('Chiba',35.6050,140.1233,'120000')">Chiba 千葉</button><button class="preset-btn" onclick="setPreset('Tokyo',35.6895,139.6917,'130000')">Tokyo 東京</button><button class="preset-btn" onclick="setPreset('Yokohama',35.4478,139.6425,'140000')">Yokohama 横浜</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chubu / 中部</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Niigata',37.9026,139.0232,'150000')">Niigata 新潟</button><button class="preset-btn" onclick="setPreset('Toyama',36.6953,137.2113,'160000')">Toyama 富山</button><button class="preset-btn" onclick="setPreset('Kanazawa',36.5944,136.6256,'170000')">Kanazawa 金沢</button><button class="preset-btn" onclick="setPreset('Fukui',36.0652,136.2219,'180000')">Fukui 福井</button><button class="preset-btn" onclick="setPreset('Kofu',35.6639,138.5684,'190000')">Kofu 甲府</button><button class="preset-btn" onclick="setPreset('Nagano',36.6513,138.1812,'200000')">Nagano 長野</button><button class="preset-btn" onclick="setPreset('Gifu',35.3912,136.7222,'210000')">Gifu 岐阜</button><button class="preset-btn" onclick="setPreset('Shizuoka',34.9756,138.3828,'220000')">Shizuoka 静岡</button><button class="preset-btn" onclick="setPreset('Nagoya',35.1815,136.9066,'230000')">Nagoya 名古屋</button><button class="preset-btn" onclick="setPreset('Tsu',34.7303,136.5086,'240000')">Tsu 津</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kinki / 近畿</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Otsu',35.0045,135.8686,'250000')">Otsu 大津</button><button class="preset-btn" onclick="setPreset('Kyoto',35.0116,135.7681,'260000')">Kyoto 京都</button><button class="preset-btn" onclick="setPreset('Osaka',34.6937,135.5023,'270000')">Osaka 大阪</button><button class="preset-btn" onclick="setPreset('Kobe',34.6913,135.1830,'280000')">Kobe 神戸</button><button class="preset-btn" onclick="setPreset('Nara',34.6851,135.8325,'290000')">Nara 奈良</button><button class="preset-btn" onclick="setPreset('Wakayama',34.2260,135.1675,'300000')">Wakayama 和歌山</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Chugoku / 中国</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Tottori',35.5011,134.2351,'310000')">Tottori 鳥取</button><button class="preset-btn" onclick="setPreset('Matsue',35.4723,133.0505,'320000')">Matsue 松江</button><button class="preset-btn" onclick="setPreset('Okayama',34.6618,133.9344,'330000')">Okayama 岡山</button><button class="preset-btn" onclick="setPreset('Hiroshima',34.3853,132.4553,'340000')">Hiroshima 広島</button><button class="preset-btn" onclick="setPreset('Yamaguchi',34.1860,131.4714,'350000')">Yamaguchi 山口</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Shikoku / 四国</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Tokushima',34.0658,134.5593,'360000')">Tokushima 徳島</button><button class="preset-btn" onclick="setPreset('Takamatsu',34.3401,134.0434,'370000')">Takamatsu 高松</button><button class="preset-btn" onclick="setPreset('Matsuyama',33.8417,132.7657,'380000')">Matsuyama 松山</button><button class="preset-btn" onclick="setPreset('Kochi',33.5597,133.5311,'390000')">Kochi 高知</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🇯🇵 Japan — Kyushu &amp; Okinawa / 九州・沖縄</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Fukuoka',33.5904,130.4017,'400000')">Fukuoka 福岡</button><button class="preset-btn" onclick="setPreset('Saga',33.2494,130.2990,'410000')">Saga 佐賀</button><button class="preset-btn" onclick="setPreset('Nagasaki',32.7503,129.8779,'420000')">Nagasaki 長崎</button><button class="preset-btn" onclick="setPreset('Kumamoto',32.7898,130.7417,'430000')">Kumamoto 熊本</button><button class="preset-btn" onclick="setPreset('Oita',33.2382,131.6126,'440000')">Oita 大分</button><button class="preset-btn" onclick="setPreset('Miyazaki',31.9111,131.4239,'450000')">Miyazaki 宮崎</button><button class="preset-btn" onclick="setPreset('Kagoshima',31.5602,130.5581,'460100')">Kagoshima 鹿児島</button><button class="preset-btn" onclick="setPreset('Naha',26.2124,127.6809,'471000')">Naha 那覇</button><button class="preset-btn" onclick="setPreset('Miyako',24.8057,125.2814,'473000')">Miyako 宮古島</button><button class="preset-btn" onclick="setPreset('Ishigaki',24.3448,124.1564,'474000')">Ishigaki 石垣島</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 East Asia</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Seoul',37.5665,126.9780,'')">Seoul</button><button class="preset-btn" onclick="setPreset('Beijing',39.9042,116.4074,'')">Beijing</button><button class="preset-btn" onclick="setPreset('Shanghai',31.2304,121.4737,'')">Shanghai</button><button class="preset-btn" onclick="setPreset('Hong Kong',22.3193,114.1694,'')">Hong Kong</button><button class="preset-btn" onclick="setPreset('Taipei',25.0330,121.5654,'')">Taipei</button><button class="preset-btn" onclick="setPreset('Bangkok',13.7563,100.5018,'')">Bangkok</button><button class="preset-btn" onclick="setPreset('Singapore',1.3521,103.8198,'')">Singapore</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌍 Europe</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('London',51.5074,-0.1278,'')">London</button><button class="preset-btn" onclick="setPreset('Paris',48.8566,2.3522,'')">Paris</button><button class="preset-btn" onclick="setPreset('Berlin',52.5200,13.4050,'')">Berlin</button><button class="preset-btn" onclick="setPreset('Madrid',40.4168,-3.7038,'')">Madrid</button><button class="preset-btn" onclick="setPreset('Rome',41.9028,12.4964,'')">Rome</button><button class="preset-btn" onclick="setPreset('Moscow',55.7558,37.6176,'')">Moscow</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌎 Americas</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('New York',40.7128,-74.0060,'')">New York</button><button class="preset-btn" onclick="setPreset('Los Angeles',34.0522,-118.2437,'')">Los Angeles</button><button class="preset-btn" onclick="setPreset('Chicago',41.8781,-87.6298,'')">Chicago</button><button class="preset-btn" onclick="setPreset('Toronto',43.6532,-79.3832,'')">Toronto</button><button class="preset-btn" onclick="setPreset('São Paulo',-23.5505,-46.6333,'')">São Paulo</button></div></div>
+        <div><div style="font-size:10px;color:var(--text2);margin-bottom:4px;font-weight:500">🌏 Oceania</div><div class="add-form-presets" style="margin-top:0"><button class="preset-btn" onclick="setPreset('Sydney',-33.8688,151.2093,'')">Sydney</button><button class="preset-btn" onclick="setPreset('Melbourne',-37.8136,144.9631,'')">Melbourne</button><button class="preset-btn" onclick="setPreset('Auckland',-36.8509,174.7645,'')">Auckland</button></div></div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <button onclick="toggleMapSearch()" style="font-size:12px;padding:4px 10px;border-radius:99px"><i class="ti ti-map" style="font-size:13px;vertical-align:-1px;margin-right:3px"></i><span data-i18n="pick_on_map">地図から選択</span></button>
+    </div>
+    <div class="map-search-box" id="map-search-box" style="display:none">
+      <div class="map-search-row">
+        <input type="text" id="map-search-input" data-i18n-placeholder="search_place" placeholder="地名・住所で検索">
+        <button onclick="searchPlace()"><i class="ti ti-search" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="search">検索</span></button>
+        <button onclick="useCurrentLocation()"><i class="ti ti-current-location" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="current_loc">現在地</span></button>
+      </div>
+      <div id="map-container"></div>
+      <div class="map-result" id="map-result"></div>
+      <button onclick="applyMapLocation()" id="apply-map-btn" style="display:none;margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="use_this_location">この地点を使用</span></button>
+    </div>
+    <div class="add-form-note" data-i18n="latlon_hint">緯度・経度はGoogle マップで右クリックすると確認できます。</div>
+  </div>
+
+  <div class="chips">
+    <span class="chip on">Open-Meteo</span>
+    <span class="chip on">GFS</span>
+    <span class="chip on" data-i18n-chip="jma">気象庁</span>
+    <span class="chip" id="chip-gw">Google Weather</span>
+    <span class="chip" id="chip-owm">OpenWeatherMap</span>
+    <span class="chip" id="chip-tmrw">Tomorrow.io</span>
+  </div>
+
+  <div class="main-tabs" id="main-tabs">
+    <button class="main-tab active" data-panel="forecast" onclick="switchMainTab('forecast')"><i class="ti ti-cloud" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_forecast">予報</span></button>
+    <button class="main-tab" data-panel="radar" onclick="switchMainTab('radar')"><i class="ti ti-radar" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_radar">雨雲レーダー</span></button>
+    <button class="main-tab" data-panel="wxmap" onclick="switchMainTab('wxmap')"><i class="ti ti-map-2" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_wxmap">天気図</span></button>
+    <button class="main-tab" data-panel="aq" onclick="switchMainTab('aq')"><i class="ti ti-leaf" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="tab_aq">大気質</span></button>
+  </div>
+
+  <!-- 雨雲レーダーパネル -->
+  <div class="main-panel" id="panel-radar">
+    <div class="stitle" id="radar-stitle">雨雲レーダー（気象庁ナウキャスト）</div>
+    <div id="radar-map"></div>
+    <div class="radar-ctrl">
+      <button id="radar-play-btn" onclick="toggleRadarPlay()" style="padding:5px 12px;font-size:12px;min-width:60px"><i class="ti ti-player-play" style="font-size:12px;vertical-align:-1px" id="radar-play-icon"></i> <span id="radar-play-label">再生</span></button>
+      <div class="radar-timeline" id="radar-timeline"></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:6px">
+      <div class="radar-legend">
+        <div class="radar-legend-bar">
+          <div class="radar-legend-swatch" style="background:#f2f2ff"></div>
+          <div class="radar-legend-swatch" style="background:#a0d1ff"></div>
+          <div class="radar-legend-swatch" style="background:#218cff"></div>
+          <div class="radar-legend-swatch" style="background:#f33030"></div>
+        </div>
+        <span>弱 → 強</span>
+      </div>
+      <div class="radar-source" id="radar-source-label">出典：気象庁 高解像度ナウキャスト</div>
+    </div>
+  </div>
+
+  <!-- 天気図パネル -->
+  <div class="main-panel" id="panel-wxmap">
+    <div class="stitle">天気図（気象庁）</div>
+    <div class="wxmap-tabs" id="wxmap-tabs">
+      <button class="wxmap-tab active" data-wxtab="surface" onclick="switchWxTab('surface')"><span data-i18n="wxmap_surface">地上天気図</span></button>
+      <button class="wxmap-tab" data-wxtab="fcst24" onclick="switchWxTab('fcst24')"><span data-i18n="wxmap_fcst24">予想（24h後）</span></button>
+      <button class="wxmap-tab" data-wxtab="fcst48" onclick="switchWxTab('fcst48')"><span data-i18n="wxmap_fcst48">予想（48h後）</span></button>
+    </div>
+    <div class="wxmap-img-wrap">
+      <img id="wxmap-img" alt="天気図">
+    </div>
+    <div class="wxmap-note">
+      <i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px;margin-right:3px"></i>
+      <span data-i18n="wxmap_source">出典：気象庁</span> —
+      <span data-i18n="wxmap_note">天気図は気象庁が発行するものです。更新は1日数回です。</span>
+      <a href="https://www.jma.go.jp/bosai/weather_map/" target="_blank" rel="noopener" style="margin-left:6px">気象庁 天気図ページ →</a>
+    </div>
+  </div>
+
+  <!-- 大気質パネル -->
+  <div class="main-panel" id="panel-aq"></div>
+
+  <div id="main-content">
+    <div class="loading"><i class="ti ti-cloud-download" style="font-size:28px;display:block;margin-bottom:8px"></i><span data-i18n="loading">天気データを取得中...</span></div>
+  </div>
+
+  <!-- APIキー設定 -->
+  <div class="keypanel">
+    <div class="stitle" style="margin-bottom:10px" data-i18n="api_keys">APIキー設定（任意・無料）</div>
+    <div style="margin-bottom:12px;padding:10px 12px;background:var(--bg2);border-radius:var(--rm);border:0.5px solid var(--border)">
+      <div style="font-size:12px;color:var(--text2);margin-bottom:6px"><i class="ti ti-clipboard" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i><span data-i18n="bulk_paste_hint">2行まとめて貼り付け（順番：OpenWeatherMap / Tomorrow.io）</span></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
+        <textarea id="bulk-paste" rows="2" style="flex:1;min-width:0;font-size:12px;padding:6px 10px;border-radius:var(--rm);border:0.5px solid var(--border);background:var(--bg);color:var(--text);font-family:monospace;resize:vertical;line-height:1.6" data-i18n-placeholder="bulk_paste_ph"></textarea>
+        <button onclick="applyBulkPaste()" style="white-space:nowrap;align-self:flex-end"><i class="ti ti-arrow-bar-to-down" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="distribute">振り分け</span></button>
+      </div>
+    </div>
+    <div class="keyrow"><span class="tag t-owm" style="min-width:120px;text-align:center">OpenWeatherMap</span><input type="text" id="owm-key" data-i18n-placeholder="api_key_ph"></div>
+    <div class="keyrow"><span class="tag t-tmrw" style="min-width:120px;text-align:center">Tomorrow.io</span><input type="text" id="tmrw-key" data-i18n-placeholder="api_key_ph"></div>
+    <button onclick="applyKeys()" style="margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="apply">適用して更新</span></button>
+    <div class="keynote" data-i18n="api_note">無料登録：OpenWeatherMap（1,000回/日）　Tomorrow.io（500回/日）</div>
+  </div>
+
+  <div class="keypanel" style="margin-top:0">
+    <div class="stitle" style="margin-bottom:10px"><i class="ti ti-brand-google" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Google APIs キー設定</div>
+    <div class="keyrow"><span class="tag" style="min-width:120px;text-align:center;background:#E3F2FD;color:#0D47A1">Google Weather</span><input type="text" id="gweather-key" data-i18n-placeholder="api_key_ph"></div>
+    <div class="keynote" style="margin-top:4px">⚠️ Google Weather API is currently unavailable in Japan. Works for world cities outside Japan.</div>
+    <div class="keyrow"><span class="tag" style="min-width:120px;text-align:center;background:#E8F5E9;color:#1B5E20">Google Pollen</span><input type="text" id="pollen-key" data-i18n-placeholder="api_key_ph"></div>
+    <button onclick="applyKeys()" style="margin-top:6px"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px"></i> <span data-i18n="apply">適用して更新</span></button>
+    <div class="keynote">APIキーはPollen APIのみ・HTTPリファラー制限を推奨。<a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Console</a> で設定できます。</div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+<!-- Chart.js v4.4.0 — Note: Chart.js v4.x does not provide SRI hashes (intentional upstream decision) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+
+<script>
+{{APP_SCRIPTS}}
+</script>
+</body>
+</html>

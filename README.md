@@ -22,6 +22,35 @@ No dependencies need to be installed. CDN assets are loaded directly in the brow
 
 Web Push notifications are optional. If the `/push/...` endpoints are not configured, the notification button will show a setup error instead of enabling notifications.
 
+### Editing and building the dashboard
+
+`index.html` is the generated deployment file. Do not edit it directly. Edit the files under `src/`, then generate a new single-file dashboard:
+
+```sh
+npm run build
+```
+
+The build uses only Node.js standard modules, so no additional build dependency or `npm install` is required. (`npm install` is still required when setting up the optional Web Push backend.)
+
+The source files are organized as follows:
+
+```text
+src/index.template.html       Page structure
+src/styles.css               Dashboard styles
+src/js/config.js             Version and shared configuration
+src/js/i18n.js               Japanese and English text
+src/js/core.js               Storage, locations, maps, and API access
+src/js/warnings.js           JMA warnings and detailed forecast
+src/js/charts-air-quality.js Charts and air quality
+src/js/panels.js             Radar and weather-map panels
+src/js/render.js             Forecast rendering and data loading
+src/js/push.js               Web Push and application startup
+```
+
+Commit both the source files and the generated `index.html` to Git. On another PC, run `git pull`; the committed `index.html` can immediately be uploaded. Node.js is needed on that PC only when changing the source and rebuilding.
+
+The deployment procedure remains unchanged: upload only the generated `index.html` to `/home/palmspot/index.html` by SFTP. The existing cron job can continue copying that file into the jail.
+
 For the optional notification backend, keep these files in the repository:
 
 ```text

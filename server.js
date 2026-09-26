@@ -4,6 +4,12 @@
 //
 // 起動: node server.js
 // 初回のみ: node server.js --gen-vapid
+//
+// 改修内容 (2026-09-26):
+//  1. fetchJson にタイムアウトを追加（ハングしたコネクションが溜まり続けるのを防止）
+//  2. checkWarnings() の多重実行防止ロックを追加
+//  3. uncaughtException / unhandledRejection ハンドラを追加（クラッシュ時に必ずログを残す）
+//  4. 定期的なメモリ使用量ログを追加（次回調査を容易にするため）
 
 'use strict';
 const http    = require('http');
@@ -12,11 +18,24 @@ const fs      = require('fs');
 const path    = require('path');
 const webpush = require('web-push');
 
-const PORT         = 3000;
-const VAPID_FILE   = path.join(__dirname, 'vapid.json');
-const SUBS_FILE    = path.join(__dirname, 'subscriptions.json');
-const POLL_INTERVAL= 5 * 60 * 1000; // 5分
-const WARNED_FILE  = path.join(__dirname, 'warned.json');
+const PORT           = 3000;
+const VAPID_FILE     = path.join(__dirname, 'vapid.json');
+const SUBS_FILE      = path.join(__dirname, 'subscriptions.json');
+const POLL_INTERVAL  = 5 * 60 * 1000;  // 5分
+const WARNED_FILE    = path.join(__dirname, 'warned.json');
+const FETCH_TIMEOUT  = 10 * 1000;      // 10秒
+const MEM_LOG_INTERVAL = 15 * 60 * 1000; // 15分
+
+// ==================== 未捕捉エラーのハンドリング ====================
+// クラッシュしても必ずログに理由を残してから終了する
+process.on('uncaughtException', (err) => {
+  console.error('[FATAL] uncaughtException:', err && err.stack ? err.stack : err);
+  process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[FATAL] unhandledRejection:', reason);
+  process.exit(1);
+});
 
 // ==================== VAPID ====================
 function loadOrGenVapid() {
@@ -50,16 +69,23 @@ function saveWarned(w) {
 }
 
 // ==================== JMA Warning Poll ====================
-function fetchJson(url) {
+// タイムアウト付きfetch。JMA側がハングしてもコネクションを確実に破棄する。
+function fetchJson(url, timeoutMs = FETCH_TIMEOUT) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'tenki-dashboard/2.1' } }, (res) => {
+    const req = https.get(url, { headers: { 'User-Agent': 'tenki-dashboard/2.1' } }, (res) => {
       let body = '';
       res.on('data', d => body += d);
       res.on('end', () => {
         try { resolve(JSON.parse(body)); }
         catch(e) { reject(e); }
       });
-    }).on('error', reject);
+      res.on('error', reject);
+    });
+
+    req.setTimeout(timeoutMs, () => {
+      req.destroy(new Error(`Request timeout after ${timeoutMs}ms: ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 
@@ -85,86 +111,114 @@ function normalizeCode(c) { return String(c).length === 1 ? '0'+c : String(c); }
 function getWarnName(c) { return WARN_CODES[normalizeCode(c)] || ('警報・注意報('+c+')'); }
 function getWarnLevel(c) { return WARN_LEVEL[normalizeCode(c)] || 1; }
 
+// 多重実行防止ロック。
+// 前回の checkWarnings() が（JMA側のハング等で）まだ終わっていない場合、
+// 今回のtickはスキップする。これがないと、setIntervalのtickごとに
+// 未解決のPromiseとコネクションが積み重なり、じわじわメモリを消費し続ける。
+let isChecking = false;
+
 async function checkWarnings() {
-  const subs = loadSubs();
-  if (!subs.length) return;
+  if (isChecking) {
+    console.warn('[checkWarnings] previous run still in progress, skipping this tick');
+    return;
+  }
+  isChecking = true;
 
-  // JMAコードごとにグループ化
-  const codeMap = {};
-  subs.forEach(s => {
-    if (s.jmaCode) {
-      if (!codeMap[s.jmaCode]) codeMap[s.jmaCode] = [];
-      codeMap[s.jmaCode].push(s);
-    }
-  });
+  try {
+    const subs = loadSubs();
+    if (!subs.length) return;
 
-  const warned = loadWarned();
-  let warnedChanged = false;
-
-  for (const [jmaCode, subscribers] of Object.entries(codeMap)) {
-    let data;
-    try {
-      data = await fetchJson(`https://www.jma.go.jp/bosai/warning/data/warning/${jmaCode}.json`);
-    } catch(e) {
-      console.error(`Failed to fetch warning for ${jmaCode}:`, e.message);
-      continue;
-    }
-
-    // 発令中の警報を収集
-    const active = [];
-    try {
-      const prefAreas = data.areaTypes && data.areaTypes[0] && data.areaTypes[0].areas || [];
-      prefAreas.forEach(area => {
-        (area.warnings || []).forEach(w => {
-          if (w.status === '発表' || w.status === '継続') {
-            active.push({ code: normalizeCode(w.code), level: getWarnLevel(w.code), name: getWarnName(w.code) });
-          }
-        });
-      });
-    } catch(e) {}
-
-    if (!active.length) {
-      // 警報解除 → 記録をリセット
-      if (warned[jmaCode]) { delete warned[jmaCode]; warnedChanged = true; }
-      continue;
-    }
-
-    // 送信済みキー（コードのソート済み文字列）
-    const currentKey = active.map(a => a.code).sort().join(',');
-    if (warned[jmaCode] === currentKey) continue; // 変化なし
-    warned[jmaCode] = currentKey;
-    warnedChanged = true;
-
-    // 通知内容を組み立て
-    const maxLevel = Math.max(...active.map(a => a.level));
-    const levelLabel = maxLevel >= 3 ? '⚠️特別警報' : maxLevel >= 2 ? '🔴警報' : '🟡注意報';
-    const kinds = [...new Set(active.map(a => a.name))].join('・');
-    const payload = JSON.stringify({
-      title: `${levelLabel} — ${subscribers[0].locName || jmaCode}`,
-      body: kinds,
-      url: '/'
+    // JMAコードごとにグループ化
+    const codeMap = {};
+    subs.forEach(s => {
+      if (s.jmaCode) {
+        if (!codeMap[s.jmaCode]) codeMap[s.jmaCode] = [];
+        codeMap[s.jmaCode].push(s);
+      }
     });
 
-    // 各購読者に送信
-    for (const sub of subscribers) {
+    const warned = loadWarned();
+    let warnedChanged = false;
+
+    for (const [jmaCode, subscribers] of Object.entries(codeMap)) {
+      let data;
       try {
-        await webpush.sendNotification(sub.subscription, payload);
-        console.log(`Sent to ${sub.locName}: ${kinds}`);
+        data = await fetchJson(`https://www.jma.go.jp/bosai/warning/data/warning/${jmaCode}.json`);
       } catch(e) {
-        if (e.statusCode === 410 || e.statusCode === 404) {
-          // 購読期限切れ → 削除
-          const all = loadSubs();
-          const filtered = all.filter(s => s.subscription.endpoint !== sub.subscription.endpoint);
-          saveSubs(filtered);
-          console.log('Removed expired subscription:', sub.subscription.endpoint.slice(-20));
-        } else {
-          console.error('sendNotification error:', e.message);
+        console.error(`Failed to fetch warning for ${jmaCode}:`, e.message);
+        continue;
+      }
+
+      // 発令中の警報を収集
+      const active = [];
+      try {
+        const prefAreas = data.areaTypes && data.areaTypes[0] && data.areaTypes[0].areas || [];
+        prefAreas.forEach(area => {
+          (area.warnings || []).forEach(w => {
+            if (w.status === '発表' || w.status === '継続') {
+              active.push({ code: normalizeCode(w.code), level: getWarnLevel(w.code), name: getWarnName(w.code) });
+            }
+          });
+        });
+      } catch(e) {}
+
+      if (!active.length) {
+        // 警報解除 → 記録をリセット
+        if (warned[jmaCode]) { delete warned[jmaCode]; warnedChanged = true; }
+        continue;
+      }
+
+      // 送信済みキー（コードのソート済み文字列）
+      const currentKey = active.map(a => a.code).sort().join(',');
+      if (warned[jmaCode] === currentKey) continue; // 変化なし
+      warned[jmaCode] = currentKey;
+      warnedChanged = true;
+
+      // 通知内容を組み立て
+      const maxLevel = Math.max(...active.map(a => a.level));
+      const levelLabel = maxLevel >= 3 ? '⚠️特別警報' : maxLevel >= 2 ? '🔴警報' : '🟡注意報';
+      const kinds = [...new Set(active.map(a => a.name))].join('・');
+      const payload = JSON.stringify({
+        title: `${levelLabel} — ${subscribers[0].locName || jmaCode}`,
+        body: kinds,
+        url: '/'
+      });
+
+      // 各購読者に送信
+      for (const sub of subscribers) {
+        try {
+          await webpush.sendNotification(sub.subscription, payload);
+          console.log(`Sent to ${sub.locName}: ${kinds}`);
+        } catch(e) {
+          if (e.statusCode === 410 || e.statusCode === 404) {
+            // 購読期限切れ → 削除
+            const all = loadSubs();
+            const filtered = all.filter(s => s.subscription.endpoint !== sub.subscription.endpoint);
+            saveSubs(filtered);
+            console.log('Removed expired subscription:', sub.subscription.endpoint.slice(-20));
+          } else {
+            console.error('sendNotification error:', e.message);
+          }
         }
       }
     }
-  }
 
-  if (warnedChanged) saveWarned(warned);
+    if (warnedChanged) saveWarned(warned);
+  } finally {
+    isChecking = false;
+  }
+}
+
+// ==================== メモリ使用量ログ ====================
+// 次回もし同様の問題が起きた場合に、RSSの推移を追えるようにする。
+function logMemoryUsage() {
+  const mem = process.memoryUsage();
+  console.log(
+    `[mem] rss=${(mem.rss/1024/1024).toFixed(1)}MB ` +
+    `heapUsed=${(mem.heapUsed/1024/1024).toFixed(1)}MB ` +
+    `heapTotal=${(mem.heapTotal/1024/1024).toFixed(1)}MB ` +
+    `external=${(mem.external/1024/1024).toFixed(1)}MB`
+  );
 }
 
 // ==================== HTTP Server ====================
@@ -230,4 +284,7 @@ server.listen(PORT, '0.0.0.0', () => {
   // 起動時に1回チェック、以降5分ごと
   checkWarnings();
   setInterval(checkWarnings, POLL_INTERVAL);
+  // 起動直後の1回分と、以降15分ごとにメモリ使用量を記録
+  logMemoryUsage();
+  setInterval(logMemoryUsage, MEM_LOG_INTERVAL);
 });

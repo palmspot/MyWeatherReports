@@ -1,6 +1,6 @@
 # [Weather Forecast Dashboard](https://github.com/REDACTED/MyWeatherReports)
 
-![Version](https://img.shields.io/badge/version-2.3.2-blue)
+![Version](https://img.shields.io/badge/version-2.3.3-blue)
 
 A multi-source weather forecast dashboard in a single static HTML file. No build step is required. Forecast, radar, map, and air-quality views run without an application backend; Web Push notifications require a small server-side API.
 
@@ -277,6 +277,15 @@ For debugging on mobile, open the page with:
 ---
 
 ## Changelog
+
+### v2.3.3 - Push notification server reliability
+
+- Added a timeout to JMA warning requests so stalled connections are terminated instead of accumulating.
+- Prevented overlapping warning checks when a previous polling cycle is still running.
+- Added fatal error logging for uncaught exceptions and unhandled promise rejections.
+- Added periodic process memory-usage logging to make resource issues easier to diagnose.
+- Configured the FreeBSD `notify` service to supervise the Node.js process and restart it automatically after an unexpected exit.
+- Added a deployment-time syntax check for `server.js` and improved service status handling through the standard rc.d framework.
 
 ### v2.3.2 - Minor fixes
 
